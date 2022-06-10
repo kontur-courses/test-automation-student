@@ -1,0 +1,106 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/ronzhina/RiderProjects/test-automation-student/VacationTests/VacationTests/VacationTests.csproj": {}
+  },
+  "projects": {
+    "/Users/ronzhina/RiderProjects/test-automation-student/VacationTests/VacationTests/VacationTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/ronzhina/RiderProjects/test-automation-student/VacationTests/VacationTests/VacationTests.csproj",
+        "projectName": "VacationTests",
+        "projectPath": "/Users/ronzhina/RiderProjects/test-automation-student/VacationTests/VacationTests/VacationTests.csproj",
+        "packagesPath": "/Users/ronzhina/.nuget/packages/",
+        "outputPath": "/Users/ronzhina/RiderProjects/test-automation-student/VacationTests/VacationTests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/ronzhina/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[6.7.0, )"
+            },
+            "Kontur.RetryableAssertions": {
+              "target": "Package",
+              "version": "[0.0.2-alpha, )"
+            },
+            "Kontur.Selone": {
+              "target": "Package",
+              "version": "[1.0.0-alpha, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.10.0-release-20210330-02, )"
+            },
+            "Microsoft.Win32.Registry": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.1, )"
+            },
+            "NUnit.Engine": {
+              "target": "Package",
+              "version": "[3.13.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.0.0-beta.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Selenium.WebDriver": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Selenium.WebDriver.ChromeDriver": {
+              "target": "Package",
+              "version": "[101.0.4951.4100, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
