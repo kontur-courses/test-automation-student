@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Properties;
+using Kontur.Selone.Selectors.Context;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure.Properties;
 
@@ -11,13 +12,13 @@ namespace VacationTests.Infrastructure.PageElements
     {
         private readonly IWebElement dateInput;
 
-        public DatePicker(ISearchContext searchContext, By by) : base(searchContext, by)
+        public DatePicker(IContextBy contextBy) : base(contextBy)
         {
-            dateInput = container.SearchElement(By.XPath(".//*[contains(@data-comp-name, 'DateInput')]"));
+            dateInput = Container.SearchElement(By.XPath(".//*[contains(@data-comp-name, 'DateInput')]"));
         }
 
-        public IProp<DateTime> Date => container.Date();
-        public IProp<bool> HasError => container.HasError();
+        public IProp<DateTime> Date => Container.Date();
+        public IProp<bool> HasError => Container.HasError();
 
         public void SetValue(DateTime date)
         {

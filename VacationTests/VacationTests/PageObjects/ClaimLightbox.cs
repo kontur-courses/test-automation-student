@@ -8,41 +8,46 @@ namespace VacationTests.PageObjects
 {
     public class ClaimLightbox : PageBase
     {
-        public ClaimLightbox(IWebDriver webDriver) : base(webDriver)
+        private readonly ControlFactory controlFactory;
+
+        public ClaimLightbox(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
-            ModalHeaderLabel = GetModalContext(webDriver).Search(x => x.WithTid("ModalHeader")).Label();
-            CrossButton = GetModalContext(webDriver).Search(x => x.WithTid("modal-close")).Button();
-
-            StatusLabel = GetModalContext(webDriver).Search(x => x.WithTid("StatusLabel")).Label();
-            ClaimTypeLabel = GetModalContext(webDriver).Search(x => x.WithTid("ClaimTypeLabel")).Label();
-            ChildAgeLabel = GetModalContext(webDriver).Search(x => x.WithTid("ChildAgeLabel")).Label();
-            PeriodLabel = GetModalContext(webDriver).Search(x => x.WithTid("PeriodLabel")).Label();
-            AvailableDaysMessageLabel =
-                GetModalContext(webDriver).Search(x => x.WithTid("AvailableDaysMessageLabel")).Label();
-            AvailableDaysLabel = GetModalContext(webDriver).Search(x => x.WithTid("AvailableDaysLabel")).Label();
-            PayNowCheckbox = GetModalContext(webDriver).Search(x => x.WithTid("PayNowCheckbox")).Checkbox();
-            DirectorFioLabel = GetModalContext(webDriver).Search(x => x.WithTid("DirectorFioLabel")).Label();
-
-            Footer = new ClaimLightboxFooter(GetModalContext(webDriver).Search(x => x.WithTid("ModalFooter")));
+            this.controlFactory = controlFactory;
         }
 
-        public Label ModalHeaderLabel { get; private set; }
-        public Button CrossButton { get; private set; }
-        public Label StatusLabel { get; private set; }
-        public Label ClaimTypeLabel { get; private set; }
-        public Label ChildAgeLabel { get; private set; }
-        public Label PeriodLabel { get; private set; }
-        public Label AvailableDaysMessageLabel { get; private set; }
-        public Label AvailableDaysLabel { get; private set; }
-        public Checkbox PayNowCheckbox { get; private set; }
-        public Label DirectorFioLabel { get; private set; }
-        public ClaimLightboxFooter Footer { get; private set; }
+        public Portal ClaimModal { get; private set; }
 
-        private static IWebElement GetModalContext(IWebDriver webDriver)
+        // Вариант работы с элементами, для которых нужен ленивый поиск
+        public Label ModalHeaderLabel => CreateControlByTid<Label>("ModalHeader");
+
+        public Button CrossButton => CreateControlByTid<Button>("modal-close");
+
+        public Label StatusLabel => CreateControlByTid<Label>("StatusLabel");
+
+        public Label ClaimTypeLabel => CreateControlByTid<Label>("ClaimTypeLabel");
+
+        public Label ChildAgeLabel => CreateControlByTid<Label>("ChildAgeLabel");
+
+        public Label PeriodLabel => CreateControlByTid<Label>("PeriodLabel");
+
+        public Label AvailableDaysMessageLabel => CreateControlByTid<Label>("AvailableDaysMessageLabel");
+
+        public Label AvailableDaysLabel => CreateControlByTid<Label>("AvailableDaysLabel");
+
+        public Checkbox PayNowCheckbox => CreateControlByTid<Checkbox>("PayNowCheckbox");
+
+        public Label DirectorFioLabel => CreateControlByTid<Label>("DirectorFioLabel");
+
+        public ClaimLightboxFooter Footer => CreateControlByTid<ClaimLightboxFooter>("ModalFooter");
+
+        private TControl CreateControlByTid<TControl>(string tid)
         {
-            var id = webDriver.FindElement(By.CssSelector("[data-tid='ClaimModal']"))
-                .GetAttribute("data-render-container-id");
-            return webDriver.Root().FindElement(By.CssSelector($"[data-rendered-container-id='{id}']"));
+            return controlFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid)));
+        }
+
+        private IWebElement GetModalContext()
+        {
+            return ClaimModal.GetPortalElement();
         }
     }
 }

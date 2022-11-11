@@ -11,20 +11,21 @@ namespace VacationTests.PageObjects
 {
     public class LoginPage : PageBase
     {
-        public LoginPage(IWebDriver webDriver) : base(webDriver)
+        public LoginPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
-            //  искать элемент по tid можно с помощью Css().WithTid("...")) - метод Selone
-            TitleLabel = webDriver.Search(x => x.Css().WithTid("LoginTitleLabel")).Label();
+            // Искать элемент по tid можно с помощью Css().WithTid("...")) - метод Selone
+            TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.Css().WithTid("LoginTitleLabel")));
 
-            // можно упростить написание для частых поисков, и создать свой метод WithTid(), чтобы опустить Css()
+            // Можно упростить написание для частых поисков, и создать свой метод WithTid(), чтобы опустить Css(),
             // этот метод будет вызывать Css().WithTid("..."))
-            LoginAsEmployeeButton = webDriver.Search(x => x.WithTid("LoginAsEmployeeButton")).Button();
-            Footer = new PageFooter(webDriver.Search(x => x.WithTid("Footer")));
+            LoginAsEmployeeButton =
+                controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("LoginAsEmployeeButton")));
+            Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
         }
 
-        public Label TitleLabel { get; private set; }
-        public Button LoginAsEmployeeButton { get; private set; }
-        public PageFooter Footer { get; private set; }
+        public Label TitleLabel { get; }
+        public Button LoginAsEmployeeButton { get; }
+        public PageFooter Footer { get; }
 
         public EmployeeVacationListPage LoginAsEmployee()
         {

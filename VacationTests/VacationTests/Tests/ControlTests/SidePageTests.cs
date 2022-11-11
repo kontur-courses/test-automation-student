@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using OpenQA.Selenium;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageObjects;
@@ -19,7 +18,7 @@ namespace VacationTests.Tests.ControlTests
             sidePage.AgreeButton.Text.Wait().EqualTo("Точно так");
             sidePage.NotAgreeButton.Text.Wait().EqualTo("Но это неточно");
             sidePage.CloseButton.ClickAndOpen<LoginPage>();
-            Assert.Catch<StaleElementReferenceException>(() => sidePage.HeaderLabel.Present.Get());
+            sidePage.HeaderLabel.Visible.Wait().EqualTo(false);
         }
     }
 }

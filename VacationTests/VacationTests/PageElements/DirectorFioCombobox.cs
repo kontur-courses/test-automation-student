@@ -9,11 +9,10 @@ namespace VacationTests.PageElements
 {
     public class DirectorFioCombobox : Combobox
     {
-        public DirectorFioCombobox(IContextBy contextBy) : base(contextBy.SearchContext, contextBy.By)
+        public DirectorFioCombobox(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
-            MenuItems = new ElementsCollection<DirectorItem>(container.Root(),
-                x => x.WithTid("ComboBoxMenu__item").FixedByIndex(),
-                (s, b, e) => new DirectorItem(s, b));
+            MenuItems = controlFactory.CreateElementsCollection<DirectorItem>(Container.Root(),
+                x => x.WithTid("ComboBoxMenu__item").FixedByIndex());
         }
 
         public new ElementsCollection<DirectorItem> MenuItems { get; private set; }

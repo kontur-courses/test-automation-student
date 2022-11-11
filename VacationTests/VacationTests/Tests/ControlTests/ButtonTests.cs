@@ -9,16 +9,16 @@ using VacationTests.PageObjects;
 
 namespace VacationTests.Tests.ControlTests
 {
-    [NonParallelizable]
     public class ButtonTests : VacationTestBase
     {
         [Test]
         public void WaitExample()
         {
-            // заменить на var page = Navigation.OpenAdminVacationList(); после доабвления метода
-            var page = GetWebDriver()
-                .OpenPage<AdminVacationListPage>("https://ronzhina.gitlab-pages.kontur.host/for-course/#/admin");
-            ClaimStorage.Add(new[] { CreateDefaultClaim(), CreateDefaultClaim(), CreateDefaultClaim() });
+            // todo для курсанта: заменить на var page = Navigation.OpenAdminVacationList(); после доабвления метода (Задание 2)
+            var page = Navigation.OpenPage<AdminVacationListPage>("https://ronzhina.gitlab-pages.kontur.host/for-course/#/admin");
+            // todo для курсанта: после создания рекорда (Задание 6) заменить создание дефолтного отпуска на создание через рекорд
+            // ClaimStorage.Add(new[] {Claim.CreateDefault(), Claim.CreateDefault(), Claim.CreateDefault()});
+            ClaimStorage.Add(new[] {CreateDefaultClaim(), CreateDefaultClaim(), CreateDefaultClaim()});
             page.Refresh();
 
             page.DownloadButton.Text.Wait().EqualTo("Скачать их отпуска");
@@ -27,7 +27,7 @@ namespace VacationTests.Tests.ControlTests
             page.DownloadButton.Present.Wait().EqualTo(true);
             page.DownloadButton.Disabled.Wait().EqualTo(true);
 
-            // сокращенный вариант для частых проверок
+            // Сокращенный вариант
             page.DownloadButton.WaitPresence();
             page.DownloadButton.WaitDisabled();
         }
@@ -35,17 +35,17 @@ namespace VacationTests.Tests.ControlTests
         [Test]
         public void OperationExample()
         {
-            // метод ClickAndOpen()
+            // Метод ClickAndOpen()
             var page = Navigation.OpenEmployeeVacationList();
             var claimPage = page.CreateButton.ClickAndOpen<ClaimCreationPage>();
 
-            // метод Click()
+            // Метод Click()
             claimPage.SendButton.Present.Wait().EqualTo(true);
             claimPage.SendButton.Click();
             claimPage.DirectorFioCombobox.HasError.Wait().EqualTo(true);
         }
         
-        // todo  после реализации record удалить код ниже
+        // todo для курсанта: после создания рекорда (Задание 6) удалить код ниже
         private Claim CreateDefaultClaim()
         {
             var random = new Random();

@@ -1,49 +1,56 @@
 ﻿using System;
-using Kontur.Selone.Pages;
 using NUnit.Framework;
 using VacationTests.Claims;
 using VacationTests.Infrastructure;
-using VacationTests.PageObjects;
 
 namespace VacationTests.Tests
 {
-    //[NonParallelizable] // тут можно указать, что тесты класса не должны / должны идти в параллель
-    public class
-        ExampleTests : VacationTestBase // класс с тестами наследуется от базового класса, в котором могут быть SetUp и TearDown
+    // [Parallelizable] // тут можно указать, что тесты класса должны / не должны идти в параллель
+    // [TestFixture] // простой класс с тестами без параметризаций можно не помечать таким атрибутом
+    // Класс с тестами (сборка тестов) с именем ExampleTests,
+    // наследуется от базового класса, в котором могут быть SetUp и TearDown
+    public class ExampleTests : VacationTestBase
     {
-        private readonly string employeeId = "newEmployeeId"; // тут можно хранить переменные, доступные для всех тестов
-        private EmployeeVacationListPage employeePage;
+        // Можно хранить константы, доступные для всех тестов
+        private readonly string employeeId = "newEmployeeId";
 
-        [SetUp] // действия, выполняемые перед каждым тестом
+        // Действия, выполняемые перед каждым тестом
+        [SetUp]
         public void SetUp()
         {
-            //base.SetUp(); // если SetUp был бы ещё в базовом классе TestBase
-            employeePage =
-                Navigation.OpenEmployeeVacationList(
-                    employeeId); // можно сделать какое-то общее действие для всех тестов
+            // Можно сделать какое-то общее действие для всех тестов
+            Navigation.OpenEmployeeVacationList(employeeId);
         }
 
-        [TearDown] // действия, выполняемые после каждого теста
-        public override void TearDown()
+        // Действия, выполняемые после каждого теста
+        [TearDown]
+        public new void TearDown()
         {
-            //ClaimStorage.ClearClaims(); // можно сделать какое-то общее действие для всех тестов
-            base.TearDown(); // вызов TearDown базового класса VacationTestBase
+            // Можно сделать какое-то общее действие для всех тестов, например
+            // ClaimStorage.ClearClaims(); 
         }
 
-        [Test] // тест
+        // Тест
+        [Test]
         public void EnterWorker()
         {
+            // Arrange
             var defaultDirector = new Director(14, "Бублик Владимир Кузьмич", "Директор департамента");
             var claim = new Claim("567", ClaimType.Study, ClaimStatus.Accepted, defaultDirector,
-                DateTime.Now.Date.AddDays(14), DateTime.Now.Date.AddDays(14 + 7), null, employeeId, true);
-            // todo: после решение задания 6 заменить создание на код ниже
+                DateTime.Now.Date, DateTime.Now.AddDays(3), null, employeeId, true);
+            // todo для курсанта: после создания рекорда (Задание 6) заменить две строки выше на код ниже
             // var claim = Claim.CreateDefault() with
             // {
             //     UserId = employeeId,
+            //     Status = ClaimStatus.Accepted,
+            //     EndDate = DateTime.Now.AddDays(3)
             // };
-
             ClaimStorage.Add(new[] {claim});
-            employeePage.Refresh();
+
+            // Act
+            var employeePage = Navigation.OpenEmployeeVacationList(employeeId);
+
+            // Assert
             employeePage.SalaryCalculatorTab.Present.Wait().EqualTo(true);
             employeePage.ClaimList.Items.Count.Wait().That(Is.AtLeast(1));
         }

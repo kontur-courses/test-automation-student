@@ -3,34 +3,36 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using VacationTests.Claims;
 using VacationTests.Infrastructure;
+using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageNavigation;
 
 namespace VacationTests
 {
-    public abstract class VacationTestBase
+    public class VacationTestBase
     {
-        // создаём словарь для хранения браузеров пула
+        // Создание словаря для хранения браузеров пула
         private static readonly ConcurrentDictionary<string, IWebDriver> AcquiredWebDrivers = new();
 
-        // свойство, которое с помощью NUnit отдаёт текущий WorkerId теста
+        // Свойство, которое с помощью NUnit отдаёт текущий WorkerId теста
         private static string TestWorkerId => TestContext.CurrentContext.WorkerId ?? "debug";
         protected IWebDriver WebDriver => GetWebDriver();
-        protected Navigation Navigation => new(WebDriver);
         protected ClaimStorage ClaimStorage => new(LocalStorage);
         protected LocalStorage LocalStorage => new(WebDriver);
-
-        // после каждого теста отдаём браузер обратно в пул
+        private ControlFactory ControlFactory => new(LocalStorage, ClaimStorage);
+        protected Navigation Navigation => new(WebDriver, ControlFactory);
+        
+        // Возвращеия браузера в пул после каждого теста
         [TearDown]
-        public virtual void TearDown()
+        public void TearDown()
         {
             if (AcquiredWebDrivers.TryRemove(TestWorkerId, out var webDriver))
                 AssemblySetUpFixture.WebDriverPool.Release(webDriver);
         }
 
-        // метод получения текущего вебдрайвера
-        protected static IWebDriver GetWebDriver()
+        // Метод получения текущего WebDriver
+        private IWebDriver GetWebDriver()
         {
-            return AcquiredWebDrivers.GetOrAdd(TestWorkerId, x => AssemblySetUpFixture.WebDriverPool.Acquire());
+            return AcquiredWebDrivers.GetOrAdd(TestWorkerId, _ => AssemblySetUpFixture.WebDriverPool.Acquire());
         }
     }
 }

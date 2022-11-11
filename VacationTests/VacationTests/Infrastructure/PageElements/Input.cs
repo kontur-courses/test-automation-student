@@ -1,5 +1,6 @@
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Properties;
+using Kontur.Selone.Selectors.Context;
 using Kontur.Selone.Selectors.Css;
 using OpenQA.Selenium;
 
@@ -9,9 +10,9 @@ namespace VacationTests.Infrastructure.PageElements
     {
         private readonly IWebElement input;
 
-        public Input(ISearchContext searchContext, By by) : base(searchContext, by)
+        public Input(IContextBy contextBy) : base(contextBy)
         {
-            input = container.SearchElement(x => x.Css("input"));
+            input = Container.SearchElement(x => x.Css("input"));
         }
 
         public IProp<string> Value => input.Value();

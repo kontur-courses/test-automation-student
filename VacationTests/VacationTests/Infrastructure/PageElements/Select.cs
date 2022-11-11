@@ -1,4 +1,6 @@
+using Kontur.Selone.Extensions;
 using Kontur.Selone.Properties;
+using Kontur.Selone.Selectors.Context;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure.Properties;
 
@@ -6,19 +8,22 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class Select : ControlBase
     {
-        public Select(ISearchContext searchContext, By by) : base(searchContext, by)
+        public Select(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
         {
-            Portal = new Portal(container, By.TagName("noscript"));
+            ControlFactory = controlFactory;
         }
 
-        public IProp<string> Value => container.ReactValue();
-        private Portal Portal { get; }
+        private ControlFactory ControlFactory { get; }
 
+        public IProp<string> Value => Container.ReactValue();
+        private Portal Portal => ControlFactory.CreateControl<Portal>(Container.Search(By.TagName("noscript")));
+
+        // TODO: в параллели бывает нестабильность
         public void SelectValueByText(string text)
         {
-            container.Click();
+            Container.Click();
             var itemSelector = $".//*[contains(@data-comp-name,'MenuItem CommonWrapper')][contains(.,'{text}')]";
-            var item = new Button(Portal.GetPortalElement(), By.XPath(itemSelector));
+            var item = ControlFactory.CreateControl<Button>(Portal.GetPortalElement().Search(By.XPath(itemSelector)));
             item.Visible.Wait().EqualTo(true);
             item.Click();
         }
