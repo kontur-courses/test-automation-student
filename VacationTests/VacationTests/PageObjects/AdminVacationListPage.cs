@@ -10,15 +10,24 @@ namespace VacationTests.PageObjects
     {
         public AdminVacationListPage(IWebDriver webDriver) : base(webDriver)
         {
-            TitleLabel = webDriver.Search(x => x.WithTid("TitleLabel")).Label();
-            ClaimsTab = webDriver.Search(x => x.WithTid("ClaimsTab")).Link();
-            DownloadButton = webDriver.Search(x => x.WithTid("DownloadButton")).Button();
-            Footer = new PageFooter(webDriver.Search(x => x.WithTid("Footer")));
         }
 
         public Label TitleLabel { get; private set; }
         public Link ClaimsTab { get; private set; }
         public Button DownloadButton { get; private set; }
         public PageFooter Footer { get; private set; }
+
+        public void AssertThatCalculatorTabNotExist()
+        {
+            // TODO pe: нужен какой-то простой способ создать глобальный контрол, имея только WebDriver и ТИД
+            var salaryCalculatorTab = new SomeWebElement(WrappedDriver.Search(x => x.WithTid("ClaimList")));
+            salaryCalculatorTab.Present.Wait().EqualTo(false);
+        }
+        
+        public void AssertThatCreateButtonNotExist()
+        {
+            var createButton = new SomeWebElement(WrappedDriver.Search(x => x.WithTid("ClaimList")));
+            createButton.Present.Wait().EqualTo(false);
+        }
     }
 }

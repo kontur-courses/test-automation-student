@@ -6,52 +6,53 @@ using VacationTests.PageObjects;
 
 namespace VacationTests.Tests.Storage
 {
-    // todo снять Ignore после выполнения задания 7
     [NonParallelizable]
-    [Ignore("Для проверки реализации методов LocalStorage")]
     public class LocalStorageTests : VacationTestBase
     {
-        // название ключа, который будем добавлять
+        // Название ключа, который будем добавлять
         private const string ClaimsKeyName = "Vacation_App_Claims";
 
-        // значение, которое будем добавлять для ключа ClaimsKeyName
+        // Значение, которое будем добавлять для ключа ClaimsKeyName
         private const string FirstVacation =
-            "[{\"endDate\":\"14.08.2020\",\"id\":\"1\",\"paidNow\":true,\"startDate\":\"01.08.2020\",\"status\":2,\"type\":\"Основной\",\"userId\":\"1\",\"director\":{\"id\":24939,\"name\":\"Захаров Максим Николаевич\",\"position\":\"Руководитель направления тестирования\"}}]";
+            @"[{""endDate"":""14.08.2020"",""id"":""1"",""paidNow"":true,""startDate"":""01.08.2020"",""status"":2,""type"":""Основной"",""userId"":""1"",""director"":{""id"":24939,""name"":""Захаров Максим Николаевич"",""position"":""Руководитель направления тестирования""}}]";
 
         private EmployeeVacationListPage employeePage;
 
+        /* todo для курсантов: после рализации методов LocalStorage расскоментировать и прогнать тесты
         [SetUp]
         public void SetUp()
         {
-            // открываем список отпусков в каждом тесте
+            // Открытие списка отпусков
             employeePage = Navigation.OpenEmployeeVacationList();
 
-            // перед каждого теста чистим LocalStorage, поскольку в данном случае данные с прошлого теста могут мешать новому тесту
+            // Перед каждым тестом этого класса делается очитска LocalStorage, поскольку
+            // в данном случае все тесты идут последовательно
+            // и данные с прошлого теста могут мешать новому тесту
             LocalStorage.Clear();
             employeePage.Refresh();
 
-            // проверяем, что список пустой
+            // Проверка пустого списка
             employeePage.ClaimList.Items.Count.Wait().EqualTo(0);
         }
 
         [Test]
         public void AddClaims_WithSeloneInterface()
         {
-            // получаем веб-драйвер и с помощью Selonе и метода JavaScriptExecutor() добавляем отпуск в localStorage
-            GetWebDriver().JavaScriptExecutor()
+            // Получение WebDriver и с помощью Selonе и метода JavaScriptExecutor() добавление отпуска в localStorage
+            WebDriver.JavaScriptExecutor()
                 .ExecuteScript($"localStorage.setItem(\"{ClaimsKeyName}\", '{FirstVacation}');");
 
-            // чтобы отпуск появился в интерфейсе, обновляем страницу
+            // Чтобы отпуск появился в интерфейсе – обновляние страницы
             employeePage.Refresh();
 
-            // проверяем, что запись отобразилась
+            // Проверка появления записи
             employeePage.ClaimList.Items.Count.Wait().EqualTo(1);
         }
 
         [Test]
         public void AddClaims_WithLocalStorageClassInterface()
         {
-            // добавляем в хранилище отпуск
+            // Добавление в хранилище отпуска
             LocalStorage.SetItem(ClaimsKeyName, FirstVacation);
 
             employeePage.Refresh();
@@ -61,58 +62,58 @@ namespace VacationTests.Tests.Storage
         [Test]
         public void AddClaims_DeleteClaimsWithRemoveItemMethod()
         {
-            // добавляем 1 отпуск
+            // Добавление 1 отпуска в хранилище
             LocalStorage.SetItem(ClaimsKeyName, FirstVacation);
             employeePage.Refresh();
             employeePage.ClaimList.Items.Count.Wait().EqualTo(1);
-            // добавляем ещё один ключ, который не должен удалиться
+            // Добавление ещё одного ключа, который не должен удалиться
             LocalStorage.SetItem("TestKey", "TestName");
 
-            // проверяем, что в LocalStorage два ключа
+            // Проверка, что в LocalStorage два ключа
             Assert.That(LocalStorage.Length, Is.EqualTo(2));
 
-            // удаляем отпуск
+            // Удаление ключа с отпуском
             LocalStorage.RemoveItem(ClaimsKeyName);
             employeePage.Refresh();
-            // проверяем, что отпуск исчез из интерфейса
+            // Проверка, что отпуск исчез из интерфейса
             employeePage.ClaimList.Items.Count.Wait().EqualTo(0);
 
-            // проверяем, что в LocalStorage остался 1 ключ
+            // Проверка, что в LocalStorage остался 1 ключ
             Assert.That(LocalStorage.Length, Is.EqualTo(1));
         }
 
         [Test]
         public void AddClaims_DeleteClaimsWithClearMethod()
         {
-            // добавляем 1 отпуск
+            // Добавление 1 отпуска
             LocalStorage.SetItem(ClaimsKeyName, FirstVacation);
             employeePage.Refresh();
             employeePage.ClaimList.Items.Count.Wait().EqualTo(1);
 
-            // добавляем ещё один ключ, который тоже удалим
+            // Добавление ещё 1 ключа, который тоже будет удален
             LocalStorage.SetItem("TestKey", "TestName");
 
-            // очищаем всё хранилище
+            // Очищение всего хранилища
             LocalStorage.Clear();
 
             employeePage.Refresh();
-            // проверяем, что отпуск исчез из интерфейса
+            // Проверка, что отпуск исчез из интерфейса
             employeePage.ClaimList.Items.Count.Wait().EqualTo(0);
 
-            // проверяем, что в LocalStorage нет ключей
+            // Проверка, что в LocalStorage нет ключей
             Assert.That(LocalStorage.Length, Is.EqualTo(0));
         }
 
         [Test]
         public void AddClaims_GetItem()
         {
-            // добавляем 1 отпуск
+            // Добавление 1 отпуска
             LocalStorage.SetItem(ClaimsKeyName, FirstVacation);
 
-            // запрашиваем значение для ключа ClaimsKeyName
+            // Получение значения для ключа ClaimsKeyName
             var result = LocalStorage.GetItem(ClaimsKeyName);
 
-            // проверяем, что значение равно тому, что мы задавали
+            // Проверка, что значение равно тому, что мы задавали
             Assert.That(result, Is.EqualTo(FirstVacation));
         }
 
@@ -120,33 +121,33 @@ namespace VacationTests.Tests.Storage
         public void GetNonExistentItem()
         {
             var nonExistentKey = "nonExistentKey";
-            // запрашиваем значение для ключа ClaimsKeyName
+            // Получение значения для ключа ClaimsKeyName
             var result = LocalStorage.GetItem(nonExistentKey);
 
-            // проверяем, что значение равно тому, что мы задавали
+            // Проверка, что значение равно тому, что мы задавали
             Assert.That(result, Is.Null);
         }
 
         [Test]
         public void AddClaims_CheckLength()
         {
-            // добавляем 1 отпуск
+            // Добавление 1 отпуска
             LocalStorage.SetItem(ClaimsKeyName, FirstVacation);
 
-            // проверяем, что теперь в хранилище есть всего 1 ключ
+            // Проверка, что теперь в хранилище есть всего 1 ключ
             Assert.That(LocalStorage.Length, Is.EqualTo(1));
         }
 
         [Test]
         public void AddClaims_GetKeyNameByIndex()
         {
-            // добавляем 1 отпуск, первый ключ будет иметь индекс 0
+            // Добавление 1 отпуска, первый ключ будет иметь индекс 0
             LocalStorage.SetItem(ClaimsKeyName, FirstVacation);
-            // добавляем ещё один ключ, второй ключ будет иметь индекс 1
+            // Добавление ещё 1 ключа, второй ключ будет иметь индекс 1
             LocalStorage.SetItem("TestKey", "TestName");
 
-            // запрашиваем ключ с индексом 0, проверяем, что это ClaimsKeyName
+            // Проверка, что в LocalStorage ключ с индексом 0 == ClaimsKeyName
             Assert.That(LocalStorage.Key(0).Equals(ClaimsKeyName));
-        }
+        }*/
     }
 }

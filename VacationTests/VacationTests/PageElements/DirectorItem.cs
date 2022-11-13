@@ -1,17 +1,13 @@
-using Kontur.Selone.Extensions;
-using OpenQA.Selenium;
+using Kontur.Selone.Selectors.Context;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 
 namespace VacationTests.PageElements
 {
-    public class DirectorItem : ControlBase, IClickable
+    public class DirectorItem : ControlBase
     {
-        public DirectorItem(ISearchContext searchContext, By by) : base(searchContext, by)
+        public DirectorItem(IContextBy contextBy) : base(contextBy)
         {
-            IdLabel = container.Search(x => x.WithTid("IdLabel")).Label();
-            FioLabel = container.Search(x => x.WithTid("FioLabel")).Label();
-            PositionLabel = container.Search(x => x.WithTid("PositionLabel")).Label();
         }
 
         public Label IdLabel { get; private set; }

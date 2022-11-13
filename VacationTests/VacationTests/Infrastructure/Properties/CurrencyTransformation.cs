@@ -19,8 +19,8 @@ namespace VacationTests.Infrastructure.Properties
 
         public string Serialize(decimal value)
         {
-            var culture = CultureInfo.CreateSpecificCulture("fr-CA"); //формат 111111,000
-            var specifier = "N2"; //пробел   между порядками, 2 знака после запятой -> 111 111,00
+            var culture = CultureInfo.CreateSpecificCulture("fr-CA"); // Формат 111111,000
+            var specifier = "N2"; // Пробел   между порядками, 2 знака после запятой -> 111 111,00
             return value.ToString(specifier, culture).Replace(" ", ((char) 8201).ToString());
         }
     }

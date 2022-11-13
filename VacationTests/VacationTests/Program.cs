@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Text.Json;
 using System.Xml;
 using NUnit.Engine;
+// ReSharper disable PossibleNullReferenceException
+// ReSharper disable AssignNullToNotNullAttribute
 
 namespace VacationTests
 {
@@ -33,6 +35,7 @@ namespace VacationTests
                             var testsResult = runner.Run(null, filter);
                             var passed = Convert.ToDouble(testsResult.Attributes["passed"].Value);
                             var countTests = Convert.ToDouble(testsResult.Attributes["total"].Value);
+                            // ReSharper disable once CompareOfFloatsByEqualityOperator
                             if (passed == countTests)
                             {
                                 result = new RunResult(Verdict.Ok, $"All {countTests} tests are passed\n\n");

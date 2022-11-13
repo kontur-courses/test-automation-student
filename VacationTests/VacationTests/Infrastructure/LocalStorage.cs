@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 
 namespace VacationTests.Infrastructure
 {
-    // Задание 5: для студентов оставляем только название методов и свойств, реализацию пишут сами
     public class LocalStorage
     {
         private readonly IWebDriver webDriver;
@@ -13,37 +12,36 @@ namespace VacationTests.Infrastructure
             this.webDriver = webDriver;
         }
 
-        // получение количества элементов в хранилище
-        // todo: public long Length => (long) написать код
-        public long Length;
+        // Получение количества элементов в хранилище
+        public long Length => (long) 42; // todo для курсанта: написать код
 
-        // очистка всего хранилища
+        // Очистка всего хранилища
         public void Clear()
         {
-            // todo: написать код
+            // todo для курсанта: написать код
         }
 
-        // получение данных по ключу keyName
+        // Получение данных по ключу keyName
         public string GetItem(string keyName)
         {
-            // todo: написать код
+            // todo для курсанта: написать код
             return null;
         }
 
-        // получение ключа на заданной позиции
+        // Получение ключа на заданной позиции
         public string Key(int keyNumber)
         {
-            // todo: написать код
+            // todo для курсанта: написать код
             return null;
         }
 
-        // удаление данных с ключом keyName
+        // Удаление данных с ключом keyName
         public void RemoveItem(string keyName)
         {
-            // todo: написать код
+            // todo для курсанта: написать код
         }
 
-        // сохранение пары ключ/значение
+        // Сохранение пары ключ/значение
         public void SetItem(string keyName, string value)
         {
             webDriver.JavaScriptExecutor().ExecuteScript($"localStorage.setItem(\"{keyName}\", '{value}');");

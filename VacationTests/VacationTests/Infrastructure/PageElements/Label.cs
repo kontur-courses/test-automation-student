@@ -1,15 +1,15 @@
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Properties;
-using OpenQA.Selenium;
+using Kontur.Selone.Selectors.Context;
 
 namespace VacationTests.Infrastructure.PageElements
 {
-    public class Label : ControlBase, IClickable
+    public class Label : ControlBase
     {
-        public Label(ISearchContext searchContext, By by) : base(searchContext, by)
+        public Label(IContextBy contextBy) : base(contextBy)
         {
         }
 
-        public IProp<string> Text => container.Text();
+        public IProp<string> Text => Container.Text();
     }
 }

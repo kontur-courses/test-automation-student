@@ -8,8 +8,8 @@ namespace VacationTests.Claims
 {
     public class ClaimStorage
     {
-        private readonly LocalStorage localStorage;
         private const string ClaimsKeyName = "Vacation_App_Claims";
+        private readonly LocalStorage localStorage;
 
         public ClaimStorage(LocalStorage localStorage)
         {

@@ -14,7 +14,7 @@ namespace VacationTests.Infrastructure.Properties
     {
         public static IProp<bool> Disabled(this IWebElement webElement)
         {
-            // когда элемент сразу доступен, то data-prop-disabled не имеет значения
+            // Когда элемент сразу доступен, то data-prop-disabled не имеет значения,
             // когда элемент становится доступен после каких-то дейсвий, то data-prop-disabled = false
             var attribute = webElement.Attribute("data-prop-disabled");
             return attribute.Get() == null ? attribute.NullBoolean() : attribute.Boolean();

@@ -1,15 +1,20 @@
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Properties;
-using OpenQA.Selenium;
+using Kontur.Selone.Selectors.Context;
 
 namespace VacationTests.Infrastructure.PageElements
 {
-    public class Link : ControlBase, IClickable
+    public class Link : ControlBase, ICanClickAndOpenPage
     {
-        public Link(ISearchContext searchContext, By by) : base(searchContext, by)
+        private readonly ControlFactory controlFactory;
+
+        public Link(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
         {
+            this.controlFactory = controlFactory;
         }
 
-        public IProp<string> Text => container.Text();
+        public IProp<string> Text => Container.Text();
+
+        ControlFactory ICanClickAndOpenPage.ControlFactory => controlFactory;
     }
 }

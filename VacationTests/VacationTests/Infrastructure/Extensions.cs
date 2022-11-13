@@ -14,23 +14,7 @@ using OpenQA.Selenium;
 // https://ulearn.me/course/basicprogramming/Metody_rasshireniya_01a1f9a5-c475-4af3-bef3-060f92e69a92
 namespace VacationTests.Infrastructure
 {
-    public static class WebDriverExtensions
-    {
-        /// <typeparam name="TPageObject">Должен содержать конструктор, принимающий IWebDriver</typeparam>
-        public static TPageObject CreatePage<TPageObject>(this IWebDriver webDriver)
-        {
-            // перед тем как вернуть страницу можно вставить ожидание загрузки страницы, вызвав метод WaitLoad()
-            return (TPageObject) Activator.CreateInstance(typeof(TPageObject), webDriver);
-        }
-
-        /// <typeparam name="TPageObject">Должен содержать конструктор, принимающий IWebDriver</typeparam>
-        public static TPageObject OpenPage<TPageObject>(this IWebDriver webDriver, string url)
-        {
-            webDriver.Navigate().GoToUrl(url);
-            return webDriver.CreatePage<TPageObject>();
-        }
-    }
-
+    // TODO pe: Унести в общую инфру. RetryableAssertions.NUnit.dll и RetryableAssertions.Selone.dll?
     public static class Extensions
     {
         public static IValueProvider<T, T> Wait<T>(this IProp<T> prop)

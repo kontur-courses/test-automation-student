@@ -1,13 +1,13 @@
 using System.Globalization;
 using Kontur.Selone.Properties;
-using OpenQA.Selenium;
+using Kontur.Selone.Selectors.Context;
 using VacationTests.Infrastructure.Properties;
 
 namespace VacationTests.Infrastructure.PageElements
 {
     public class CurrencyInput : Input
     {
-        public CurrencyInput(ISearchContext searchContext, By by) : base(searchContext, by)
+        public CurrencyInput(IContextBy contextBy) : base(contextBy)
         {
         }
 

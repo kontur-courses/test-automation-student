@@ -14,7 +14,7 @@ namespace VacationTests.Claims
                 new Director(24939, "Захаров Максим Николаевич", "Руководитель направления тестирования"),
                 new DateTime(2021, 08, 1), new DateTime(2021, 08, 5),
                 1, "1", true);
-            // todo после решения Задания 6 заиспользовать код ниже вместо создания класса напрямую
+            // todo для курсанта: после создания рекорда (Задание 6) заиспользовать код ниже вместо создания класса напрямую
             /*var claim = Claim.CreateDefault() with
             {
                 Id = "1",
@@ -47,7 +47,7 @@ namespace VacationTests.Claims
                 new Director(24939, "Захаров Максим Николаевич", "Руководитель направления тестирования"),
                 new DateTime(2021, 08, 1), new DateTime(2021, 08, 5),
                 1, "1", true);
-            // todo после решения Задания 6 заиспользовать код ниже вместо создания класса напрямую
+            // todo для курсанта: после создания рекорда (Задание 6) заиспользовать код ниже вместо создания класса напрямую
             /*var expectClaim = Claim.CreateDefault() with
             {
                 Id = "1",
@@ -66,7 +66,6 @@ namespace VacationTests.Claims
                 }
             };*/
             var deserialized = ClaimStorage.Deserialize<Claim>(localStorageData);
-
             deserialized.Should().BeEquivalentTo(expectClaim);
         }
 
@@ -86,7 +85,7 @@ namespace VacationTests.Claims
                 null, "1", false);
             var expectClaim = new[] {claim1, claim2};
 
-            // todo после решения Задания 6 заиспользовать код ниже вместо создания класса напрямую
+            // После решения Задания 6 заиспользовать код ниже вместо создания класса напрямую
             /*var expectClaim = new[]
             {
                 Claim.CreateDefault() with
