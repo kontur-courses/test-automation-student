@@ -11,13 +11,9 @@ namespace VacationTests.Infrastructure
     {
         public IWebDriver Create()
         {
-            var chromeDriverService =
-                ChromeDriverService.CreateDefaultService(AppDomain.CurrentDomain.BaseDirectory);
+            var chromeDriverService = ChromeDriverService.CreateDefaultService(AppDomain.CurrentDomain.BaseDirectory);
             var options = new ChromeOptions();
             options.AddArguments("--no-sandbox", "--start-maximized", "--disable-extensions");
-            // Использовать для запуска тестов на ulearn
-            // chromeDriverService.SuppressInitialDiagnosticInformation = true;
-            // options.AddArguments("--no-sandbox", "--start-maximized", "--disable-extensions", "--disable-dev-shm-usage", "--headless");
             var chromeDriver = new ChromeDriver(chromeDriverService, options, TimeSpan.FromSeconds(180));
             chromeDriver.Manage().Window.SetSize(1280, 960);
             return chromeDriver;
