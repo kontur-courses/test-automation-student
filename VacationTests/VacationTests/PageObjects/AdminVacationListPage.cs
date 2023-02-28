@@ -17,17 +17,14 @@ namespace VacationTests.PageObjects
         public Button DownloadButton { get; private set; }
         public PageFooter Footer { get; private set; }
 
-        public void AssertThatCalculatorTabNotExist()
+        public bool IsAdminPage
         {
-            // TODO pe: нужен какой-то простой способ создать глобальный контрол, имея только WebDriver и ТИД
-            var salaryCalculatorTab = new SomeWebElement(WrappedDriver.Search(x => x.WithTid("ClaimList")));
-            salaryCalculatorTab.Present.Wait().EqualTo(false);
-        }
-        
-        public void AssertThatCreateButtonNotExist()
-        {
-            var createButton = new SomeWebElement(WrappedDriver.Search(x => x.WithTid("ClaimList")));
-            createButton.Present.Wait().EqualTo(false);
+            get
+            {
+                var employeeVacationListPage = new ControlFactory().CreatePage<EmployeeVacationListPage>(WrappedDriver);
+                return employeeVacationListPage.SalaryCalculatorTab.Present.Get() 
+                       && employeeVacationListPage.CreateButton.Present.Get();
+            }
         }
     }
 }
