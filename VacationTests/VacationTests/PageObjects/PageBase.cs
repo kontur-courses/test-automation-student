@@ -7,7 +7,7 @@ namespace VacationTests.PageObjects
 {
     public class PageBase : IPage
     {
-        protected PageBase(IWebDriver webDriver)
+        public PageBase(IWebDriver webDriver)
         {
             WrappedDriver = webDriver;
         }
