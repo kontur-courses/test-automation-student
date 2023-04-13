@@ -20,11 +20,9 @@ namespace VacationTests.Tests.EmployeePage
             var controlFactory = new ControlFactory();
             controlFactory.CreateControl<Button>(page.Search(x => x.WithTid("SalaryCalculatorTab"))).Click();
 
-            controlFactory.CreateControl<Select>(page.Search(x => x.WithTid("first"))
-                    .SearchContext.Search(x => x.WithTid("YearSelect")))
+            controlFactory.CreateControl<Select>(page.Search(x => x.WithTid("first").WithTid("YearSelect")))
                 .Visible.Wait().EqualTo(true);
-            controlFactory.CreateControl<Input>(page.Search(x => x.WithTid("first"))
-                    .SearchContext.Search(x => x.WithTid("SalaryCurrencyInput")))
+            controlFactory.CreateControl<Input>(page.Search(x => x.WithTid("first").WithTid("SalaryCurrencyInput")))
                 .Visible.Wait().EqualTo(true);
 
             controlFactory.CreateControl<Select>(page.Search(x => x.WithTid("second").WithTid("YearSelect")))

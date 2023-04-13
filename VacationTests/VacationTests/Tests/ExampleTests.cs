@@ -19,7 +19,7 @@ namespace VacationTests.Tests
         public void SetUp()
         {
             // Можно сделать какое-то общее действие для всех тестов
-            Navigation.OpenEmployeeVacationList(employeeId);
+            Navigation.OpenEmployeeVacationListPage(employeeId);
         }
 
         // Действия, выполняемые после каждого теста
@@ -48,7 +48,7 @@ namespace VacationTests.Tests
             ClaimStorage.Add(new[] {claim});
 
             // Act
-            var employeePage = Navigation.OpenEmployeeVacationList(employeeId);
+            var employeePage = Navigation.OpenEmployeeVacationListPage(employeeId);
 
             // Assert
             employeePage.SalaryCalculatorTab.Present.Wait().EqualTo(true);

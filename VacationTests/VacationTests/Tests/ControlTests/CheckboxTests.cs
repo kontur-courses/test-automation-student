@@ -10,7 +10,7 @@ namespace VacationTests.Tests.ControlTests
         [Test]
         public void Example()
         {
-            var page = Navigation.OpenEmployeeVacationList();
+            var page = Navigation.OpenEmployeeVacationListPage();
             var claimPage = page.CreateButton.ClickAndOpen<ClaimCreationPage>();
             claimPage.PayNowCheckbox.Checked.Wait().That(Is.False);
             claimPage.PayNowCheckbox.SetChecked();

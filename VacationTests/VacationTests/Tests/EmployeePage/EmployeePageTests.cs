@@ -8,7 +8,7 @@ namespace VacationTests.Tests.EmployeePage
         [Test]
         public void ControlVisibilityTest()
         {
-            var page = Navigation.OpenEmployeeVacationList();
+            var page = Navigation.OpenEmployeeVacationListPage();
             page.TitleLabel.Text.Wait().EqualTo("Список отпусков");
             page.ClaimsTab.Visible.Wait().EqualTo(true);
             page.ClaimsTab.Text.Wait().EqualTo("🌴 Заявления на отпуск");
