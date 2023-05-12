@@ -19,12 +19,12 @@ namespace VacationTests.Infrastructure
 		{
 			Console.WriteLine($"Driver is initialized: {webDriver != null}");
 			var screenshot = ((ITakesScreenshot)webDriver).GetScreenshot();
-			var screenshotName = $"{DateTime.Now:yyyyMMdd-HHmmss}-{TestContext.CurrentContext.Test.FullName}.png";
+			var screenshotName = $"{DateTime.Now:yyyyMMdd-HHmmss}-{TestContext.CurrentContext.Test.Name}.png";
 			var filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, screenshotName);
 			screenshot.SaveAsFile(filepath);
             
 			Console.WriteLine($"##teamcity[publishArtifacts '{filepath}'] ");
-			Console.WriteLine($"##teamcity[testMetadata testName='{TestContext.CurrentContext.Test.FullName}' name='Screenshot' type='image' value='{screenshotName}']");
+			Console.WriteLine($"##teamcity[testMetadata testName='{TestContext.CurrentContext.Test.Name}' name='Screenshot' type='image' value='{screenshotName}']");
 		}
 		
 		public void SaveTestFailureScreenshot()
