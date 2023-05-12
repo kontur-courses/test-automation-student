@@ -18,8 +18,13 @@ namespace VacationTests
         protected LocalStorage LocalStorage => new(WebDriver);
         private ControlFactory ControlFactory => new(LocalStorage, ClaimStorage);
         protected Navigation Navigation => new(WebDriver, ControlFactory);
+        private Screenshoter Screenshoter => new(WebDriver);
 
         [OneTimeTearDown]
-        protected void OneTimeTearDown() => WebDriver.Dispose();
+        protected void OneTimeTearDown()
+        {
+            Screenshoter.SaveTestFailureScreenshot();
+            WebDriver.Dispose(); 
+        }
     }
 }
