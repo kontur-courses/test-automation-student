@@ -8,7 +8,7 @@ namespace VacationTests.Claims
 
     public class Claim
     {
-        // Метод инициализации
+        // Конструктор класса
         public Claim(string id, ClaimType type, ClaimStatus status, Director director, DateTime startDate,
             DateTime endDate, int? childAgeInMonths, string userId, bool paidNow)
         {
