@@ -29,6 +29,7 @@ namespace VacationTests.PageNavigation
             where TPageObject : PageBase
         {
             webDriver.Navigate().GoToUrl(url);
+            webDriver.Navigate().Refresh();
             return controlFactory.CreatePage<TPageObject>(webDriver);
         }
     }
