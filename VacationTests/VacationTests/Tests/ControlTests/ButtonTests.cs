@@ -36,7 +36,7 @@ namespace VacationTests.Tests.ControlTests
         public void OperationExample()
         {
             // Метод ClickAndOpen()
-            var page = Navigation.OpenEmployeeVacationList();
+            var page = Navigation.OpenEmployeeVacationListPage();
             var claimPage = page.CreateButton.ClickAndOpen<ClaimCreationPage>();
 
             // Метод Click()

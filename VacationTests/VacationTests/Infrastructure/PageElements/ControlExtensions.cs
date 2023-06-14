@@ -16,24 +16,24 @@ namespace VacationTests.Infrastructure.PageElements
             return control.ControlFactory.CreatePage<TPageObject>(control.Container.WebDriver());
         }
 
-        public static void WaitPresence(this ControlBase control)
+        public static void WaitPresence(this ControlBase control, int? timeout = null)
         {
-            control.Present.Wait().EqualTo(true);
+            control.Present.Wait().EqualTo(true, timeout);
         }
 
-        public static void WaitAbsence(this ControlBase control)
+        public static void WaitAbsence(this ControlBase control, int? timeout = null)
         {
-            control.Present.Wait().EqualTo(false);
+            control.Present.Wait().EqualTo(false, timeout);
         }
 
-        public static void WaitDisabled(this ControlBase control)
+        public static void WaitDisabled(this ControlBase control, int? timeout = null)
         {
-            control.Disabled.Wait().EqualTo(true);
+            control.Disabled.Wait().EqualTo(true, timeout);
         }
 
-        public static void WaitEnabled(this ControlBase control)
+        public static void WaitEnabled(this ControlBase control, int? timeout = null)
         {
-            control.Disabled.Wait().EqualTo(false);
+            control.Disabled.Wait().EqualTo(false, timeout);
         }
     }
 }

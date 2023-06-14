@@ -1,3 +1,4 @@
+using Kontur.Selone.Pages;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageObjects;
@@ -20,9 +21,17 @@ namespace VacationTests.PageNavigation
             return OpenPage<LoginPage>(Urls.LoginPage);
         }
 
-        public EmployeeVacationListPage OpenEmployeeVacationList(string employeeId = "1")
+        public EmployeeVacationListPage OpenEmployeeVacationListPage(string employeeId = "1")
         {
-            return OpenPage<EmployeeVacationListPage>(Urls.EmployeeVacationList(employeeId));
+            var isCurrentPageIsEmployeePage = webDriver.Url.Contains("user");
+            var page = OpenPage<EmployeeVacationListPage>(Urls.EmployeeVacationListPage(employeeId));
+
+            // на фронте баг со страницей сотрудника
+            // если находишься на странице сотрудника и меняешь цифру с id сотрудником в урле, то страница не обновляется
+            // пока баг не исправлен, вставляем принудительный рефреш страницы
+            if (isCurrentPageIsEmployeePage)
+                page.Refresh();
+            return page;
         }
 
         public TPageObject OpenPage<TPageObject>(string url)
