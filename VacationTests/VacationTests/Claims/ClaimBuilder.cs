@@ -6,7 +6,7 @@ namespace VacationTests.Claims
     // Название должно быть обязательно <имя класса, для которого создаем Builder>Builder
     public class ClaimBuilder
     {
-        // Создаем переменные со значениями по умолчанию для каждого свойства класса отпуск
+        // Инициализируем приватные поля со значениями по умолчанию для каждого свойства класса Claim
         private const string DefaultUserId = "1";
         private string id = new Random().Next(101).ToString();
         private ClaimType type = ClaimType.Paid;
@@ -14,13 +14,9 @@ namespace VacationTests.Claims
         private string userId = DefaultUserId;
         private int? childAgeInMonths;
 
-        public ClaimBuilder()
-        {
-        }
-
-        // Для каждого свойства создаем метод With<название свойства>, возвращающий ClaimBuilder
-        // Метод принимает новое значение свойства, записывает это значение в переменную, созданную выше
-        // С помощью таких методов можно будет задать необходимые поля
+        // Для каждого поля создаем метод With<название свойства>, возвращающий экземпляр этого DirectorBuilder
+        // Метод принимает значение и записывает в соответствующее приватное поле
+        // С помощью таких методов можно будет задать необходимые поляr
         public ClaimBuilder WithId(string newId)
         {
             id = newId;
@@ -45,7 +41,6 @@ namespace VacationTests.Claims
             return this;
         }
 
-        // Можно создать перегрузку метода для удобных входных данных
         public ClaimBuilder WithUserId(int newUserId)
         {
             userId = newUserId.ToString();
@@ -57,27 +52,18 @@ namespace VacationTests.Claims
             childAgeInMonths = newChildAgeInMonths;
             return this;
         }
-        
+
         // Основной метод, который возвращает экземпляр класса Claim
-        public Claim Build() => new(id, type, status,
-            new Director(14, "Бублик Владимир Кузьмич", "Директор департамента"), DateTime.Now.Date.AddDays(7),
-            DateTime.Now.Date.AddDays(12), childAgeInMonths, userId, false);
-
-        // Статический метод, который возвращает экземпляр класса ClaimBuilder вместе со значениями по умолчанию
-        public static ClaimBuilder AClaim()
-        {
-            return new ClaimBuilder();
-        }
-
-        // Статический метод, который возвращает экземпляр класса Claim вместе со значениями по умолчанию
-        // для случая, если нам никакие данные не нужны
-        public static Claim ADefaultClaim() => AClaim().Build();
-
-        // Статический метод, который возвращает экземпляр класса Claim
-        // для случая, если нам важен отпуск по уходу за ребёнком
-        public static Claim AChildClaim() => AClaim()
-            .WithType(ClaimType.Child)
-            .WithChildAgeInMonths(new Random().Next(1, 101))
-            .Build();
+        public Claim Build() => new Claim(
+            id,
+            type,
+            status,
+            new Director(14, "Бублик Владимир Кузьмич", "Директор департамента"),
+            DateTime.Now.Date.AddDays(7),
+            DateTime.Now.Date.AddDays(12),
+            childAgeInMonths,
+            userId,
+            false
+        );
     }
 }
