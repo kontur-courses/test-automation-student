@@ -12,5 +12,10 @@ namespace VacationTests.PageNavigation
         {
             return Host + $"/#/user/{employeeId}";
         }
+        
+        public static string AdminVacationListPage()
+        {
+            return Host + $"/#/admin";
+        }
     }
 }
