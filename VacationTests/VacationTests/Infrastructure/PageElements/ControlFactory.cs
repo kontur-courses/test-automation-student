@@ -65,7 +65,7 @@ namespace VacationTests.Infrastructure.PageElements
 
             // Вызываем конструктор и передаём ему все входные параметры
             var value = constructor.Invoke(args.ToArray());
-            
+
             // Получаем контекст, по которому будем искать все контролы, входящие в состав нашего объекта
             var searchContext = contextBy?.SearchContext.SearchElement(contextBy.By) ??
                                 dependencies.OfType<ISearchContext>().SingleOrDefault();
@@ -92,7 +92,7 @@ namespace VacationTests.Infrastructure.PageElements
             {
                 // проверяем, что доступен метод set;
                 if (prop.SetMethod is null) continue;
-                
+
                 // находим атрибут BaseSearchByAttribute или его наследника ByTidAttribute
                 var attribute = prop.GetCustomAttribute<BaseSearchByAttribute>(true);
                 // если атрибут не найден, то берём название самого свойства,
@@ -100,7 +100,7 @@ namespace VacationTests.Infrastructure.PageElements
                 var contextBy = attribute == null
                     ? searchContext.Search(x => x.WithTid(prop.Name))
                     : searchContext.Search(attribute.SearchCriteria);
-                
+
                 // создаём экземпляр свойства через CreateInstance,
                 // чтобы иницаилизировать у сложных контролов ещё и их свойства
                 var value = CreateInstance(prop.PropertyType, contextBy, dependencies);

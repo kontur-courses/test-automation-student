@@ -22,7 +22,7 @@ public class Examples_AddScoped : Base
         Assert.AreEqual(tokenInstance1.Id, tokenInstance2.Id);
         Log(nameof(tokenInstance1) + " -> " + tokenInstance1.Id);
         Log(nameof(tokenInstance2) + " -> " + tokenInstance2.Id);
-        
+
         var writer1Instance1 = container.GetRequiredService<ConsoleTokenWriter1>();
         var writer1Instance2 = container.GetRequiredService<ConsoleTokenWriter1>();
 

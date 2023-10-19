@@ -7,15 +7,11 @@ namespace VacationTests.PageNavigation
         // Использовать для локального запуска сервиса Отпуска
         // private const string Host = "http://localhost:8080";
         public const string LoginPage = Host + "/#/";
+        public const string AdminVacationListPage = Host + "/#/admin";
 
         public static string EmployeeVacationListPage(string employeeId)
         {
             return Host + $"/#/user/{employeeId}";
-        }
-        
-        public static string AdminVacationListPage()
-        {
-            return Host + $"/#/admin";
         }
     }
 }

@@ -43,7 +43,7 @@ namespace VacationTests.Tests.ControlTests
             claimPage.SendButton.Click();
             claimPage.DirectorFioCombobox.HasError.Wait().EqualTo(true);
         }
-        
+
         // todo для курсанта: после создания рекорда (Задание 6) удалить код ниже
         private Claim CreateDefaultClaim()
         {
@@ -51,7 +51,7 @@ namespace VacationTests.Tests.ControlTests
             var randomClaimId = random.Next(1, 101).ToString();
             var defaultDirector = new Director(14, "Бублик Владимир Кузьмич", "Директор департамента");
             return new Claim(randomClaimId, ClaimType.Study, ClaimStatus.Accepted, defaultDirector,
-                DateTime.Now.Date.AddDays(14), DateTime.Now.Date.AddDays(14 + 7), null,"55", true);
+                DateTime.Now.Date.AddDays(14), DateTime.Now.Date.AddDays(14 + 7), null, "55", true);
         }
     }
 }

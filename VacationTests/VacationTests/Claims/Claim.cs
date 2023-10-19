@@ -22,15 +22,15 @@ namespace VacationTests.Claims
             UserId = userId;
             PaidNow = paidNow;
         }
-    
+
         // Свойства класса
         public string Id { get; }
-    
+
         [property: JsonConverter(typeof(StringEnumConverter))]
         public ClaimType Type { get; }
-    
+
         public ClaimStatus Status { get; }
-    
+
         public Director Director { get; }
         public DateTime StartDate { get; }
         public DateTime EndDate { get; }

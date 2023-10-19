@@ -9,6 +9,7 @@ namespace VacationTests.PageObjects
     public class AdminVacationListPage : PageBase
     {
         private ControlFactory controlFactory;
+
         public AdminVacationListPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
             this.controlFactory = controlFactory;
@@ -29,7 +30,7 @@ namespace VacationTests.PageObjects
             {
                 var employeeVacationListPage = new ControlFactory().CreatePage<EmployeeVacationListPage>(WrappedDriver);
                 return !(employeeVacationListPage.SalaryCalculatorTab.Visible.Get()
-                       && employeeVacationListPage.CreateButton.Visible.Get());
+                         && employeeVacationListPage.CreateButton.Visible.Get());
             }
         }
     }

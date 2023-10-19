@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Kontur.Selone.Pages;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure.PageElements;
@@ -33,14 +34,11 @@ namespace VacationTests.PageNavigation
                 page.Refresh();
             return page;
         }
-        
+
         public AdminVacationListPage OpenAdminVacationListPage()
         {
-            var isCurrentPageIsEmployeePage = webDriver.Url.Contains("admin");
-            var page = OpenPage<AdminVacationListPage>(Urls.AdminVacationListPage());
-            
-            if (isCurrentPageIsEmployeePage)
-                page.Refresh();
+            var page = OpenPage<AdminVacationListPage>(Urls.AdminVacationListPage);
+            webDriver.Url.Should().Contain("admin");
             return page;
         }
 

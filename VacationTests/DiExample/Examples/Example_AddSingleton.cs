@@ -43,7 +43,7 @@ public class Examples_AddSingleton : Base
         writerInstance1.WriteText();
         writerInstance2.WriteText();
     }
-    
+
     // Ниже необязательный пример для любознательных, можно пропустить.
     // Тестируем, что при использовании AddSingleton объект лежит в одной и тойже области памяти
     [Test]
@@ -69,11 +69,11 @@ public class Examples_AddSingleton : Base
             // логируем адреса
             Log($"{nameof(tokenInstance)} : ссылка на адрес памяти -> {(long) pointerToken:X}");
             Log($"{nameof(pointerTokenId)}: {id} : ссылка на адрес памяти -> {(long) pointerTokenId:X}");
-            
+
             // и добавляем в список
             result.Add($"{(long) pointerToken:X}:{(long) pointerTokenId:X}");
         }
-        
+
         // проверяем, что для всех 5 раз адреса были одинаковые
         Assert.AreEqual(1, result.Distinct().Count());
     }
