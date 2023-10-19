@@ -5,5 +5,6 @@
     &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.ControlTests.ButtonTests.WaitExample&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.Navigation.NavigationExercise1Tests.LoginPage_EmployeeButtonTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.Navigation.NavigationExercise2Tests.LoginPage_TitleTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.Navigation.NavigationTests.LoginPage_GoToAdminPageTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
