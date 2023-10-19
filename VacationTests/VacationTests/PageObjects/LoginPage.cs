@@ -1,5 +1,4 @@
 using Kontur.Selone.Extensions;
-using Kontur.Selone.Selectors.Css;
 using Kontur.Selone.Waiting;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure;
@@ -13,11 +12,9 @@ namespace VacationTests.PageObjects
     {
         public LoginPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
-            // Искать элемент по tid можно с помощью Css().WithTid("...")) - метод Selone
-            TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.Css().WithTid("LoginTitleLabel")));
-
             // Можно упростить написание для частых поисков, и создать свой метод WithTid(), чтобы опустить Css(),
             // этот метод будет вызывать Css().WithTid("..."))
+            TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
             LoginAsEmployeeButton =
                 controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("LoginAsEmployeeButton")));
             LoginAsAdminButton =
