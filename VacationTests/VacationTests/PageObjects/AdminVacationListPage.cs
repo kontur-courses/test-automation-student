@@ -33,5 +33,11 @@ namespace VacationTests.PageObjects
                          && employeeVacationListPage.CreateButton.Visible.Get());
             }
         }
+
+        public void WaitLoaded(int? timeout = null)
+        {
+            ClaimsTab.WaitPresence(timeout);
+            TitleLabel.WaitPresence(timeout);
+        }
     }
 }

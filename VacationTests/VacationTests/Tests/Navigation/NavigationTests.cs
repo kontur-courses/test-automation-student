@@ -11,9 +11,11 @@ namespace VacationTests.Tests.Navigation
         public void LoginPage_GoToAdminPageTest()
         {
             var enterPage = Navigation.OpenLoginPage();
+            enterPage.WaitLoaded(1);
             var adminPage = enterPage.LoginAsAdmin();
+            adminPage.WaitLoaded(1);
             adminPage.IsAdminPage.Should().BeTrue();
-            
+
             // var collection = new []
             // {
             //     new { Id = 1, Name = "John", Attributes = new string[] { } },

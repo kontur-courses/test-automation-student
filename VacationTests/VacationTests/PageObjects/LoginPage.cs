@@ -40,8 +40,8 @@ namespace VacationTests.PageObjects
 
         public void WaitLoaded(int? timeout = null)
         {
-            LoginAsEmployeeButton.WaitPresence();
-            LoginAsAdminButton.WaitPresence();
+            LoginAsEmployeeButton.WaitPresence(timeout);
+            LoginAsAdminButton.WaitPresence(timeout);
         }
     }
 }
