@@ -32,6 +32,7 @@ namespace VacationTests.PageNavigation
             // пока баг не исправлен, вставляем принудительный рефреш страницы
             if (isCurrentPageIsEmployeePage)
                 page.Refresh();
+            page.WaitLoaded();
             return page;
         }
 

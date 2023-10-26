@@ -25,5 +25,11 @@ namespace VacationTests.PageObjects
         public Button CreateButton { get; }
         public EmployeeClaimList ClaimList { get; }
         public PageFooter Footer { get; }
+
+        public void WaitLoaded(int? timeout = null)
+        {
+            TitleLabel.WaitPresence();
+            CreateButton.WaitPresence();
+        }
     }
 }

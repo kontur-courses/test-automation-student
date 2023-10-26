@@ -12,29 +12,71 @@ namespace VacationTests.Tests.EmployeePage
         [Test]
         public void SmokyTest()
         {
-            var page = Navigation
-                .OpenPage<PageBase>(@"https://ronzhina.gitlab-pages.kontur.host/for-course/#/user/1")
-                .WrappedDriver;
+            // var page = Navigation
+            //     .OpenPage<PageBase>(@"https://ronzhina.gitlab-pages.kontur.host/for-course/#/user/1")
+            //     .WrappedDriver;
 
-            Thread.Sleep(2000);
-            var controlFactory = new ControlFactory();
-            controlFactory.CreateControl<Button>(page.Search(x => x.WithTid("SalaryCalculatorTab"))).Click();
+            var page = Navigation.OpenEmployeeVacationListPage();
+            //ожидание страницы добавила в OpenEmployeeVacationListPage
+            var calcPage = page.SalaryCalculatorTab.ClickAndOpen<AverageDailyEarningsCalculatorPage>();
+            calcPage.WaitLoaded();
+            calcPage.AverageSalaryFirstRow.YearSelect.Visible.Wait().EqualTo(true);
+            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.Visible.Wait().EqualTo(true);
+            calcPage.AverageSalarySecondRow.YearSelect.Visible.Wait().EqualTo(true);
+            calcPage.AverageSalarySecondRow.SalaryCurrencyInput.Visible.Wait().EqualTo(true);
+            var averageDailyEarningsCurrency = calcPage.AverageDailyEarningsCurrencyLabel;
+            averageDailyEarningsCurrency.Visible.Wait().EqualTo(true);
 
-            controlFactory.CreateControl<Select>(page.Search(x => x.WithTid("first").WithTid("YearSelect")))
-                .Visible.Wait().EqualTo(true);
-            controlFactory.CreateControl<Input>(page.Search(x => x.WithTid("first").WithTid("SalaryCurrencyInput")))
-                .Visible.Wait().EqualTo(true);
+            Assert.That(averageDailyEarningsCurrency.ToString(), Contains.Substring("370,85"));
+        }
 
-            controlFactory.CreateControl<Select>(page.Search(x => x.WithTid("second").WithTid("YearSelect")))
-                .Visible.Wait().EqualTo(true);
-            controlFactory.CreateControl<Input>(page.Search(x => x.WithTid("second").WithTid("SalaryCurrencyInput")))
-                .Visible.Wait().EqualTo(true);
+        [Test]
+        public void AverageDailyEarningsCalculatorPage_AverageDailyEarningsTest()
+        {
+            var calcPage = OpenAverageDailyEarningsCalculatorPage();
 
-            var averageDailyEarningsCurrencyLabel =
-                controlFactory.CreateControl<Label>(page.Search(x =>
-                    x.WithTid("AverageDailyEarningsCurrencyLabel")));
-            averageDailyEarningsCurrencyLabel.Visible.Wait().EqualTo(true);
-            Assert.That(averageDailyEarningsCurrencyLabel.ToString(), Contains.Substring("370,85"));
+            calcPage.AverageSalaryFirstRow.YearSelect.SelectValueByText("2020");
+            calcPage.AverageSalarySecondRow.YearSelect.SelectValueByText("2021");
+            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.ClearAndInputText("100000");
+            calcPage.AverageSalarySecondRow.SalaryCurrencyInput.ClearAndInputText("200000");
+            calcPage.CountOfExcludeDaysInput.ClearAndInputText("100");
+            calcPage.AverageDailyEarningsCurrencyLabel.Sum.Wait().EqualTo(475.44m);
+        }
+
+        [Test]
+        public void AverageDailyEarningsCalculatorPage_OverCountBaseTest()
+        {
+            var calcPage = OpenAverageDailyEarningsCalculatorPage();
+
+            calcPage.AverageSalaryFirstRow.YearSelect.SelectValueByText("2020");
+            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.ClearAndInputText("2000000,00");
+            calcPage.AverageSalaryFirstRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(912000.00m);
+
+            calcPage.AverageSalaryFirstRow.YearSelect.SelectValueByText("2021");
+            calcPage.AverageSalaryFirstRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(966000.00m);
+        }
+
+        [Test]
+        public void AverageDailyEarningsCalculatorPage_OverCountBaseTest345()
+        {
+            var salary1 = 100000.1m;
+            var salary2 = 200000.2m;
+            var calcPage = OpenAverageDailyEarningsCalculatorPage();
+
+            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.ClearAndInputCurrency(salary1);
+            calcPage.AverageSalarySecondRow.SalaryCurrencyInput.ClearAndInputCurrency(salary2);
+            calcPage.AverageSalaryFirstRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(salary1);
+            calcPage.AverageSalarySecondRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(salary2);
+
+            calcPage.TotalEarningsCurrencyLabel.Sum.Wait().EqualTo(300000.3m);
+        }
+
+        private AverageDailyEarningsCalculatorPage OpenAverageDailyEarningsCalculatorPage()
+        {
+            var page = Navigation.OpenEmployeeVacationListPage();
+            var calcPage = page.SalaryCalculatorTab.ClickAndOpen<AverageDailyEarningsCalculatorPage>();
+            calcPage.WaitLoaded();
+            return calcPage;
         }
     }
 }

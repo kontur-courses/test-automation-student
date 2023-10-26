@@ -21,7 +21,7 @@ namespace VacationTests
         private Screenshoter Screenshoter => new(WebDriver);
 
         [OneTimeTearDown]
-        protected void OneTimeTearDown() => WebDriver.Dispose();
+        protected void OneTimeTearDown() => WebDriver.Close();
 
         [TearDown]
         public void TearDown() => Screenshoter.SaveTestFailureScreenshot();
