@@ -13,7 +13,7 @@ namespace VacationTests.Tests.EmployeePage
         public void SmokyTest()
         {
             var page = Navigation
-                .OpenPage<PageBase>(@"https://ronzhina.gitlab-pages.kontur.host/for-course/#/user/1")
+                .OpenPage<PageBase>(@"https://test-automation-course.gitlab-pages.kontur.host/for-course/#/user/1")
                 .WrappedDriver;
 
             Thread.Sleep(2000);
