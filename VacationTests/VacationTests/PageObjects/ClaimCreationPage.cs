@@ -1,5 +1,4 @@
-using OpenQA.Selenium;
-using VacationTests.Infrastructure;
+using Kontur.Selone.Selectors.Context;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageElements;
 
@@ -7,7 +6,7 @@ namespace VacationTests.PageObjects
 {
     public class ClaimCreationPage : PageBase
     {
-        public ClaimCreationPage(IWebDriver webDriver) : base(webDriver)
+        public ClaimCreationPage(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

@@ -1,12 +1,11 @@
 using Kontur.Selone.Selectors.Context;
-using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 
 namespace VacationTests.PageElements
 {
     public class DirectorItem : ControlBase
     {
-        public DirectorItem(IContextBy contextBy) : base(contextBy)
+        public DirectorItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

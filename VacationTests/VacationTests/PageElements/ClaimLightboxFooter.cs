@@ -1,12 +1,11 @@
 using Kontur.Selone.Selectors.Context;
-using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 
 namespace VacationTests.PageElements
 {
     public class ClaimLightboxFooter : ControlBase
     {
-        public ClaimLightboxFooter(IContextBy contextBy) : base(contextBy)
+        public ClaimLightboxFooter(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

@@ -1,5 +1,6 @@
 using System;
 using Kontur.Selone.Extensions;
+using Kontur.Selone.Selectors.Context;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
@@ -15,15 +16,13 @@ namespace VacationTests.PageObjects
         private readonly Lazy<Label> bodyLabel;
         private readonly Lazy<Button> closeButton;
 
-        private readonly ControlFactory controlFactory;
         private readonly Lazy<Button> crossButton;
         private readonly Lazy<Label> headerLabel;
         private readonly Lazy<Button> notAgreeButton;
 
         //TODO pe: Тут и в ClaimModal стоило бы придумать как перейти на InjectControls, чтобы не писать ручное создание
-        public InfoSidePage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
+        public InfoSidePage(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
-            this.controlFactory = controlFactory;
             headerLabel = CreateLazyControlByTid<Label>("SidePageHeader");
             crossButton = CreateLazyControlByTid<Button>("SidePage__close");
             bodyLabel = CreateLazyControlByTid<Label>("SidePageBody");
@@ -43,7 +42,7 @@ namespace VacationTests.PageObjects
 
         private Lazy<TControl> CreateLazyControlByTid<TControl>(string tid)
         {
-            return new(() => controlFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid))));
+            return new(() => ControlFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid))));
         }
 
         private IWebElement GetModalContext()

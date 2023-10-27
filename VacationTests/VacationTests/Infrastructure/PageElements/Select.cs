@@ -8,12 +8,9 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class Select : ControlBase
     {
-        public Select(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
+        public Select(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
-            ControlFactory = controlFactory;
         }
-
-        private ControlFactory ControlFactory { get; }
 
         public IProp<string> Value => Container.ReactValue();
         private Portal Portal => ControlFactory.CreateControl<Portal>(Container.Search(By.TagName("noscript")));

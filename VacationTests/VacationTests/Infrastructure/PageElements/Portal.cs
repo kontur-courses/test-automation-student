@@ -6,7 +6,7 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class Portal : ControlBase
     {
-        public Portal(IContextBy contextBy) : base(contextBy)
+        public Portal(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

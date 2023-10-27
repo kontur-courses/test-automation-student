@@ -12,7 +12,7 @@ namespace VacationTests.Infrastructure.PageElements
     {
         private readonly IWebElement dateInput;
 
-        public DatePicker(IContextBy contextBy) : base(contextBy)
+        public DatePicker(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
             dateInput = Container.SearchElement(By.XPath(".//*[contains(@data-comp-name, 'DateInput')]"));
         }

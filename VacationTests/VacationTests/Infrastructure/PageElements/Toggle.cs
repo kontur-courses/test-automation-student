@@ -7,7 +7,7 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class Toggle : ControlBase
     {
-        public Toggle(IContextBy contextBy) : base(contextBy)
+        public Toggle(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

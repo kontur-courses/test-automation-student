@@ -9,11 +9,11 @@ namespace VacationTests.PageElements
     // поскольку это тоже контрол и могут понадобиться базовые методы и пропсы
     public class EmployeeClaimItem : ControlBase
     {
-        public EmployeeClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
+        public EmployeeClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
-            TitleLink = controlFactory.CreateControl<Link>(Container.Search(x => x.WithTid("TitleLink")));
-            PeriodLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("PeriodLabel")));
-            StatusLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("StatusLabel")));
+            TitleLink = FindByTid<Link>("TitleLink");
+            PeriodLabel = FindByTid<Label>("PeriodLabel");
+            StatusLabel = FindByTid<Label>("StatusLabel");
         }
 
         // При обращении из теста к любому элементу списка отпусков будут доступны три свойства

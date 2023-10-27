@@ -30,7 +30,20 @@ namespace VacationTests.Infrastructure.PageElements
         public TPageObject CreatePage<TPageObject>(IWebDriver webDriver)
         {
             var allDependencies = dependencies.Prepend(this).Prepend(webDriver).ToArray();
-            return (TPageObject) CreateInstance(typeof(TPageObject), null, allDependencies);
+            return (TPageObject) CreateInstance(typeof(TPageObject), new PageContext(webDriver), allDependencies);
+        }
+
+        private class PageContext : IContextBy
+        {
+            public PageContext(ISearchContext searchContext)
+            {
+                SearchContext = searchContext;
+                By = null;
+                // By = By.TagName("body");
+            }
+
+            public ISearchContext SearchContext { get; }
+            public By By { get; }
         }
 
         /// <summary>Создать коллекцию контролов типа TItem</summary>
@@ -65,10 +78,13 @@ namespace VacationTests.Infrastructure.PageElements
 
             // Вызываем конструктор и передаём ему все входные параметры
             var value = constructor.Invoke(args.ToArray());
-            
+
             // Получаем контекст, по которому будем искать все контролы, входящие в состав нашего объекта
-            var searchContext = contextBy?.SearchContext.SearchElement(contextBy.By) ??
-                                dependencies.OfType<ISearchContext>().SingleOrDefault();
+            var searchContext = contextBy switch
+            {
+                PageContext _ => contextBy.SearchContext,
+                ContextBy _ => contextBy.SearchContext.SearchElement(contextBy.By)
+            };
             if (searchContext == null)
                 throw new NotSupportedException(
                     "Для автоматической инициализации полей контрола должен быть известен ISearchContext. " +
@@ -92,7 +108,7 @@ namespace VacationTests.Infrastructure.PageElements
             {
                 // проверяем, что доступен метод set;
                 if (prop.SetMethod is null) continue;
-                
+
                 // находим атрибут BaseSearchByAttribute или его наследника ByTidAttribute
                 var attribute = prop.GetCustomAttribute<BaseSearchByAttribute>(true);
                 // если атрибут не найден, то берём название самого свойства,
@@ -100,7 +116,7 @@ namespace VacationTests.Infrastructure.PageElements
                 var contextBy = attribute == null
                     ? searchContext.Search(x => x.WithTid(prop.Name))
                     : searchContext.Search(attribute.SearchCriteria);
-                
+
                 // создаём экземпляр свойства через CreateInstance,
                 // чтобы иницаилизировать у сложных контролов ещё и их свойства
                 var value = CreateInstance(prop.PropertyType, contextBy, dependencies);

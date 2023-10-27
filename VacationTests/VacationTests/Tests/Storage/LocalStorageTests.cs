@@ -1,7 +1,4 @@
-using Kontur.Selone.Extensions;
-using Kontur.Selone.Pages;
 using NUnit.Framework;
-using VacationTests.Infrastructure;
 using VacationTests.PageObjects;
 
 namespace VacationTests.Tests.Storage

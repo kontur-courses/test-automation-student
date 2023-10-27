@@ -2,10 +2,8 @@ using Kontur.Selone.Elements;
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Properties;
 using Kontur.Selone.Selectors.Context;
-using Kontur.Selone.Selectors.Css;
 using Kontur.Selone.Selectors.XPath;
 using NUnit.Framework;
-using OpenQA.Selenium;
 using VacationTests.Infrastructure.Properties;
 
 namespace VacationTests.Infrastructure.PageElements
@@ -14,12 +12,10 @@ namespace VacationTests.Infrastructure.PageElements
     {
         private readonly Input input;
 
-        public Combobox(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
+        public Combobox(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
-            input = controlFactory.CreateControl<Input>(
-                Container.Search(By.XPath(".//*[contains(@data-comp-name,'CommonWrapper Input')]")));
-            MenuItems = controlFactory.CreateElementsCollection<Button>(Container.Root(),
-                x => x.WithTid("ComboBoxMenu__item").FixedByIndex());
+            input = Find<Input>(x => x.XPath(".//*[contains(@data-comp-name,'CommonWrapper Input')]"));
+            MenuItems = FindCollectionByTid<Button>("ComboBoxMenu__item", SearchArea.Page);
         }
 
         public IProp<string> Text => Container.Text();

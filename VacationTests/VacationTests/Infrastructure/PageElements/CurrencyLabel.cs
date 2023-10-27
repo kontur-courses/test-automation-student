@@ -6,7 +6,7 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class CurrencyLabel : Label
     {
-        public CurrencyLabel(IContextBy contextBy) : base(contextBy)
+        public CurrencyLabel(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

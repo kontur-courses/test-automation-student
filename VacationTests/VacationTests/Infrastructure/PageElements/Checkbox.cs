@@ -7,7 +7,7 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class Checkbox : ControlBase
     {
-        public Checkbox(IContextBy contextBy) : base(contextBy)
+        public Checkbox(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

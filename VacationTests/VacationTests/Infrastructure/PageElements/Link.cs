@@ -8,7 +8,7 @@ namespace VacationTests.Infrastructure.PageElements
     {
         private readonly ControlFactory controlFactory;
 
-        public Link(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
+        public Link(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
             this.controlFactory = controlFactory;
         }

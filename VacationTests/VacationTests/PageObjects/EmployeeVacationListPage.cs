@@ -1,6 +1,4 @@
-using Kontur.Selone.Extensions;
-using OpenQA.Selenium;
-using VacationTests.Infrastructure;
+using Kontur.Selone.Selectors.Context;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageElements;
 
@@ -8,22 +6,22 @@ namespace VacationTests.PageObjects
 {
     public class EmployeeVacationListPage : PageBase
     {
-        public EmployeeVacationListPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
+        public EmployeeVacationListPage(IContextBy contextBy, ControlFactory controlFactory)
+            : base(contextBy, controlFactory)
         {
-            TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
-            ClaimsTab = controlFactory.CreateControl<Link>(webDriver.Search(x => x.WithTid("ClaimsTab")));
-            SalaryCalculatorTab =
-                controlFactory.CreateControl<Link>(webDriver.Search(x => x.WithTid("SalaryCalculatorTab")));
-            CreateButton = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("CreateButton")));
-            ClaimList = controlFactory.CreateControl<EmployeeClaimList>(webDriver.Search(x => x.WithTid("ClaimList")));
-            Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
+            TitleLabel = FindByTid<Label>("TitleLabel");
+            ClaimsTab = FindByTid<Link>("ClaimsTab");
+            SalaryCalculatorTab = FindByTid<Link>("SalaryCalculatorTab");
+            ClaimList = FindByTid<EmployeeClaimList>("ClaimList");
+            Footer = FindByTid<PageFooter>("Footer");
+            CreateButton = FindByTid<Button>("CreateButton");
         }
 
-        public Label TitleLabel { get; }
-        public Link ClaimsTab { get; }
+        public Label TitleLabel { get; set; }
+        public Link ClaimsTab { get; set; }
         public Link SalaryCalculatorTab { get; }
-        public Button CreateButton { get; }
         public EmployeeClaimList ClaimList { get; }
-        public PageFooter Footer { get; }
+        public PageFooter Footer { get; set; }
+        public Button CreateButton { get; }
     }
 }

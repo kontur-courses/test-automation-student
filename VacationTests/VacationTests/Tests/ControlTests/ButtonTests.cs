@@ -4,7 +4,6 @@ using NUnit.Framework;
 using VacationTests.Claims;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
-using VacationTests.PageNavigation;
 using VacationTests.PageObjects;
 
 namespace VacationTests.Tests.ControlTests

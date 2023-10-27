@@ -1,4 +1,5 @@
 using Kontur.Selone.Extensions;
+using Kontur.Selone.Selectors.Context;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
@@ -8,11 +9,8 @@ namespace VacationTests.PageObjects
 {
     public class ClaimLightbox : PageBase
     {
-        private readonly ControlFactory controlFactory;
-
-        public ClaimLightbox(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
+        public ClaimLightbox(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
-            this.controlFactory = controlFactory;
         }
 
         public Portal ClaimModal { get; private set; }
@@ -42,7 +40,7 @@ namespace VacationTests.PageObjects
 
         private TControl CreateControlByTid<TControl>(string tid)
         {
-            return controlFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid)));
+            return ControlFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid)));
         }
 
         private IWebElement GetModalContext()

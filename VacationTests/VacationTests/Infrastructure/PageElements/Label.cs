@@ -6,7 +6,7 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class Label : ControlBase
     {
-        public Label(IContextBy contextBy) : base(contextBy)
+        public Label(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

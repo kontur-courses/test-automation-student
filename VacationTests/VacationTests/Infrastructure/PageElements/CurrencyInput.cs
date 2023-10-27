@@ -7,7 +7,7 @@ namespace VacationTests.Infrastructure.PageElements
 {
     public class CurrencyInput : Input
     {
-        public CurrencyInput(IContextBy contextBy) : base(contextBy)
+        public CurrencyInput(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
         }
 

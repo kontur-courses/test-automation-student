@@ -1,6 +1,4 @@
-using Kontur.Selone.Extensions;
-using OpenQA.Selenium;
-using VacationTests.Infrastructure;
+using Kontur.Selone.Selectors.Context;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageElements;
 
@@ -8,14 +6,13 @@ namespace VacationTests.PageObjects
 {
     public class AdminVacationListPage : PageBase
     {
-        private ControlFactory controlFactory;
-        public AdminVacationListPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
+        public AdminVacationListPage(IContextBy searchContext, ControlFactory controlFactory)
+            : base(searchContext, controlFactory)
         {
-            this.controlFactory = controlFactory;
-            TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
-            ClaimsTab = controlFactory.CreateControl<Link>(webDriver.Search(x => x.WithTid("ClaimsTab")));
-            DownloadButton = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("DownloadButton")));
-            Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
+            TitleLabel = FindByTid<Label>("TitleLabel");
+            ClaimsTab = FindByTid<Link>("ClaimsTab");
+            DownloadButton = FindByTid<Button>("DownloadButton");
+            Footer = FindByTid<PageFooter>("Footer");
         }
 
         public Label TitleLabel { get; }
@@ -29,7 +26,7 @@ namespace VacationTests.PageObjects
             {
                 var employeeVacationListPage = new ControlFactory().CreatePage<EmployeeVacationListPage>(WrappedDriver);
                 return !(employeeVacationListPage.SalaryCalculatorTab.Visible.Get()
-                       && employeeVacationListPage.CreateButton.Visible.Get());
+                         && employeeVacationListPage.CreateButton.Visible.Get());
             }
         }
     }

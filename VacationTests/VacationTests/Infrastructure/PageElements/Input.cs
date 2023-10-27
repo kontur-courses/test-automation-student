@@ -10,7 +10,7 @@ namespace VacationTests.Infrastructure.PageElements
     {
         private readonly IWebElement input;
 
-        public Input(IContextBy contextBy) : base(contextBy)
+        public Input(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy, controlFactory)
         {
             input = Container.SearchElement(x => x.Css("input"));
         }
