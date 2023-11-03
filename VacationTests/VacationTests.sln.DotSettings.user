@@ -1,16 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d9f5f06c_002D16c4_002D44ca_002Dadf2_002Ddcfa63711a25/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ExampleTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4ba61461_002D8d24_002D4085_002Dbf9a_002D31cfbf648e8d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EmployeeVacationsListUiTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.ExampleTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.ControlTests.ButtonTests.WaitExample&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.Navigation.NavigationExercise1Tests.LoginPage_EmployeeButtonTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.Navigation.NavigationExercise2Tests.LoginPage_TitleTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.Navigation.NavigationTests.LoginPage_GoToAdminPageTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.SmokyTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.Test1&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.Test2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.AverageDailyEarningsCalculatorPage_OverCountBaseTest345&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.EmployeeVacationsListUiTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=chromedriver_002Eexe/@EntryIndexedValue">KillOrphaned</s:String>
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=conhost_002Eexe/@EntryIndexedValue">KillOrphaned</s:String></wpf:ResourceDictionary>

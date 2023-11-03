@@ -16,14 +16,22 @@ namespace VacationTests.PageObjects
                 controlFactory.CreateControl<Link>(webDriver.Search(x => x.WithTid("SalaryCalculatorTab")));
             CreateButton = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("CreateButton")));
             ClaimList = controlFactory.CreateControl<EmployeeClaimList>(webDriver.Search(x => x.WithTid("ClaimList")));
+            //добавляла в задании 4.1
+            //NoClaimsTextLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("NoClaimsTextLabel")));
             Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
+            
         }
+
+
 
         public Label TitleLabel { get; }
         public Link ClaimsTab { get; }
         public Link SalaryCalculatorTab { get; }
         public Button CreateButton { get; }
         public EmployeeClaimList ClaimList { get; }
+        
+        //добавляла в задании 4.1
+        //public Label NoClaimsTextLabel { get; }
         public PageFooter Footer { get; }
 
         public void WaitLoaded(int? timeout = null)
