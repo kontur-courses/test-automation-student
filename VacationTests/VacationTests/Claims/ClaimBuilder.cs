@@ -1,4 +1,5 @@
 using System;
+using VacationTests.Data;
 
 namespace VacationTests.Claims
 {
@@ -11,8 +12,12 @@ namespace VacationTests.Claims
         private string id = new Random().Next(101).ToString();
         private ClaimType type = ClaimType.Paid;
         private ClaimStatus status = ClaimStatus.NonHandled;
+        private Director director = Directors.Default;
+        private DateTime startDate = DateTime.Today.AddDays(7);
+        private DateTime endDate = DateTime.Today.AddDays(12);
         private string userId = DefaultUserId;
         private int? childAgeInMonths;
+        private bool paidNow = false;
 
         // Для каждого поля создаем метод With<название свойства>, возвращающий экземпляр этого DirectorBuilder
         // Метод принимает значение и записывает в соответствующее приватное поле
@@ -35,6 +40,37 @@ namespace VacationTests.Claims
             return this;
         }
 
+        public ClaimBuilder WithDirector(Director newDirector)
+        {
+            director = newDirector;
+            return this;
+        }
+
+        public ClaimBuilder WithStartDate(DateTime newStartDate)
+        {
+            startDate = newStartDate.Date;
+            return this;
+        }
+
+        public ClaimBuilder WithEndDate(DateTime newEndDate)
+        {
+            endDate = newEndDate.Date;
+            return this;
+        }
+
+        public ClaimBuilder WithPeriod(DateTime newStartDate, DateTime newEndDate)
+        {
+            var startDateWithoutTime = newStartDate.Date;
+            var endDateWithoutTime = newEndDate.Date;
+            if (endDateWithoutTime < startDateWithoutTime)
+                throw new Exception("Дата начала отпуска должна быть раньше даты конца отпуска");
+            if (endDateWithoutTime < startDateWithoutTime.AddDays(3))
+                throw new Exception("Минимальный период отпуска должен быть 3 дня");
+            startDate = startDateWithoutTime;
+            endDate = endDateWithoutTime;
+            return this;
+        }
+
         public ClaimBuilder WithUserId(string newUserId)
         {
             userId = newUserId;
@@ -53,17 +89,23 @@ namespace VacationTests.Claims
             return this;
         }
 
+        public ClaimBuilder WithPaidNow(bool isPaidNow)
+        {
+            paidNow = isPaidNow;
+            return this;
+        }
+
         // Основной метод, который возвращает экземпляр класса Claim
         public Claim Build() => new Claim(
             id,
             type,
             status,
-            new Director(14, "Бублик Владимир Кузьмич", "Директор департамента"),
-            DateTime.Now.Date.AddDays(7),
-            DateTime.Now.Date.AddDays(12),
+            director,
+            startDate,
+            endDate,
             childAgeInMonths,
             userId,
-            false
+            paidNow
         );
     }
 }
