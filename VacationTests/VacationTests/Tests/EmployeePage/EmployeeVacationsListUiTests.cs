@@ -33,7 +33,6 @@ namespace VacationTests.Tests.EmployeePage
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(1);
 
-            //хотела брать из БД данные, но почему-то ClaimStorage.GetAll() отдаёт null
             //var claimId = ClaimStorage.GetAll().Single(x=>x.UserId == employeeId).Id;
 
             var vacation = employeePage.ClaimList.Items.SingleOrDefault()!;
