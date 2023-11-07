@@ -40,6 +40,7 @@ namespace VacationTests.PageNavigation
         {
             var page = OpenPage<AdminVacationListPage>(Urls.AdminVacationListPage);
             webDriver.Url.Should().Contain("admin");
+            page.WaitLoaded();
             return page;
         }
 

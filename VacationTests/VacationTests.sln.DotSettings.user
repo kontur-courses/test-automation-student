@@ -1,9 +1,20 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9096eafd_002D5f1b_002D4349_002Dba61_002Dc4a6c3d8dee7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="EmployeeVacationsListUiTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6898feb4_002Dd259_002D44ed_002Db933_002Def241977f0d4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CreateChildCareVacationTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_DownloadButtonTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9096eafd_002D5f1b_002D4349_002Dba61_002Dc4a6c3d8dee7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EmployeeVacationsListUiTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.EmployeeVacationsListUiTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.EmployeeVacationsListTests.ClaimsList_ShouldDisplayRightTitles_InRightOrder&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.EmployeeVacationsListTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.SmokyTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.AverageDailyEarningsCalculatorPage_AverageDailyEarningsTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.AverageEarningsCalculatorPage_LeapYearTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.AverageEarningsCalculatorPage_LeapYearTest3&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.CreateChildCareVacationTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	

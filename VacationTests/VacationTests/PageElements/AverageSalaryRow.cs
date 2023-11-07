@@ -1,6 +1,5 @@
 ﻿using Kontur.Selone.Extensions;
 using Kontur.Selone.Selectors.Context;
-using OpenQA.Selenium;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 

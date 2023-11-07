@@ -15,9 +15,12 @@ namespace VacationTests.PageObjects
             this.controlFactory = controlFactory;
             TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
             ClaimsTab = controlFactory.CreateControl<Link>(webDriver.Search(x => x.WithTid("ClaimsTab")));
+            ClaimList = controlFactory.CreateControl<AdminClaimList>(webDriver.Search(x => x.WithTid("ClaimList")));
             DownloadButton = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("DownloadButton")));
             Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
         }
+
+        public AdminClaimList ClaimList { get; set; }
 
         public Label TitleLabel { get; }
         public Link ClaimsTab { get; }
