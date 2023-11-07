@@ -13,8 +13,8 @@ namespace VacationTests.Claims
         private ClaimType type = ClaimType.Paid;
         private ClaimStatus status = ClaimStatus.NonHandled;
         private Director director = Directors.Default;
-        private DateTime startDate = DateTime.Today.AddDays(7);
-        private DateTime endDate = DateTime.Today.AddDays(12);
+        private DateTime startDate = DateTime.Today.AddDays(5);
+        private DateTime endDate = DateTime.Today.AddDays(6);
         private string userId = DefaultUserId;
         private int? childAgeInMonths;
         private bool paidNow = false;

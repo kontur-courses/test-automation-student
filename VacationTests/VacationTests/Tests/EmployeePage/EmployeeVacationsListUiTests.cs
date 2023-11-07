@@ -13,8 +13,6 @@ namespace VacationTests.Tests.EmployeePage
 {
     public class EmployeeVacationsListUiTests : VacationTestBase
     {
-        private const string Claim = "Заявление ";
-
         [Test]
         public void CreateChildCareVacationTest()
         {
@@ -35,9 +33,9 @@ namespace VacationTests.Tests.EmployeePage
 
             //var claimId = ClaimStorage.GetAll().Single(x=>x.UserId == employeeId).Id;
 
-            var vacation = employeePage.ClaimList.Items.SingleOrDefault()!;
-            vacation.TitleLink.Text.Wait().EqualTo(Claim + "1");
-            vacation.PeriodLabel.Text.Wait().EqualTo(ConvertDate(claimStartDate) + " - " + ConvertDate(claimEndDate));
+            var vacation = employeePage.ClaimList.Items.Single();
+            vacation.TitleLink.Text.Wait().EqualTo("Заявление 1");
+            vacation.PeriodLabel.Text.Wait().EqualTo(GetClaimPeriod(claimStartDate, claimEndDate));
             vacation.StatusLabel.Text.Wait().EqualTo(ClaimStatus.NonHandled.GetDescription());
         }
 
@@ -45,16 +43,14 @@ namespace VacationTests.Tests.EmployeePage
         public void CreateVacations_ShouldAddItemsToClaimsList()
         {
             var employeeId = Guid.NewGuid().ToString();
-            var claimStartDate = DateTime.Today.AddDays(14);
-            var claimEndDate = claimStartDate.AddDays(7);
 
             var employeePage = Navigation.OpenEmployeeVacationListPage(employeeId);
 
             employeePage.ClaimList.WaitAbsence();
 
             //создаем 2 заявления
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate, claimEndDate);
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate, claimEndDate);
+            employeePage = CreateClaimFromUi(employeePage);
+            employeePage = CreateClaimFromUi(employeePage);
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(2);
         }
@@ -63,18 +59,16 @@ namespace VacationTests.Tests.EmployeePage
         public void ClaimsList_ShouldDisplayRightTitles_InRightOrder()
         {
             var employeeId = Guid.NewGuid().ToString();
-            var claimStartDate = DateTime.Today.AddDays(14);
-            var claimEndDate = claimStartDate.AddDays(7);
-            var expect = new[] {Claim + "1", Claim + "2", Claim + "3"};
+            var expect = new[] {"Заявление 1", "Заявление 2", "Заявление 3"};
 
             var employeePage = Navigation.OpenEmployeeVacationListPage(employeeId);
 
             employeePage.ClaimList.WaitAbsence();
 
             //создаем 3 заявления
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate, claimEndDate);
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate, claimEndDate);
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate, claimEndDate);
+            employeePage = CreateClaimFromUi(employeePage);
+            employeePage = CreateClaimFromUi(employeePage);
+            employeePage = CreateClaimFromUi(employeePage);
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(3);
             employeePage.ClaimList.Items.Select(x => x.TitleLink.Text).Wait().EqualTo(expect);
@@ -91,8 +85,8 @@ namespace VacationTests.Tests.EmployeePage
             var status = ClaimStatus.NonHandled.GetDescription();
             var expect = new[]
             {
-                (Claim + "1", ConvertDate(claimStartDate1) + " - " + ConvertDate(claimEndDate1), status),
-                (Claim + "2", ConvertDate(claimStartDate2) + " - " + ConvertDate(claimEndDate2), status)
+                ("Заявление 1", GetClaimPeriod(claimStartDate1, claimEndDate1), status),
+                ("Заявление 2", GetClaimPeriod(claimStartDate2, claimEndDate2), status)
             };
 
             var employeePage = Navigation.OpenEmployeeVacationListPage(employeeId);
@@ -127,27 +121,34 @@ namespace VacationTests.Tests.EmployeePage
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(2);
 
-            var claim = employeePage.ClaimList.Items.Wait().Single(x => x.TitleLink.Text, Is.EqualTo(Claim + "2"));
-            claim.PeriodLabel.Text.Wait().EqualTo(ConvertDate(claimStartDate2) + " - " + ConvertDate(claimEndDate2));
+            var claim = employeePage.ClaimList.Items.Wait().Single(x => x.TitleLink.Text, Is.EqualTo("Заявление 2"));
+            claim.PeriodLabel.Text.Wait().EqualTo(GetClaimPeriod(claimStartDate2, claimEndDate2));
             claim.StatusLabel.Text.Wait().EqualTo(ClaimStatus.NonHandled.GetDescription());
         }
 
         private static EmployeeVacationListPage CreateClaimFromUi(EmployeeVacationListPage employeePage,
-            DateTime claimStartDate, DateTime claimEndDate, ClaimType claimType = ClaimType.Paid,
-            string? director = "24939",
+            DateTime? claimStartDate = null, DateTime? claimEndDate = null, ClaimType claimType = ClaimType.Paid,
+            string director = "Захаров",
             string? childAge = "1")
         {
             var claimCreationPage = employeePage.CreateButton.ClickAndOpen<ClaimCreationPage>();
             claimCreationPage.ClaimTypeSelect.SelectValueByText(claimType.GetDescription());
             if (claimType == ClaimType.Child)
                 claimCreationPage.ChildAgeInput.ClearAndInputText(childAge);
-            claimCreationPage.ClaimStartDatePicker.SetValue(claimStartDate);
-            claimCreationPage.ClaimEndDatePicker.SetValue(claimEndDate);
+            var startDate = claimStartDate ?? DateTime.Today.AddDays(5);
+            var endDate = claimEndDate ?? startDate.AddDays(1);
+            claimCreationPage.ClaimStartDatePicker.SetValue(startDate);
+            claimCreationPage.ClaimEndDatePicker.SetValue(endDate);
             claimCreationPage.DirectorFioCombobox.SelectValue(director);
             employeePage = claimCreationPage.SendButton.ClickAndOpen<EmployeeVacationListPage>();
             return employeePage;
         }
 
+        private static string GetClaimPeriod(DateTime claimStartDate, DateTime claimEndDate)
+        {
+            return ConvertDate(claimStartDate) + " - " + ConvertDate(claimEndDate);
+        }
+        
         private static string ConvertDate(DateTime dateTime)
         {
             return dateTime.ToString("d", new CultureInfo("ru-RU"));
