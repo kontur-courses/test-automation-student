@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using Kontur.Selone.Extensions;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageObjects;
@@ -20,10 +18,10 @@ namespace VacationTests.Tests.EmployeePage
             //ожидание страницы добавила в OpenEmployeeVacationListPage
             var calcPage = page.SalaryCalculatorTab.ClickAndOpen<AverageDailyEarningsCalculatorPage>();
             calcPage.WaitLoaded();
-            calcPage.AverageSalaryFirstRow.YearSelect.Visible.Wait().EqualTo(true);
-            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.Visible.Wait().EqualTo(true);
-            calcPage.AverageSalarySecondRow.YearSelect.Visible.Wait().EqualTo(true);
-            calcPage.AverageSalarySecondRow.SalaryCurrencyInput.Visible.Wait().EqualTo(true);
+            calcPage.AverageSalaryRow1.YearSelect.Visible.Wait().EqualTo(true);
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.Visible.Wait().EqualTo(true);
+            calcPage.AverageSalaryRow2.YearSelect.Visible.Wait().EqualTo(true);
+            calcPage.AverageSalaryRow2.SalaryCurrencyInput.Visible.Wait().EqualTo(true);
             var averageDailyEarningsCurrency = calcPage.AverageDailyEarningsCurrencyLabel;
             averageDailyEarningsCurrency.Visible.Wait().EqualTo(true);
 
@@ -31,44 +29,95 @@ namespace VacationTests.Tests.EmployeePage
         }
 
         [Test]
-        public void AverageDailyEarningsCalculatorPage_AverageDailyEarningsTest()
+        public void AverageEarningsCalculatorPage_AverageDailyEarningsTest()
         {
             var calcPage = OpenAverageDailyEarningsCalculatorPage();
 
-            calcPage.AverageSalaryFirstRow.YearSelect.SelectValueByText("2020");
-            calcPage.AverageSalarySecondRow.YearSelect.SelectValueByText("2021");
-            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.ClearAndInputText("100000");
-            calcPage.AverageSalarySecondRow.SalaryCurrencyInput.ClearAndInputText("200000");
+            calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2020");
+            calcPage.AverageSalaryRow2.YearSelect.SelectValueByText("2021");
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputText("100000");
+            calcPage.AverageSalaryRow2.SalaryCurrencyInput.ClearAndInputText("200000");
             calcPage.CountOfExcludeDaysInput.ClearAndInputText("100");
             calcPage.AverageDailyEarningsCurrencyLabel.Sum.Wait().EqualTo(475.44m);
         }
 
         [Test]
-        public void AverageDailyEarningsCalculatorPage_OverCountBaseTest()
+        public void AverageEarningsCalculatorPage_EarningsMoreThanCountBaseTest()
         {
             var calcPage = OpenAverageDailyEarningsCalculatorPage();
 
-            calcPage.AverageSalaryFirstRow.YearSelect.SelectValueByText("2020");
-            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.ClearAndInputText("2000000,00");
-            calcPage.AverageSalaryFirstRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(912000.00m);
+            calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2020");
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputText("2000000,00");
+            calcPage.AverageSalaryRow1.CountBaseCurrencyLabel.Sum.Wait().EqualTo(912000.00m);
 
-            calcPage.AverageSalaryFirstRow.YearSelect.SelectValueByText("2021");
-            calcPage.AverageSalaryFirstRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(966000.00m);
+            calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2021");
+            calcPage.AverageSalaryRow1.CountBaseCurrencyLabel.Sum.Wait().EqualTo(966000.00m);
         }
 
         [Test]
-        public void AverageDailyEarningsCalculatorPage_OverCountBaseTest345()
+        public void AverageEarningsCalculatorPage_EarningsLessThanCountBaseTest()
         {
             var salary1 = 100000.1m;
             var salary2 = 200000.2m;
             var calcPage = OpenAverageDailyEarningsCalculatorPage();
 
-            calcPage.AverageSalaryFirstRow.SalaryCurrencyInput.ClearAndInputCurrency(salary1);
-            calcPage.AverageSalarySecondRow.SalaryCurrencyInput.ClearAndInputCurrency(salary2);
-            calcPage.AverageSalaryFirstRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(salary1);
-            calcPage.AverageSalarySecondRow.CountBaseCurrencyLabel.Sum.Wait().EqualTo(salary2);
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputCurrency(salary1);
+            calcPage.AverageSalaryRow2.SalaryCurrencyInput.ClearAndInputCurrency(salary2);
 
+            calcPage.AverageSalaryRow1.CountBaseCurrencyLabel.Sum.Wait().EqualTo(salary1);
+            calcPage.AverageSalaryRow2.CountBaseCurrencyLabel.Sum.Wait().EqualTo(salary2);
             calcPage.TotalEarningsCurrencyLabel.Sum.Wait().EqualTo(300000.3m);
+        }
+
+        [Test]
+        public void AverageEarningsCalculatorPage_LeapYearTest()
+        {
+            var withLeapYearTwoYearsCountDays = "731";
+            var withoutLeapYearTwoYearsCountDays = "730";
+            var calcPage = OpenAverageDailyEarningsCalculatorPage();
+
+            calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2020");
+            calcPage.AverageSalaryRow2.YearSelect.SelectValueByText("2021");
+
+            calcPage.TotalDaysForCalcLabel.Text.Wait().EqualTo(withLeapYearTwoYearsCountDays);
+            calcPage.DaysInTwoYearsLabel.Text.Wait().EqualTo(withLeapYearTwoYearsCountDays);
+
+            //хочется проверить, что в вычислениях среднего заработка тоже используется правильное значение
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputCurrency(600000m);
+            calcPage.AverageSalaryRow2.SalaryCurrencyInput.ClearAndInputCurrency(700000m);
+
+            calcPage.AverageDailyEarningsCurrencyLabel.Sum.Wait().EqualTo(1778.39m);
+
+            calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2019");
+
+            calcPage.TotalDaysForCalcLabel.Text.Wait().EqualTo(withoutLeapYearTwoYearsCountDays);
+            calcPage.DaysInTwoYearsLabel.Text.Wait().EqualTo(withoutLeapYearTwoYearsCountDays);
+            calcPage.AverageDailyEarningsCurrencyLabel.Sum.Wait().EqualTo(1780.82m);
+        }
+
+        [Test]
+        public void AverageEarningsCalculatorPage_LeapYearTest3()
+        {
+            var withLeapYearTwoYearsCountDays = "731";
+            var calcPage = OpenAverageDailyEarningsCalculatorPage();
+
+            calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2020");
+            calcPage.AverageSalaryRow2.YearSelect.SelectValueByText("2021");
+
+            calcPage.TotalDaysForCalcLabel.Text.Wait().EqualTo(withLeapYearTwoYearsCountDays);
+            calcPage.DaysInTwoYearsLabel.Text.Wait().EqualTo(withLeapYearTwoYearsCountDays);
+
+            //хочется проверить, что в вычислениях среднего заработка тоже используется правильное значение
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputCurrency(600000m);
+            calcPage.AverageSalaryRow2.SalaryCurrencyInput.ClearAndInputCurrency(700000m);
+
+            calcPage.AverageDailyEarningsCurrencyLabel.Sum.Wait().EqualTo(1778.39m);
+
+            calcPage.CountOfExcludeDaysInput.ClearAndInputText("100");
+
+            calcPage.DaysInTwoYearsLabel.Text.Wait().EqualTo(withLeapYearTwoYearsCountDays);
+            calcPage.TotalDaysForCalcLabel.Text.Wait().EqualTo("631");
+            calcPage.AverageDailyEarningsCurrencyLabel.Sum.Wait().EqualTo(2060.22m);
         }
 
         private AverageDailyEarningsCalculatorPage OpenAverageDailyEarningsCalculatorPage()

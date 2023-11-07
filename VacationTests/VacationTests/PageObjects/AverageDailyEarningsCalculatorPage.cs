@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using Kontur.RetryableAssertions.ValueProviding;
-using Kontur.Selone.Elements;
-using Kontur.Selone.Extensions;
+﻿using Kontur.Selone.Extensions;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
@@ -13,40 +10,56 @@ namespace VacationTests.PageObjects
     {
         public AverageDailyEarningsCalculatorPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
-            SalaryCalculatorTab = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("SalaryCalculatorTab")));
+            SalaryCalculatorTab =
+                controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("SalaryCalculatorTab")));
 
-            AverageSalaryFirstRow = controlFactory.CreateControl<AverageSalaryRow>(webDriver.Search(x => x.WithTid("first")));
-            
-            AverageSalarySecondRow = controlFactory.CreateControl<AverageSalaryRow>(webDriver.Search(x => x.WithTid("second")));
-            
-            CountOfExcludeDaysInput = controlFactory.CreateControl<CurrencyInput>(webDriver.Search(x =>
+            AverageSalaryRow1 =
+                controlFactory.CreateControl<AverageSalaryRow>(webDriver.Search(x => x.WithTid("first")));
+
+            AverageSalaryRow2 =
+                controlFactory.CreateControl<AverageSalaryRow>(webDriver.Search(x => x.WithTid("second")));
+
+            CountOfExcludeDaysInput = controlFactory.CreateControl<Input>(webDriver.Search(x =>
                 x.WithTid("CountOfExcludeDaysInput")));
-            
+
+            DaysInTwoYearsLabel = controlFactory.CreateControl<Label>(webDriver.Search(x =>
+                x.WithTid("DaysInTwoYearsLabel")));
+
+            TotalDaysForCalcLabel = controlFactory.CreateControl<Label>(webDriver.Search(x =>
+                x.WithTid("TotalDaysForCalcLabel")));
+
             TotalEarningsCurrencyLabel = controlFactory.CreateControl<CurrencyLabel>(webDriver.Search(x =>
                 x.WithTid("TotalEarningsCurrencyLabel")));
+
+            TotalDaysForCalcLabel = controlFactory.CreateControl<Label>(webDriver.Search(x =>
+                x.WithTid("TotalDaysForCalcLabel")));
 
             AverageDailyEarningsCurrencyLabel =
                 controlFactory.CreateControl<CurrencyLabel>(webDriver.Search(x =>
                     x.WithTid("AverageDailyEarningsCurrencyLabel")));
         }
 
-        public AverageSalaryRow AverageSalarySecondRow { get; }
+        public Label DaysInTwoYearsLabel { get; }
 
-        public AverageSalaryRow AverageSalaryFirstRow { get; }
+        public Label TotalDaysForCalcLabel { get; }
+
+        public AverageSalaryRow AverageSalaryRow2 { get; }
+
+        public AverageSalaryRow AverageSalaryRow1 { get; }
 
         public CurrencyLabel TotalEarningsCurrencyLabel { get; }
 
-        public CurrencyInput CountOfExcludeDaysInput { get; }
+        public Input CountOfExcludeDaysInput { get; }
 
-        public CurrencyLabel AverageDailyEarningsCurrencyLabel { get;}
+        public CurrencyLabel AverageDailyEarningsCurrencyLabel { get; }
 
         public Button SalaryCalculatorTab { get; }
-        
+
         public void WaitLoaded(int? timeout = null)
         {
             SalaryCalculatorTab.WaitPresence();
-            AverageSalaryFirstRow.WaitPresence();
-            AverageSalarySecondRow.WaitPresence();
+            AverageSalaryRow1.WaitPresence();
+            AverageSalaryRow2.WaitPresence();
         }
     }
 }
