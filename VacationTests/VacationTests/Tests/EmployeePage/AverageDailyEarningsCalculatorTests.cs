@@ -35,8 +35,8 @@ namespace VacationTests.Tests.EmployeePage
 
             calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2020");
             calcPage.AverageSalaryRow2.YearSelect.SelectValueByText("2021");
-            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputText("100000");
-            calcPage.AverageSalaryRow2.SalaryCurrencyInput.ClearAndInputText("200000");
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputCurrency(100000);
+            calcPage.AverageSalaryRow2.SalaryCurrencyInput.ClearAndInputCurrency(200000);
             calcPage.CountOfExcludeDaysInput.ClearAndInputText("100");
             calcPage.AverageDailyEarningsCurrencyLabel.Sum.Wait().EqualTo(475.44m);
         }
@@ -47,7 +47,7 @@ namespace VacationTests.Tests.EmployeePage
             var calcPage = OpenAverageDailyEarningsCalculatorPage();
 
             calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2020");
-            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputText("2000000,00");
+            calcPage.AverageSalaryRow1.SalaryCurrencyInput.ClearAndInputCurrency(2000000.00m);
             calcPage.AverageSalaryRow1.CountBaseCurrencyLabel.Sum.Wait().EqualTo(912000.00m);
 
             calcPage.AverageSalaryRow1.YearSelect.SelectValueByText("2021");
