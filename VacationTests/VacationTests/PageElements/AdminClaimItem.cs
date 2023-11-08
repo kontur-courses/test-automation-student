@@ -10,7 +10,7 @@ namespace VacationTests.PageElements
         public AdminClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
         {
             ItemCheckbox = controlFactory.CreateControl<Checkbox>(Container.Search(x => x.WithTid("ListItemCheckbox")));
-            TitleLink = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("TitleLink")));
+            TitleLink = controlFactory.CreateControl<Button>(Container.Search(x => x.WithTid("TitleLink")));
             UserFioLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("UserFioLabel")));
             PeriodLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("PeriodLabel")));
             StatusLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("StatusLabel")));
@@ -26,7 +26,7 @@ namespace VacationTests.PageElements
 
         public Label UserFioLabel { get; }
 
-        public Label TitleLink { get; }
+        public Button TitleLink { get; }
         public Label PeriodLabel { get; }
         public Label StatusLabel { get; }
 
