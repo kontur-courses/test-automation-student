@@ -6,6 +6,7 @@ using Kontur.Selone.Properties;
 using NUnit.Framework;
 using VacationTests.Claims;
 using VacationTests.Infrastructure;
+using VacationTests.Infrastructure.Helper;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageObjects;
 
@@ -27,7 +28,7 @@ namespace VacationTests.Tests.EmployeePage
             //не проходил на юлерне тест, поэтому пришлось закомментировать
             //employeePage.NoClaimsTextLabel.Text.Wait().EqualTo("Нет заявлений");
 
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate, claimEndDate, claimType);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage, claimStartDate, claimEndDate, claimType);
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(1);
 
@@ -49,8 +50,8 @@ namespace VacationTests.Tests.EmployeePage
             employeePage.ClaimList.WaitAbsence();
 
             //создаем 2 заявления
-            employeePage = CreateClaimFromUi(employeePage);
-            employeePage = CreateClaimFromUi(employeePage);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage);
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(2);
         }
@@ -66,9 +67,9 @@ namespace VacationTests.Tests.EmployeePage
             employeePage.ClaimList.WaitAbsence();
 
             //создаем 3 заявления
-            employeePage = CreateClaimFromUi(employeePage);
-            employeePage = CreateClaimFromUi(employeePage);
-            employeePage = CreateClaimFromUi(employeePage);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage);
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(3);
             employeePage.ClaimList.Items.Select(x => x.TitleLink.Text).Wait().EqualTo(expect);
@@ -94,8 +95,8 @@ namespace VacationTests.Tests.EmployeePage
             employeePage.ClaimList.WaitAbsence();
 
             //создаем 2 заявления
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate1, claimEndDate1);
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate2, claimEndDate2);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage, claimStartDate1, claimEndDate1);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage, claimStartDate2, claimEndDate2);
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(2);
             employeePage.ClaimList.Items
@@ -116,8 +117,8 @@ namespace VacationTests.Tests.EmployeePage
 
             employeePage.ClaimList.WaitAbsence();
 
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate1, claimEndDate1);
-            employeePage = CreateClaimFromUi(employeePage, claimStartDate2, claimEndDate2);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage, claimStartDate1, claimEndDate1);
+            employeePage = new ClaimUiHelper().CreateClaimFromUi(employeePage, claimStartDate2, claimEndDate2);
 
             employeePage.ClaimList.Items.Count.Wait().EqualTo(2);
 
@@ -126,29 +127,11 @@ namespace VacationTests.Tests.EmployeePage
             claim.StatusLabel.Text.Wait().EqualTo(ClaimStatus.NonHandled.GetDescription());
         }
 
-        private static EmployeeVacationListPage CreateClaimFromUi(EmployeeVacationListPage employeePage,
-            DateTime? claimStartDate = null, DateTime? claimEndDate = null, ClaimType claimType = ClaimType.Paid,
-            string director = "Захаров",
-            string? childAge = "1")
-        {
-            var claimCreationPage = employeePage.CreateButton.ClickAndOpen<ClaimCreationPage>();
-            claimCreationPage.ClaimTypeSelect.SelectValueByText(claimType.GetDescription());
-            if (claimType == ClaimType.Child)
-                claimCreationPage.ChildAgeInput.ClearAndInputText(childAge);
-            var startDate = claimStartDate ?? DateTime.Today.AddDays(5);
-            var endDate = claimEndDate ?? startDate.AddDays(1);
-            claimCreationPage.ClaimStartDatePicker.SetValue(startDate);
-            claimCreationPage.ClaimEndDatePicker.SetValue(endDate);
-            claimCreationPage.DirectorFioCombobox.SelectValue(director);
-            employeePage = claimCreationPage.SendButton.ClickAndOpen<EmployeeVacationListPage>();
-            return employeePage;
-        }
-
         private static string GetClaimPeriod(DateTime claimStartDate, DateTime claimEndDate)
         {
             return ConvertDate(claimStartDate) + " - " + ConvertDate(claimEndDate);
         }
-        
+
         private static string ConvertDate(DateTime dateTime)
         {
             return dateTime.ToString("d", new CultureInfo("ru-RU"));
