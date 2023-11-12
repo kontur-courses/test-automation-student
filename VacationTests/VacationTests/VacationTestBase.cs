@@ -7,23 +7,30 @@ using VacationTests.PageNavigation;
 
 // Классы с тестами запускаются параллельно.
 // Тесты внутри одного класса проходят последовательно.
-[assembly: Parallelizable(ParallelScope.Fixtures)]
+[assembly: Parallelizable(ParallelScope.All)]  
+[assembly: LevelOfParallelism(4)]
 
 namespace VacationTests
 {
     public abstract class VacationTestBase
     {
-        protected IWebDriver WebDriver = new ChromeDriverFactory().Create();
+        //protected IWebDriver WebDriver = new ChromeDriverFactory().Create();
+        protected IWebDriver WebDriver => MyBrowserPool.Get();
         protected ClaimStorage ClaimStorage => new(LocalStorage);
         protected LocalStorage LocalStorage => new(WebDriver);
         private ControlFactory ControlFactory => new(LocalStorage, ClaimStorage);
         protected Navigation Navigation => new(WebDriver, ControlFactory);
         private Screenshoter Screenshoter => new(WebDriver);
 
-        [OneTimeTearDown]
-        protected void OneTimeTearDown() => WebDriver.Close();
+        //[OneTimeTearDown]
+        //protected void OneTimeTearDown() => WebDriver.Close();
+        //protected static void OneTimeTearDown() => MyBrowserPool.Dispose();
 
         [TearDown]
-        public void TearDown() => Screenshoter.SaveTestFailureScreenshot();
+        public void TearDown()
+        {
+            Screenshoter.SaveTestFailureScreenshot();
+            MyBrowserPool.Release();
+        }
     }
 }

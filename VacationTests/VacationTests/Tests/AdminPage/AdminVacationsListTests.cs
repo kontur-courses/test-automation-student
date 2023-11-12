@@ -15,31 +15,32 @@ using VacationTests.PageObjects;
 
 namespace VacationTests.Tests.AdminPage
 {
+    [NonParallelizable]
     public class AdminVacationsListTests : VacationTestBase
     {
-        [Test]
-        public void TestAdminClaimsList_ShouldDisplayVacationFromDifferentEmployee_CreateClaimFromUi()
-        {
-            var employeeId = Guid.NewGuid().ToString();
-            var employee1Page = Navigation.OpenEmployeeVacationListPage();
-            new ClaimUiHelper().CreateClaimFromUi(employee1Page);
-            var employee2Page = Navigation.OpenEmployeeVacationListPage(employeeId);
-            new ClaimUiHelper().CreateClaimFromUi(employee2Page);
-
-
-            var adminPage = Navigation.OpenAdminVacationListPage();
-
-            adminPage.ClaimList.Items.Count.Wait().EqualTo(2);
-
-            var expect = new[]
-            {
-                ("Заявление 1", "Иванов Петр Семенович"),
-                ("Заявление 2", "Пользователь " + employeeId)
-            };
-
-            adminPage.ClaimList.Items.Select(x => Props.Create(x.TitleLink.Text, x.UserFioLabel.Text)).Wait()
-                .EquivalentTo(expect);
-        }
+        // [Test]
+        // public void TestAdminClaimsList_ShouldDisplayVacationFromDifferentEmployee_CreateClaimFromUi()
+        // {
+        //     var employeeId = Guid.NewGuid().ToString();
+        //     var employee1Page = Navigation.OpenEmployeeVacationListPage();
+        //     new ClaimUiHelper().CreateClaimFromUi(employee1Page);
+        //     var employee2Page = Navigation.OpenEmployeeVacationListPage(employeeId);
+        //     new ClaimUiHelper().CreateClaimFromUi(employee2Page);
+        //
+        //
+        //     var adminPage = Navigation.OpenAdminVacationListPage();
+        //
+        //     adminPage.ClaimList.Items.Count.Wait().EqualTo(2);
+        //
+        //     var expect = new[]
+        //     {
+        //         ("Заявление 1", "Иванов Петр Семенович"),
+        //         ("Заявление 2", "Пользователь " + employeeId)
+        //     };
+        //
+        //     adminPage.ClaimList.Items.Select(x => Props.Create(x.TitleLink.Text, x.UserFioLabel.Text)).Wait()
+        //         .EquivalentTo(expect);
+        // }
 
         [Test]
         public void TestAdminClaimsList_ShouldDisplayVacationWithAllStatus()

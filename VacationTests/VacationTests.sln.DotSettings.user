@@ -1,21 +1,9 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=32a8c54b_002D8f97_002D4d1f_002D8402_002D6bcfcad425fe/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="EmployeeVacationsListUiTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.EmployeePage.EmployeeVacationsListUiTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_ShouldDisplayVacationFromDifferentEmployee_CreateClaimFromUi&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_ShouldDisplayVacation_WithAllStatus&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_CheckClaimInfo_OpenClaimAndCheckInfo&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c1390310_002D4a5f_002D40a1_002D94f3_002D3ec0ccf67243/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from EmployeePage" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;ProjectFolder&gt;25F10403-D9F6-41B8-93DE-72FD9CB04CE9/d:Tests&lt;/ProjectFolder&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f73ca09a_002Ddef7_002D4822_002Da9b5_002Dbf533efc164f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestAdminClaimsList_CheckClaimInfo_OpenClaimAndCheckInfo" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_CheckClaimInfo_OpenClaimAndCheckInfo&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_CheckOrderTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_AcceptButtonTest3123&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_ShouldDisplayVacationWithAllStatus&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net7.0::VacationTests.Tests.AdminPage.AdminVacationsListTests.TestAdminClaimsList_AcceptButtonTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
 	
 	
 	
