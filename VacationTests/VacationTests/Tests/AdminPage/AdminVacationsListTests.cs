@@ -234,7 +234,7 @@ namespace VacationTests.Tests.AdminPage
             vacation.AcceptButton.WaitEnabled();
             vacation.RejectButton.WaitEnabled();
 
-            getButton.Invoke(vacation).Click();
+            getButton(vacation).Click();
 
             vacation.StatusLabel.Text.Wait().EqualTo(status.GetDescription());
             var claimStatus = ClaimStorage.GetAll().Single(x => x.Id == claim.Id).Status;
