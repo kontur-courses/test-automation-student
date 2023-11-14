@@ -1,10 +1,11 @@
-namespace VacationTests.Infrastructure
+using SeloneCore.Controls;
+
+namespace VacationTests.Infrastructure;
+
+public class ByTidAttribute : BaseSearchByAttribute
 {
-    public class ByTidAttribute : BaseSearchByAttribute
+    public ByTidAttribute(string tid) 
+        : base(x => x.WithTid(tid))
     {
-        public ByTidAttribute(string tid) 
-            : base(x => x.WithTid(tid))
-        {
-        }
     }
 }

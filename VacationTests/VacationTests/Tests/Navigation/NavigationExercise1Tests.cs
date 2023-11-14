@@ -1,17 +1,16 @@
 ﻿using NUnit.Framework;
-using VacationTests.Infrastructure;
+using SeloneCore.Props;
 
-namespace VacationTests.Tests.Navigation
+namespace VacationTests.Tests.Navigation;
+
+// Задание 3.1: нужно поднять этот тест
+public class NavigationExercise1Tests : VacationTestBase
 {
-    // Задание 3.1: нужно поднять этот тест
-    public class NavigationExercise1Tests : VacationTestBase
+    [Test]
+    public void LoginPage_EmployeeButtonTest()
     {
-        [Test]
-        public void LoginPage_EmployeeButtonTest()
-        {
-            var enterPage = Navigation.OpenLoginPage();
-            enterPage.LoginAsEmployeeButton.Present.Wait().EqualTo(false);
-            enterPage.LoginAsEmployeeButton.Text.Wait().EqualTo("Я кадровик");
-        }
+        var enterPage = Navigation.OpenLoginPage();
+        enterPage.LoginAsEmployeeButton.Present.Wait().EqualTo(false);
+        enterPage.LoginAsEmployeeButton.Text.Wait().EqualTo("Я кадровик");
     }
 }

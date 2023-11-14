@@ -1,9 +1,8 @@
-﻿namespace DiExample.Selenium.Page
+﻿namespace DiExample.Selenium.Page;
+
+public interface IPage
 {
-    public interface IPage
-    {
-        string Url { get; }
-        string Title { get; }
-        string CompositeUrl(string path);
-    }
+    string Url { get; }
+    string Title { get; }
+    string CompositeUrl(string path);
 }

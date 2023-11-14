@@ -1,16 +1,15 @@
 ﻿using NUnit.Framework;
-using VacationTests.Infrastructure;
+using SeloneCore.Props;
 
-namespace VacationTests.Tests.Navigation
+namespace VacationTests.Tests.Navigation;
+
+// Задание 3.2: нужно поднять этот тест
+public class NavigationExercise2Tests : VacationTestBase
 {
-    // Задание 3.2: нужно поднять этот тест
-    public class NavigationExercise2Tests : VacationTestBase
+    [Test]
+    public void LoginPage_TitleTest()
     {
-        [Test]
-        public void LoginPage_TitleTest()
-        {
-            var enterPage = Navigation.OpenLoginPage();
-            enterPage.TitleLabel.Text.Wait().EqualTo("Вход в сервис");
-        }
+        var enterPage = Navigation.OpenLoginPage();
+        enterPage.TitleLabel.Text.Wait().EqualTo<string, string>("Вход в сервис");
     }
 }

@@ -1,7 +1,6 @@
-namespace VacationTests.Claims
-{
-    public class DirectorBuilder
-    {
+namespace VacationTests.Claims;
 
-    }
+public class DirectorBuilder
+{
+
 }

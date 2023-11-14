@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacationTests", "VacationTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiExample", "DiExample\DiExample.csproj", "{34EFAD77-226C-46D1-B59F-02EEAFF4CCFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeloneCore", "SeloneCore\SeloneCore.csproj", "{5CF2FA7F-E30D-4248-BA7E-2A9BC12679B1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{34EFAD77-226C-46D1-B59F-02EEAFF4CCFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34EFAD77-226C-46D1-B59F-02EEAFF4CCFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34EFAD77-226C-46D1-B59F-02EEAFF4CCFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF2FA7F-E30D-4248-BA7E-2A9BC12679B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF2FA7F-E30D-4248-BA7E-2A9BC12679B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF2FA7F-E30D-4248-BA7E-2A9BC12679B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF2FA7F-E30D-4248-BA7E-2A9BC12679B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

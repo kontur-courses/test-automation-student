@@ -1,12 +1,11 @@
 ﻿using System;
 
-namespace DiExample
+namespace DiExample;
+
+public class Container
 {
-    public class Container
+    public IServiceProvider BuildServiceProvider()
     {
-        public IServiceProvider BuildServiceProvider()
-        {
-            throw new NotImplementedException();
-        }
+        throw new NotImplementedException();
     }
 }

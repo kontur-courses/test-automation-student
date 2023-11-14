@@ -1,13 +1,12 @@
 using System.ComponentModel;
 
-namespace VacationTests.Claims
+namespace VacationTests.Claims;
+
+public enum ClaimStatus
 {
-    public enum ClaimStatus
-    {
-        [Description("Согласовано")] Accepted = 0,
+    [Description("Согласовано")] Accepted = 0,
 
-        [Description("Отклонено")] Rejected = 1,
+    [Description("Отклонено")] Rejected = 1,
 
-        [Description("На согласовании")] NonHandled = 2
-    }
+    [Description("На согласовании")] NonHandled = 2
 }

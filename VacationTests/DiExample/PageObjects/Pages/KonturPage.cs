@@ -1,18 +1,17 @@
 ﻿using DiExample.Selenium.Page;
 using OpenQA.Selenium;
 
-namespace DiExample.PageObjects.Pages
+namespace DiExample.PageObjects.Pages;
+
+public class KonturPage : IPage
 {
-    public class KonturPage : IPage
-    {
-        private readonly IWebDriver _driver;
+    private readonly IWebDriver _driver;
 
-        public KonturPage(IWebDriver driver) => _driver = driver;
+    public KonturPage(IWebDriver driver) => _driver = driver;
 
-        public string Url => "https://kontur.ru/";
-        public string Title => _driver.Title;
-        public string CompositeUrl(string path) => Url + path;
+    public string Url => "https://kontur.ru/";
+    public string Title => _driver.Title;
+    public string CompositeUrl(string path) => Url + path;
 
-        public IWebElement FirstNew => _driver.FindElement(By.ClassName("tm-article-body"));
-    }
+    public IWebElement FirstNew => _driver.FindElement(By.ClassName("tm-article-body"));
 }
