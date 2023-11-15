@@ -8,10 +8,10 @@ namespace SeloneCore.Controls.BaseWebElements;
 // О наследовании https://ulearn.me/course/basicprogramming/Nasledovanie_ac2b8cb6-8d63-4b81-9083-eaa77ab0c89c
 public class Button : ControlBase, ICanClickAndOpenPage
 {
-    public Button(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Button(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 
     public IProp<string> Text => Container.Text();
-    public IControlFactory ControlFactory => base.ControlFactory;
+    public IPageObjectFactory PageObjectFactory => base.PageObjectFactory;
 }

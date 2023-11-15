@@ -5,40 +5,46 @@ using Kontur.Selone.Selectors;
 using Kontur.Selone.Selectors.Context;
 using Kontur.Selone.Selectors.XPath;
 using OpenQA.Selenium;
+using SeloneCore;
 using SeloneCore.Controls;
 using SeloneCore.Controls.BaseWebElements;
 using SeloneCore.Page;
 
 namespace VacationTests.Infrastructure;
 
-public class ControlFactory : IControlFactory
+public class PageObjectFactory : IPageObjectFactory
 {
     private readonly object[] dependencies;
-    public ControlFactory(params object[] dependencies) => this.dependencies = dependencies;
+    public PageObjectFactory(params object[] dependencies) => this.dependencies = dependencies;
 
-    public TControl CreateControl<TControl>(ISearchContext container, string tid) where TControl : ControlBase
+    public TControl CreateControl<TControl>(ISearchContext container, string tid) 
+        where TControl : ControlBase
         => CreateControl<TControl>(container.Search(x => x.WithTid(tid)));
 
-    public TControl CreateControl<TControl>(IContextBy contextBy) where TControl : ControlBase
+    public TControl CreateControl<TControl>(IContextBy contextBy) 
+        where TControl : ControlBase
         => (TControl) CreateInstance(typeof(TControl), contextBy, dependencies.Prepend(this).ToArray());
 
-    public TPage CreatePage<TPage>(IWebDriver webDriver) where TPage : PageBase
-    {
-        var allDependencies = dependencies.Prepend(this).Prepend(webDriver).ToArray();
-        return (TPage) CreateInstance(typeof(TPage), new PageContext(webDriver), allDependencies);
-    }
+    public TBox CreateLightBox<TBox>(ISearchContext context) 
+        where TBox : Lightbox
+        => (TBox) CreateInstance(typeof(TBox), new PageContext(context), dependencies.Prepend(this).ToArray());
+
+    public TBox CreateLightBox<TBox>(IContextBy contextBy) 
+        where TBox : Lightbox
+        => (TBox) CreateInstance(typeof(TBox), contextBy, dependencies.Prepend(this).ToArray());
+
+    public TPage CreatePage<TPage>(IWebDriver webDriver) 
+        where TPage : PageBase
+        => (TPage) CreateInstance(typeof(TPage), new PageContext(webDriver), dependencies.Prepend(this).ToArray());
 
     public ElementsCollection<TItem> CreateElementsCollection<TItem>(ISearchContext itemsSearchContext, string tid)
         where TItem : ControlBase
         => CreateElementsCollection<TItem>(itemsSearchContext, x => x.WithTid(tid).FixedByIndex());
 
     public ElementsCollection<TItem> CreateElementsCollection<TItem>(ISearchContext itemsSearchContext,
-        ItemByLambda findItem) where TItem : ControlBase
-    {
-        return new ElementsCollection<TItem>(itemsSearchContext,
-            findItem,
-            (s, b, _) => CreateControl<TItem>(new ContextBy(s, b)));
-    }
+        ItemByLambda findItem) 
+        where TItem : ControlBase =>
+        new (itemsSearchContext, findItem, (s, b, _) => CreateControl<TItem>(new ContextBy(s, b)));
 
     private static object CreateInstance(Type controlType, IContextBy contextBy, object[] dependencies)
     {

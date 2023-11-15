@@ -6,11 +6,11 @@ namespace SeloneCore.Controls.BaseWebElements;
 
 public class Link : ControlBase, ICanClickAndOpenPage
 {
-    public Link(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Link(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 
     public IProp<string> Text => Container.Text();
 
-    public IControlFactory ControlFactory => base.ControlFactory;
+    public IPageObjectFactory PageObjectFactory => base.PageObjectFactory;
 }

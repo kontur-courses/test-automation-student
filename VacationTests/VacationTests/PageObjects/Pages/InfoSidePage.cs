@@ -2,6 +2,7 @@ using Kontur.Selone.Extensions;
 using Kontur.Selone.Selectors;
 using Kontur.Selone.Selectors.Context;
 using OpenQA.Selenium;
+using SeloneCore;
 using SeloneCore.Controls;
 using SeloneCore.Controls.BaseWebElements;
 using SeloneCore.Page;
@@ -24,7 +25,7 @@ public class InfoSidePage : PageBase
     private readonly Lazy<Button> notAgreeButton;
 
     //TODO pe: Тут и в ClaimModal стоило бы придумать как перейти на InjectControls, чтобы не писать ручное создание
-    public InfoSidePage(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public InfoSidePage(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
         headerLabel = CreateLazyControlByTid<Label>("SidePageHeader");
         crossButton = CreateLazyControlByTid<Button>("SidePage__close");
@@ -46,7 +47,7 @@ public class InfoSidePage : PageBase
     private Lazy<TControl> CreateLazyControlByTid<TControl>(string tid) where TControl : ControlBase
     {
         return new(() =>
-            ControlFactory.CreateControl<TControl>(
+            PageObjectFactory.CreateControl<TControl>(
                 GetModalContext().Search(x => SelectorExtensions.WithTid((ByDummy) x, tid)))
         );
     }

@@ -7,6 +7,6 @@ namespace SeloneCore.Controls;
 /// </summary>
 public interface ICanClickAndOpenPage : IHaveContainer
 {
-    IControlFactory ControlFactory { get; }
+    IPageObjectFactory PageObjectFactory { get; }
     void Click();
 }

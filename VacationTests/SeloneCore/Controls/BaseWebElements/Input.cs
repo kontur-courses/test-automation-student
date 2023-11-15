@@ -11,7 +11,7 @@ public class Input : ControlBase
 {
     private readonly IWebElement input;
 
-    public Input(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Input(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
         input = Container.SearchElement(x => x.Css("input"));
     }

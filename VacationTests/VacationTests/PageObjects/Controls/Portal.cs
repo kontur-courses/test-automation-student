@@ -1,7 +1,7 @@
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Selectors.Context;
 using OpenQA.Selenium;
-using SeloneCore.Controls;
+using SeloneCore;
 using SeloneCore.Controls.BaseWebElements;
 using SeloneCore.Props;
 
@@ -9,7 +9,7 @@ namespace VacationTests.PageObjects.Controls;
 
 public class Portal : ControlBase
 {
-    public Portal(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Portal(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 

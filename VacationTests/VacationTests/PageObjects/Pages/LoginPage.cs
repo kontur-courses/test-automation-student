@@ -1,4 +1,5 @@
 using Kontur.Selone.Selectors.Context;
+using SeloneCore;
 using SeloneCore.Controls;
 using SeloneCore.Controls.BaseWebElements;
 using SeloneCore.Page;
@@ -9,11 +10,11 @@ namespace VacationTests.PageObjects.Pages;
 
 public class LoginPage : PageBase
 {
-    public LoginPage(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public LoginPage(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
-        TitleLabel = controlFactory.CreateControl<Label>(WrappedDriver, "LoginTitleLabel");
-        LoginAsEmployeeButton = controlFactory.CreateControl<Button>(WrappedDriver, "LoginAsEmployeeButton");
-        Footer = controlFactory.CreateControl<PageFooter>(WrappedDriver, "Footer");
+        TitleLabel = pageObjectFactory.CreateControl<Label>(WrappedDriver, "LoginTitleLabel");
+        LoginAsEmployeeButton = pageObjectFactory.CreateControl<Button>(WrappedDriver, "LoginAsEmployeeButton");
+        Footer = pageObjectFactory.CreateControl<PageFooter>(WrappedDriver, "Footer");
     }
 
     public Label TitleLabel { get; }

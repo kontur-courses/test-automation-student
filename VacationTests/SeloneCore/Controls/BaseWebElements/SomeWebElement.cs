@@ -4,7 +4,7 @@ namespace SeloneCore.Controls.BaseWebElements;
 
 public class SomeWebElement : ControlBase
 {
-    public SomeWebElement(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public SomeWebElement(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 }

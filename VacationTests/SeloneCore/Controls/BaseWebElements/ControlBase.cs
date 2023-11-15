@@ -8,12 +8,12 @@ namespace SeloneCore.Controls.BaseWebElements;
 
 public abstract class ControlBase : IHaveContainer
 {
-    protected IControlFactory ControlFactory { get; }
+    protected IPageObjectFactory PageObjectFactory { get; }
     public IWebElement Container { get; }
 
-    protected ControlBase(IContextBy contextBy, IControlFactory controlFactory)
+    protected ControlBase(IContextBy contextBy, IPageObjectFactory pageObjectFactory)
     {
-        ControlFactory = controlFactory;
+        PageObjectFactory = pageObjectFactory;
         Container = contextBy.SearchContext.SearchElement(contextBy.By);
     }
 

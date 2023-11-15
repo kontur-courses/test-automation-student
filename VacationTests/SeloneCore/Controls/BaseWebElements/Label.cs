@@ -6,7 +6,7 @@ namespace SeloneCore.Controls.BaseWebElements;
 
 public class Label : ControlBase
 {
-    public Label(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Label(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 

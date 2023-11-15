@@ -12,11 +12,11 @@ public class Combobox : ControlBase
 {
     private readonly Input input;
 
-    public Combobox(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Combobox(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
-        input = controlFactory.CreateControl<Input>(Container.Search(x =>
+        input = pageObjectFactory.CreateControl<Input>(Container.Search(x =>
             x.XPath(".//*[contains(@data-comp-name,'CommonWrapper Input')]")));
-        MenuItems = controlFactory.CreateElementsCollection<Button>(
+        MenuItems = pageObjectFactory.CreateElementsCollection<Button>(
             Container.Root(),
             x => x.WithTid("ComboBoxMenu__item").FixedByIndex()
         );

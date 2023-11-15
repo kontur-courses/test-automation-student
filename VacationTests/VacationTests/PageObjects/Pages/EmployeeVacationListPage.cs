@@ -1,5 +1,5 @@
 using Kontur.Selone.Selectors.Context;
-using SeloneCore.Controls;
+using SeloneCore;
 using SeloneCore.Controls.BaseWebElements;
 using SeloneCore.Page;
 using VacationTests.PageObjects.Controls;
@@ -8,15 +8,15 @@ namespace VacationTests.PageObjects.Pages;
 
 public class EmployeeVacationListPage : PageBase
 {
-    public EmployeeVacationListPage(IContextBy contextBy, IControlFactory controlFactory)
-        : base(contextBy, controlFactory)
+    public EmployeeVacationListPage(IContextBy contextBy, IPageObjectFactory pageObjectFactory)
+        : base(contextBy, pageObjectFactory)
     {
-        TitleLabel = controlFactory.CreateControl<Label>(WrappedDriver, "TitleLabel");
-        ClaimsTab = controlFactory.CreateControl<Link>(WrappedDriver, "ClaimsTab");
-        SalaryCalculatorTab = controlFactory.CreateControl<Link>(WrappedDriver, "SalaryCalculatorTab");
-        ClaimList = controlFactory.CreateControl<EmployeeClaimList>(WrappedDriver, "ClaimList");
-        Footer = controlFactory.CreateControl<PageFooter>(WrappedDriver, "Footer");
-        CreateButton = controlFactory.CreateControl<Button>(WrappedDriver, "CreateButton");
+        TitleLabel = pageObjectFactory.CreateControl<Label>(WrappedDriver, "TitleLabel");
+        ClaimsTab = pageObjectFactory.CreateControl<Link>(WrappedDriver, "ClaimsTab");
+        SalaryCalculatorTab = pageObjectFactory.CreateControl<Link>(WrappedDriver, "SalaryCalculatorTab");
+        ClaimList = pageObjectFactory.CreateControl<EmployeeClaimList>(WrappedDriver, "ClaimList");
+        Footer = pageObjectFactory.CreateControl<PageFooter>(WrappedDriver, "Footer");
+        CreateButton = pageObjectFactory.CreateControl<Button>(WrappedDriver, "CreateButton");
     }
 
     public Label TitleLabel { get; set; }

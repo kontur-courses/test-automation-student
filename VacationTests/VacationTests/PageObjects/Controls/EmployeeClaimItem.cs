@@ -1,6 +1,6 @@
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Selectors.Context;
-using SeloneCore.Controls;
+using SeloneCore;
 using SeloneCore.Controls.BaseWebElements;
 
 namespace VacationTests.PageObjects.Controls;
@@ -9,11 +9,11 @@ namespace VacationTests.PageObjects.Controls;
 // поскольку это тоже контрол и могут понадобиться базовые методы и пропсы
 public class EmployeeClaimItem : ControlBase
 {
-    public EmployeeClaimItem(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public EmployeeClaimItem(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
-        TitleLink = controlFactory.CreateControl<Link>(Container, "TitleLink");
-        PeriodLabel = controlFactory.CreateControl<Label>(Container, "PeriodLabel");
-        StatusLabel = controlFactory.CreateControl<Label>(Container, "StatusLabel");
+        TitleLink = pageObjectFactory.CreateControl<Link>(Container, "TitleLink");
+        PeriodLabel = pageObjectFactory.CreateControl<Label>(Container, "PeriodLabel");
+        StatusLabel = pageObjectFactory.CreateControl<Label>(Container, "StatusLabel");
     }
 
     // При обращении из теста к любому элементу списка отпусков будут доступны три свойства

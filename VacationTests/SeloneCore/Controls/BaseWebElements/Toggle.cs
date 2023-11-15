@@ -7,7 +7,7 @@ namespace SeloneCore.Controls.BaseWebElements;
 
 public class Toggle : ControlBase
 {
-    public Toggle(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Toggle(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 

@@ -11,7 +11,7 @@ public class DatePicker : ControlBase
 {
     private readonly IWebElement dateInput;
 
-    public DatePicker(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public DatePicker(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
         dateInput = Container.SearchElement(By.XPath(".//*[contains(@data-comp-name, 'DateInput')]"));
     }

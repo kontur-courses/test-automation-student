@@ -19,7 +19,7 @@ public class AverageDailyEarningsCalculatorTests : VacationTestBase
             .WrappedDriver;
 
         Thread.Sleep(2000);
-        var controlFactory = new ControlFactory();
+        var controlFactory = new PageObjectFactory();
         controlFactory.CreateControl<Button>(page.Search(x => x.WithTid("SalaryCalculatorTab"))).Click();
 
         controlFactory.CreateControl<Select>(page.Search(x => x.WithTid("first").WithTid("YearSelect")))

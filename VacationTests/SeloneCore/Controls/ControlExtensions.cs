@@ -15,7 +15,14 @@ public static class ControlExtensions
         where TPageObject : PageBase
     {
         control.Click();
-        return control.ControlFactory.CreatePage<TPageObject>(control.Container.WebDriver());
+        return control.PageObjectFactory.CreatePage<TPageObject>(control.Container.WebDriver());
+    }
+
+    public static TBox ClickAndOpenLightBox<TBox>(this ICanClickAndOpenPage control)
+        where TBox : Lightbox
+    {
+        control.Click();
+        return control.PageObjectFactory.CreateLightBox<TBox>(control.Container.Root());
     }
 
     public static void WaitPresence(this ControlBase control, int? timeout = null)

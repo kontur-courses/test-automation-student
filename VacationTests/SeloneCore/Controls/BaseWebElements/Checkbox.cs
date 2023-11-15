@@ -7,7 +7,7 @@ namespace SeloneCore.Controls.BaseWebElements;
 
 public class Checkbox : ControlBase
 {
-    public Checkbox(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public Checkbox(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 

@@ -1,6 +1,6 @@
 using Kontur.Selone.Pages;
 using OpenQA.Selenium;
-using SeloneCore.Controls;
+using SeloneCore;
 using SeloneCore.Page;
 using VacationTests.PageObjects.Pages;
 
@@ -8,13 +8,13 @@ namespace VacationTests.PageObjects.Navigations;
 
 public class Navigation
 {
-    private readonly IControlFactory controlFactory;
+    private readonly IPageObjectFactory pageObjectFactory;
     private readonly IWebDriver webDriver;
 
-    public Navigation(IWebDriver webDriver, IControlFactory controlFactory)
+    public Navigation(IWebDriver webDriver, IPageObjectFactory pageObjectFactory)
     {
         this.webDriver = webDriver;
-        this.controlFactory = controlFactory;
+        this.pageObjectFactory = pageObjectFactory;
     }
 
     public LoginPage OpenLoginPage() => OpenPage<LoginPage>(Urls.LoginPage);
@@ -36,6 +36,6 @@ public class Navigation
     {
         webDriver.Navigate().GoToUrl(url);
         webDriver.Navigate().Refresh();
-        return controlFactory.CreatePage<TPageObject>(webDriver);
+        return pageObjectFactory.CreatePage<TPageObject>(webDriver);
     }
 }

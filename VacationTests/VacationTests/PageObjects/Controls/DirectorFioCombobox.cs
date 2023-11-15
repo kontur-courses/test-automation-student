@@ -2,6 +2,7 @@ using Kontur.Selone.Elements;
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Selectors.Context;
 using Kontur.Selone.Selectors.XPath;
+using SeloneCore;
 using SeloneCore.Controls;
 using SeloneCore.Controls.BaseWebElements;
 
@@ -9,9 +10,9 @@ namespace VacationTests.PageObjects.Controls;
 
 public class DirectorFioCombobox : Combobox
 {
-    public DirectorFioCombobox(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public DirectorFioCombobox(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
-        MenuItems = controlFactory.CreateElementsCollection<DirectorItem>(Container.Root(),
+        MenuItems = pageObjectFactory.CreateElementsCollection<DirectorItem>(Container.Root(),
             x => x.WithTid("ComboBoxMenu__item").FixedByIndex());
     }
 

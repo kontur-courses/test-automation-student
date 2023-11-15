@@ -1,15 +1,16 @@
 using Kontur.Selone.Extensions;
-using Kontur.Selone.Selectors;
 using Kontur.Selone.Selectors.Context;
 using OpenQA.Selenium;
+using SeloneCore;
 using SeloneCore.Controls;
 using SeloneCore.Controls.BaseWebElements;
 
 namespace VacationTests.PageObjects.Controls;
 
-public class ClaimLightbox : ControlBase
+public class ClaimLightbox : Lightbox
 {
-    public ClaimLightbox(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public ClaimLightbox(IContextBy contextBy, IPageObjectFactory pageObjectFactory)
+        : base(contextBy.SearchContext.Search(x=>x.WithTid("ClaimLightbox")), pageObjectFactory)
     {
     }
 
@@ -39,9 +40,7 @@ public class ClaimLightbox : ControlBase
     public ClaimLightboxFooter Footer => CreateControlByTid<ClaimLightboxFooter>("ModalFooter");
 
     private TControl CreateControlByTid<TControl>(string tid) where TControl : ControlBase
-    {
-        return ControlFactory.CreateControl<TControl>(GetModalContext().Search(x => SelectorExtensions.WithTid((ByDummy) x, tid)));
-    }
+        => PageObjectFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid)));
 
     private IWebElement GetModalContext()
     {

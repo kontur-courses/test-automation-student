@@ -1,7 +1,7 @@
 using System.Globalization;
 using Kontur.Selone.Properties;
 using Kontur.Selone.Selectors.Context;
-using SeloneCore.Controls;
+using SeloneCore;
 using SeloneCore.Controls.BaseWebElements;
 using SeloneCore.Props;
 
@@ -9,7 +9,7 @@ namespace VacationTests.PageObjects.Controls;
 
 public class CurrencyInput : Input
 {
-    public CurrencyInput(IContextBy contextBy, IControlFactory controlFactory) : base(contextBy, controlFactory)
+    public CurrencyInput(IContextBy contextBy, IPageObjectFactory pageObjectFactory) : base(contextBy, pageObjectFactory)
     {
     }
 

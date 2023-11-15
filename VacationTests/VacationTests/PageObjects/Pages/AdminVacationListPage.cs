@@ -1,5 +1,5 @@
 using Kontur.Selone.Selectors.Context;
-using SeloneCore.Controls;
+using SeloneCore;
 using SeloneCore.Controls.BaseWebElements;
 using SeloneCore.Page;
 using VacationTests.Infrastructure;
@@ -9,13 +9,13 @@ namespace VacationTests.PageObjects.Pages;
 
 public class AdminVacationListPage : PageBase
 {
-    public AdminVacationListPage(IContextBy searchContext, IControlFactory controlFactory)
-        : base(searchContext, controlFactory)
+    public AdminVacationListPage(IContextBy searchContext, IPageObjectFactory pageObjectFactory)
+        : base(searchContext, pageObjectFactory)
     {
-        TitleLabel = controlFactory.CreateControl<Label>(WrappedDriver,"TitleLabel");
-        ClaimsTab = controlFactory.CreateControl<Link>(WrappedDriver,"ClaimsTab");
-        DownloadButton = controlFactory.CreateControl<Button>(WrappedDriver,"DownloadButton");
-        Footer = controlFactory.CreateControl<PageFooter>(WrappedDriver,"Footer");
+        TitleLabel = pageObjectFactory.CreateControl<Label>(WrappedDriver,"TitleLabel");
+        ClaimsTab = pageObjectFactory.CreateControl<Link>(WrappedDriver,"ClaimsTab");
+        DownloadButton = pageObjectFactory.CreateControl<Button>(WrappedDriver,"DownloadButton");
+        Footer = pageObjectFactory.CreateControl<PageFooter>(WrappedDriver,"Footer");
     }
 
     public Label TitleLabel { get; }
@@ -27,7 +27,7 @@ public class AdminVacationListPage : PageBase
     {
         get
         {
-            var employeeVacationListPage = new ControlFactory().CreatePage<EmployeeVacationListPage>(WrappedDriver);
+            var employeeVacationListPage = new PageObjectFactory().CreatePage<EmployeeVacationListPage>(WrappedDriver);
             return !(employeeVacationListPage.SalaryCalculatorTab.Visible.Get()
                      && employeeVacationListPage.CreateButton.Visible.Get());
         }
