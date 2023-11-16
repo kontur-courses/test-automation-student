@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using Kontur.Selone.Extensions;
 using Kontur.Selone.WebDrivers;
 using NUnit.Framework;
@@ -14,7 +15,27 @@ namespace VacationTests.Infrastructure
 
         static MyBrowserPool()
         {
-            pool = new WebDriverPool(new ChromeDriverFactory(), new DelegateWebDriverCleaner(x => x.ResetWindows()));
+            var browserType = Environment.GetEnvironmentVariable("TEST_BROWSER") ?? "chrome";
+            IWebDriverFactory factory;
+
+            switch (browserType)
+            {
+                case "chrome":
+                    factory = new ChromeDriverFactory();
+                    break;
+                case "firefox":
+                    factory = new FirefoxDriverFactory();
+                    break;
+                // case "safari":
+                //     factory = new SafariDriverFactory();
+                //     break;
+                default:
+                    factory = new ChromeDriverFactory();
+                    break;
+            }
+            
+            var delegateWebDriverCleaner = new DelegateWebDriverCleaner(x => x.ResetWindows());
+            pool = new WebDriverPool(factory, delegateWebDriverCleaner);
         }
 
         private static string key => TestContext.CurrentContext.Test.ID ?? "debug";
