@@ -4,6 +4,7 @@ using VacationTests.Infrastructure.PageElements;
 
 namespace VacationTests.PageElements
 {
+    [InjectControls]
     public class ClaimLightboxFooter : ControlBase
     {
         public ClaimLightboxFooter(IContextBy contextBy) : base(contextBy)

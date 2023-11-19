@@ -7,6 +7,7 @@ namespace VacationTests.PageElements
 {
     // Класс элемента списка отпусков EmployeeClaimList наследуем от ControlBase,
     // поскольку это тоже контрол и могут понадобиться базовые методы и пропсы
+    [InjectControls]
     public class EmployeeClaimItem : ControlBase
     {
         public EmployeeClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)

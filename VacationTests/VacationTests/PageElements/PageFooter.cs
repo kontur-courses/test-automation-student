@@ -4,7 +4,7 @@ using VacationTests.Infrastructure.PageElements;
 
 namespace VacationTests.PageElements
 {
-    //[InjectControls]
+    [InjectControls]
     public class PageFooter : ControlBase
     {
         public PageFooter(IContextBy contextBy) : base(contextBy)
