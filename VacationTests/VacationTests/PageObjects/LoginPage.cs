@@ -10,23 +10,14 @@ namespace VacationTests.PageObjects
     [InjectControls]
     public class LoginPage : PageBase, ILoadable
     {
-        public LoginPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
+        public LoginPage(IWebDriver webDriver) : base(webDriver)
         {
-            // Можно упростить написание для частых поисков, и создать свой метод WithTid(), чтобы опустить Css(),
-            // этот метод будет вызывать Css().WithTid("..."))
-            // TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
-            // LoginAsEmployeeButton =
-            //     controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("LoginAsEmployeeButton")));
-            // LoginAsAdminButton =
-            //     controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("LoginAsAdminButton")));
-            // Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
         }
 
-        public Label TitleLabel { get; set; }
-        public Button LoginAsEmployeeButton { get; set; }
-
-        public Button LoginAsAdminButton { get; set; }
-        public PageFooter Footer { get; set; }
+        public Label TitleLabel { get; private set; }
+        public Button LoginAsEmployeeButton { get; private set; }
+        public Button LoginAsAdminButton { get; private set; }
+        public PageFooter Footer { get; private set; }
 
         public void WaitLoaded(int? timeout = null)
         {

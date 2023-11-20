@@ -8,28 +8,21 @@ namespace VacationTests.PageElements
     [InjectControls]
     public class AdminClaimItem : ControlBase
     {
-        public AdminClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
+        public AdminClaimItem(IContextBy contextBy) : base(contextBy)
         {
-            ItemCheckbox = controlFactory.CreateControl<Checkbox>(Container.Search(x => x.WithTid("ListItemCheckbox")));
-            TitleLink = controlFactory.CreateControl<Button>(Container.Search(x => x.WithTid("TitleLink")));
-            UserFioLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("UserFioLabel")));
-            PeriodLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("PeriodLabel")));
-            StatusLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("StatusLabel")));
-            AcceptButton = controlFactory.CreateControl<Button>(Container.Search(x => x.WithTid("AcceptButton")));
-            RejectButton = controlFactory.CreateControl<Button>(Container.Search(x => x.WithTid("RejectButton")));
         }
 
-        public Checkbox ItemCheckbox { get; }
+        [ByTid("ListItemCheckbox")] public Checkbox ItemCheckbox { get; private set; }
 
-        public Button RejectButton { get; }
+        public Button RejectButton { get; private set; }
 
-        public Button AcceptButton { get; }
+        public Button AcceptButton { get; private set; }
 
-        public Label UserFioLabel { get; }
+        public Label UserFioLabel { get; private set; }
 
-        public Button TitleLink { get; }
-        public Label PeriodLabel { get; }
-        public Label StatusLabel { get; }
+        public Button TitleLink { get; private set; }
+        public Label PeriodLabel { get; private set; }
+        public Label StatusLabel { get; private set; }
 
         public void MouseOver()
         {

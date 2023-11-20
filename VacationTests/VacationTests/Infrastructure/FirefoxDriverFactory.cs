@@ -11,10 +11,6 @@ namespace VacationTests.Infrastructure
         {
             var firefoxDriverService = FirefoxDriverService.CreateDefaultService(AppDomain.CurrentDomain.BaseDirectory);
             var options = new FirefoxOptions();
-            //не уверена, что это аналог --no-sandbox, но это самое близкое, что я нагуглила. И оно НЕ работает :(
-            options.SetPreference("security.sandbox.content.level", "0");
-            //аналогов --disable-extensions я не нашла и как задать размер экрана тоже
-            //поэтому ниже просто вроде бы полезнаце штуки
             options.SetPreference("browser.download.dir", "C:\\Windows\\temp");
             options.SetPreference("browser.download.useDownloadDir", true);
             options.SetPreference("browser.download.viewableInternally.enabledTypes", "");

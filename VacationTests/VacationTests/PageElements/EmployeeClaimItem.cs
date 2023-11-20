@@ -10,17 +10,14 @@ namespace VacationTests.PageElements
     [InjectControls]
     public class EmployeeClaimItem : ControlBase
     {
-        public EmployeeClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
+        public EmployeeClaimItem(IContextBy contextBy) : base(contextBy)
         {
-            TitleLink = controlFactory.CreateControl<Link>(Container.Search(x => x.WithTid("TitleLink")));
-            PeriodLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("PeriodLabel")));
-            StatusLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("StatusLabel")));
         }
 
         // При обращении из теста к любому элементу списка отпусков будут доступны три свойства
-        public Link TitleLink { get; }
-        public Label PeriodLabel { get; }
-        public Label StatusLabel { get; }
+        public Link TitleLink { get; private set; }
+        public Label PeriodLabel { get; private set; }
+        public Label StatusLabel { get; private set; }
 
         // Можно вот так реализовать метод для наведения мыши на конкретный элемент,
         // такой метод может понадобиться, если только при наведении на элемент списка показывается какой-то контрол

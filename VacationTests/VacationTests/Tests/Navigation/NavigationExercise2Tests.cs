@@ -10,7 +10,7 @@ namespace VacationTests.Tests.Navigation
         public void LoginPage_TitleTest()
         {
             var enterPage = Navigation.OpenLoginPage();
-            enterPage.WaitLoaded(1);
+            enterPage.WaitLoaded();
             enterPage.TitleLabel.Text.Wait().EqualTo("Вход в сервис");
         }
     }

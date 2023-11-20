@@ -18,29 +18,30 @@ namespace VacationTests.Tests.AdminPage
     [NonParallelizable]
     public class AdminVacationsListTests : VacationTestBase
     {
-        // [Test]
-        // public void TestAdminClaimsList_ShouldDisplayVacationFromDifferentEmployee_CreateClaimFromUi()
-        // {
-        //     var employeeId = Guid.NewGuid().ToString();
-        //     var employee1Page = Navigation.OpenEmployeeVacationListPage();
-        //     new ClaimUiHelper().CreateClaimFromUi(employee1Page);
-        //     var employee2Page = Navigation.OpenEmployeeVacationListPage(employeeId);
-        //     new ClaimUiHelper().CreateClaimFromUi(employee2Page);
-        //
-        //
-        //     var adminPage = Navigation.OpenAdminVacationListPage();
-        //
-        //     adminPage.ClaimList.Items.Count.Wait().EqualTo(2);
-        //
-        //     var expect = new[]
-        //     {
-        //         ("Заявление 1", "Иванов Петр Семенович"),
-        //         ("Заявление 2", "Пользователь " + employeeId)
-        //     };
-        //
-        //     adminPage.ClaimList.Items.Select(x => Props.Create(x.TitleLink.Text, x.UserFioLabel.Text)).Wait()
-        //         .EquivalentTo(expect);
-        // }
+        [Explicit("Долгий тест, создает данные через интерсфейс")]
+        [Test]
+        public void TestAdminClaimsList_ShouldDisplayVacationFromDifferentEmployee_CreateClaimFromUi()
+        {
+            var employeeId = Guid.NewGuid().ToString();
+            var employee1Page = Navigation.OpenEmployeeVacationListPage();
+            new ClaimUiHelper().CreateClaimFromUi(employee1Page);
+            var employee2Page = Navigation.OpenEmployeeVacationListPage(employeeId);
+            new ClaimUiHelper().CreateClaimFromUi(employee2Page);
+
+
+            var adminPage = Navigation.OpenAdminVacationListPage();
+
+            adminPage.ClaimList.Items.Count.Wait().EqualTo(2);
+
+            var expect = new[]
+            {
+                ("Заявление 1", "Иванов Петр Семенович"),
+                ("Заявление 2", "Пользователь " + employeeId)
+            };
+
+            adminPage.ClaimList.Items.Select(x => Props.Create(x.TitleLink.Text, x.UserFioLabel.Text)).Wait()
+                .EquivalentTo(expect);
+        }
 
         [Test]
         public void TestAdminClaimsList_ShouldDisplayVacationWithAllStatus()
@@ -211,7 +212,7 @@ namespace VacationTests.Tests.AdminPage
         }
 
         //дублирование тестов, используем TestCaseSource
-        static IEnumerable<TestCaseData> CasesForListButtonTest()
+        private static IEnumerable<TestCaseData> CasesForListButtonTest()
         {
             yield return new TestCaseData(new Func<AdminClaimItem, Button>(item => item.AcceptButton),
                 ClaimStatus.Accepted).SetName("AcceptedTest"); // 1й тест-кейс
@@ -243,7 +244,7 @@ namespace VacationTests.Tests.AdminPage
             vacation.RejectButton.WaitAbsence();
         }
 
-        static IEnumerable<TestCaseData> CasesForAcceptButtonTest()
+        private static IEnumerable<TestCaseData> CasesForAcceptButtonTest()
         {
             yield return new TestCaseData(new Func<AdminClaimItem, Button>(item => item.AcceptButton)).SetName(
                 "AcceptedTestFromList");

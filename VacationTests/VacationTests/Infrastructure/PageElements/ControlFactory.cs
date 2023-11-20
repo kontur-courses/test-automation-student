@@ -66,20 +66,22 @@ namespace VacationTests.Infrastructure.PageElements
             // Вызываем конструктор и передаём ему все входные параметры
             var value = constructor.Invoke(args.ToArray());
 
-            // Получаем контекст, по которому будем искать все контролы, входящие в состав нашего объекта
-            var searchContext = contextBy?.SearchContext.SearchElement(contextBy.By) ??
-                                dependencies.OfType<ISearchContext>().SingleOrDefault();
-            if (searchContext == null)
-                throw new NotSupportedException(
-                    "Для автоматической инициализации полей контрола должен быть известен ISearchContext. " +
-                    "Либо укажите IContextBy, либо передайте в зависимости WebDriver.");
-
             // находим атрибут InjectControlsAttribute
             var attribute = controlType.GetCustomAttribute<InjectControlsAttribute>(true);
             // если атрибут найден, инициализируем его контролы
             if (attribute != null)
+            {
+                // Получаем контекст, по которому будем искать все контролы, входящие в состав нашего объекта
+                var searchContext = contextBy?.SearchContext.SearchElement(contextBy.By) ??
+                                    dependencies.OfType<ISearchContext>().SingleOrDefault();
+                if (searchContext == null)
+                    throw new NotSupportedException(
+                        "Для автоматической инициализации полей контрола должен быть известен ISearchContext. " +
+                        "Либо укажите IContextBy, либо передайте в зависимости WebDriver.");
+
                 // Инициализируем контролы объекта
                 InitializePropertiesWithControls(value, searchContext, dependencies);
+            }
 
             // Возвращаем экземпляр объекта
             return value;
