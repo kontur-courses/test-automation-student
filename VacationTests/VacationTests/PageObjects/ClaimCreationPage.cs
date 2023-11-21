@@ -7,6 +7,7 @@ namespace VacationTests.PageObjects
 {
     public class ClaimCreationPage : PageBase
     {
+        [InjectControls]
         public ClaimCreationPage(IWebDriver webDriver) : base(webDriver)
         {
         }

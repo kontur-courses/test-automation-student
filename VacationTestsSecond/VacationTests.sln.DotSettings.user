@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4bd6eb97_002Db180_002D49ea_002Dbf8e_002Dcd5160dc353d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LoginAsAdmin_CheckAdminVacationListPageIsOpen" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net6.0::VacationTests.Tests.Navigation.NavigationTests.LoginAsAdmin_CheckAdminVacationListPageIsOpen&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net6.0::VacationTests.Tests.Navigation.NavigationExercise1Tests.LoginPage_EmployeeButtonTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

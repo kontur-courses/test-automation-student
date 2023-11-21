@@ -1,13 +1,17 @@
+using System.Runtime.CompilerServices;
 using Kontur.Selone.Extensions;
+using Kontur.Selone.Waiting;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageElements;
+using VacationTests.PageObjects.Scenarios;
 
 namespace VacationTests.PageObjects
 {
-    public class EmployeeVacationListPage : PageBase
+    public class EmployeeVacationListPage : PageBase, ILoadable
     {
+        [InjectControls]
         public EmployeeVacationListPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
             TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
@@ -17,6 +21,7 @@ namespace VacationTests.PageObjects
             CreateButton = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("CreateButton")));
             ClaimList = controlFactory.CreateControl<EmployeeClaimList>(webDriver.Search(x => x.WithTid("ClaimList")));
             Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
+
         }
 
         public Label TitleLabel { get; }
@@ -25,5 +30,13 @@ namespace VacationTests.PageObjects
         public Button CreateButton { get; }
         public EmployeeClaimList ClaimList { get; }
         public PageFooter Footer { get; }
+        public EmployeeVacationPageScenario PageScenario => new (this);
+
+        public void WaitLoaded(int? timeout = 5000)
+        {
+            CreateButton.Present.Wait().EqualTo(true, timeout);
+        }
+        
+        
     }
 }

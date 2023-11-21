@@ -8,16 +8,18 @@ namespace VacationTests.PageObjects
 {
     public class AdminVacationListPage : PageBase
     {
+        [InjectControls]
         private ControlFactory controlFactory;
         public AdminVacationListPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
             this.controlFactory = controlFactory;
             TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
             ClaimsTab = controlFactory.CreateControl<Link>(webDriver.Search(x => x.WithTid("ClaimsTab")));
+            ClaimList = controlFactory.CreateControl<EmployeeClaimList>(webDriver.Search(x => x.WithTid("ClaimList")));
             DownloadButton = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("DownloadButton")));
             Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
         }
-
+        public EmployeeClaimList ClaimList { get; }
         public Label TitleLabel { get; }
         public Link ClaimsTab { get; }
         public Button DownloadButton { get; }

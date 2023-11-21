@@ -6,8 +6,9 @@ using VacationTests.PageElements;
 
 namespace VacationTests.PageObjects
 {
-    public class ClaimLightbox : PageBase
+    public class ClaimLightbox : PageBase 
     {
+        [InjectControls]
         private readonly ControlFactory controlFactory;
 
         public ClaimLightbox(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)

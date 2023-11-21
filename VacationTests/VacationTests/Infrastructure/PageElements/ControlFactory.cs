@@ -4,9 +4,12 @@ using System.Linq;
 using System.Reflection;
 using Kontur.Selone.Elements;
 using Kontur.Selone.Extensions;
+using Kontur.Selone.Properties;
 using Kontur.Selone.Selectors;
 using Kontur.Selone.Selectors.Context;
+using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.DevTools.V85.Debugger;
 
 namespace VacationTests.Infrastructure.PageElements
 {
@@ -30,6 +33,7 @@ namespace VacationTests.Infrastructure.PageElements
         public TPageObject CreatePage<TPageObject>(IWebDriver webDriver)
         {
             var allDependencies = dependencies.Prepend(this).Prepend(webDriver).ToArray();
+            
             return (TPageObject) CreateInstance(typeof(TPageObject), null, allDependencies);
         }
 
@@ -62,21 +66,55 @@ namespace VacationTests.Infrastructure.PageElements
                         $"Не поддерживаемый тип {parameterInfo.ParameterType} параметра конструктора контрола {controlType}");
                 args.Add(arg);
             }
-
-            // Вызываем конструктор и передаём ему все входные параметры
-            var value = constructor.Invoke(args.ToArray());
             
-            // Получаем контекст, по которому будем искать все контролы, входящие в состав нашего объекта
+            var controlProps = controlType.GetProperties()
+                .Where(p => typeof(ControlBase).IsAssignableFrom(p.PropertyType)).ToList();
+
+            var value = constructor.Invoke(args.ToArray());
             var searchContext = contextBy?.SearchContext.SearchElement(contextBy.By) ??
                                 dependencies.OfType<ISearchContext>().SingleOrDefault();
             if (searchContext == null)
                 throw new NotSupportedException(
                     "Для автоматической инициализации полей контрола должен быть известен ISearchContext. " +
                     "Либо укажите IContextBy, либо передайте в зависимости WebDriver.");
-            // Инициализируем контролы объекта
+            
+            // foreach (var prop in controlProps)
+            // {
+            //     if (prop.SetMethod is null) continue;
+            //     
+            //     var attribute = prop.GetCustomAttribute<InjectControlsAttribute>(true);
+            //
+            //     if (attribute != null)
+            //     {
+            //         InitializePropertiesWithControls(value, searchContext, dependencies);
+            //         break;
+            //     }
+            //     else
+            //     {
+            //         break;
+            //     }
+            // }
+            
+            foreach (var prop in controlProps)
+            {
+                // проверяем, что доступен метод set;
+                if (prop.SetMethod is null) continue;
+                
+                // находим атрибут BaseSearchByAttribute или его наследника ByTidAttribute
+                var attribute = prop.GetCustomAttribute<InjectControlsAttribute>(true);
+                // если атрибут не найден, то берём название самого свойства,
+                // а если атрибут найден, берём его значение
+                if (attribute == null)
+                {
+                    break;
+                }
+                value = CreateInstance(prop.PropertyType, contextBy, dependencies);
+                InitializePropertiesWithControls(value, searchContext, dependencies);
+                return value;
+            }
+            
             InitializePropertiesWithControls(value, searchContext, dependencies);
 
-            // Возвращаем экземпляр объекта
             return value;
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Kontur.Selone.Extensions;
 using Kontur.Selone.WebDrivers;
 using OpenQA.Selenium;

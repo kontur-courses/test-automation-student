@@ -1,4 +1,5 @@
 using System;
+using VacationTests.Data;
 
 namespace VacationTests.Claims
 {
@@ -11,8 +12,12 @@ namespace VacationTests.Claims
         private string id = new Random().Next(101).ToString();
         private ClaimType type = ClaimType.Paid;
         private ClaimStatus status = ClaimStatus.NonHandled;
+        private Director director = Directors.Default;
+        private DateTime startDate = DateTime.Now.Date.AddDays(7);
+        private DateTime endDate = DateTime.Now.Date.AddDays(12);
         private string userId = DefaultUserId;
         private int? childAgeInMonths;
+        private bool paidNow;
 
         // Для каждого поля создаем метод With<название свойства>, возвращающий экземпляр этого DirectorBuilder
         // Метод принимает значение и записывает в соответствующее приватное поле
@@ -32,6 +37,41 @@ namespace VacationTests.Claims
         public ClaimBuilder WithStatus(ClaimStatus newStatus)
         {
             status = newStatus;
+            return this;
+        }
+        
+        public ClaimBuilder WithDirector(Director newDirector)
+        {
+            director = newDirector;
+            return this;
+        }
+
+        public ClaimBuilder WithStartDate(DateTime newStartDate)
+        {
+            startDate = newStartDate.Date;
+            return this;
+        }
+
+        public ClaimBuilder WithEndDate(DateTime newEndDate)
+        {
+            endDate = newEndDate.Date;
+            return this;
+        }
+
+        public ClaimBuilder WithPaidNow(bool newPaidNow)
+        {
+            paidNow = newPaidNow;
+            return this;
+        }
+
+        public ClaimBuilder WithPeriod(DateTime newStartDate, DateTime newEndDate)
+        {
+            if(newStartDate > newEndDate)
+                throw new Exception("Дата начала отпуска должна быть раньше даты конца отпуска");
+            if((newEndDate-newStartDate).Days < 3)
+                throw new Exception("Минимальный период отпуска должен быть 3 дня");
+            WithStartDate(newStartDate);
+            WithEndDate(newEndDate);
             return this;
         }
 
@@ -58,12 +98,12 @@ namespace VacationTests.Claims
             id,
             type,
             status,
-            new Director(14, "Бублик Владимир Кузьмич", "Директор департамента"),
-            DateTime.Now.Date.AddDays(7),
-            DateTime.Now.Date.AddDays(12),
+            director,
+            startDate,
+            endDate,
             childAgeInMonths,
             userId,
-            false
+            paidNow
         );
     }
 }
