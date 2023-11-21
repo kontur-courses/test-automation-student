@@ -3,13 +3,21 @@
   &lt;Assembly Path="C:\Users\alebastr\.nuget\packages\kontur.selone\1.0.0-alpha\lib\netstandard2.0\Kontur.Selone.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3772c2b8_002D4db2_002D4533_002D966b_002Df81fc23e1b4d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;And&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;And&gt;&#xD;
+      &lt;TestAncestor&gt;&#xD;
+        &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net6.0::VacationTests.Tests.AdminPage.AdminVacationsListTests&lt;/TestId&gt;&#xD;
+      &lt;/TestAncestor&gt;&#xD;
+      &lt;Project Location="C:\Repositories\test-automation-student\VacationTests\VacationTests" Presentation="&amp;lt;VacationTests&amp;gt;" /&gt;&#xD;
+      &lt;Namespace&gt;VacationTests.Tests.AdminPage&lt;/Namespace&gt;&#xD;
+    &lt;/And&gt;&#xD;
     &lt;TestAncestor&gt;&#xD;
-      &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net6.0::VacationTests.Tests.AdminPage.AdminVacationsListTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::25F10403-D9F6-41B8-93DE-72FD9CB04CE9::net6.0::VacationTests.Tests.EmployeePage.AverageDailyEarningsCalculatorTests.SmokyTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::34EFAD77-226C-46D1-B59F-02EEAFF4CCFD::net6.0::DiExample.Examples.Ulern_Test.DiTest_AddScoped_And_Singleton_UseCommonToken&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::34EFAD77-226C-46D1-B59F-02EEAFF4CCFD::net6.0::DiExample.Examples.Ulern_Test.DiTest_AllAddScoped_UseRandomToken&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;NUnit3x::34EFAD77-226C-46D1-B59F-02EEAFF4CCFD::net6.0::DiExample.Examples.Ulern_Test.DiTest_AddTransientToken&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
-    &lt;Project Location="C:\Repositories\test-automation-student\VacationTests\VacationTests" Presentation="&amp;lt;VacationTests&amp;gt;" /&gt;&#xD;
-    &lt;Namespace&gt;VacationTests.Tests.AdminPage&lt;/Namespace&gt;&#xD;
-  &lt;/And&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
 	

@@ -12,16 +12,16 @@ public class Ulern_Test
         // должен использоваться общий токен
         var container = new ServiceCollection()
             .AddSingleton<Token>()
-            .AddSingleton<ConsoleTokenWriter1>()
-            .AddSingleton<ConsoleTokenWriter2>()
+            .AddScoped<ConsoleTokenWriter1>()
+            .AddScoped<ConsoleTokenWriter2>()
             .BuildServiceProvider();
 
         var sp1 = container.CreateScope().ServiceProvider;
         var sp2 = container.CreateScope().ServiceProvider;
 
         Assert.AreEqual(
-            sp1.GetRequiredService<ConsoleTokenWriter1>(),
-            sp2.GetRequiredService<ConsoleTokenWriter1>(),
+            sp1.GetRequiredService<ConsoleTokenWriter1>().TokenInfo,
+            sp2.GetRequiredService<ConsoleTokenWriter1>().TokenInfo,
             "Должен быть одинаковый токен в разных скоупах"
         );
     }
@@ -40,9 +40,9 @@ public class Ulern_Test
         var sp1 = container.CreateScope().ServiceProvider;
         var sp2 = container.CreateScope().ServiceProvider;
         
-        var instance_1_1 = sp1.GetRequiredService<ConsoleTokenWriter1>();
-        var instance_2_1 = sp2.GetRequiredService<ConsoleTokenWriter1>();
-        var instance_2_2 = sp2.GetRequiredService<ConsoleTokenWriter2>();
+        var instance_1_1 = sp1.GetRequiredService<ConsoleTokenWriter1>().TokenInfo;
+        var instance_2_1 = sp2.GetRequiredService<ConsoleTokenWriter1>().TokenInfo;
+        var instance_2_2 = sp2.GetRequiredService<ConsoleTokenWriter2>().TokenInfo;
         var instanceDoubleToken = sp2.GetRequiredService<DoubleToken>();
 
 
@@ -50,7 +50,7 @@ public class Ulern_Test
             {
                 Assert.AreNotEqual(instance_1_1, instance_2_1,
                     "в разных СКОУПАХ для 1 сервиса должны быть разные токены, т.к. токен добавлен через AddScoped");
-                Assert.AreNotEqual(instance_2_1, instance_2_2,
+                Assert.AreEqual(instance_2_1, instance_2_2,
                     "для разных сервисах внутри общего скоупа должен быть общий токен, т.к. токен добавлен через AddScoped");
                 Assert.AreNotEqual(instance_1_1, instance_2_2,
                     "для разных сервисах внутри разных скоупов должны быть разные токены, т.к. токен добавлен через AddScoped");
@@ -66,17 +66,17 @@ public class Ulern_Test
         //используем разные токены 
         var container = new ServiceCollection()
             .AddTransient<Token>()
-            .AddTransient<ConsoleTokenWriter1>()
-            .AddTransient<ConsoleTokenWriter2>()
-            .AddTransient<DoubleToken>()
+            .AddScoped<ConsoleTokenWriter1>()
+            .AddScoped<ConsoleTokenWriter2>()
+            .AddScoped<DoubleToken>()
             .BuildServiceProvider();
         
         var sp1 = container.CreateScope().ServiceProvider;
         var sp2 = container.CreateScope().ServiceProvider;
         
-        var instance_1_1 = sp1.GetRequiredService<ConsoleTokenWriter1>();
-        var instance_2_1 = sp2.GetRequiredService<ConsoleTokenWriter1>();
-        var instance_2_2 = sp2.GetRequiredService<ConsoleTokenWriter2>();
+        var instance_1_1 = sp1.GetRequiredService<ConsoleTokenWriter1>().TokenInfo;
+        var instance_2_1 = sp2.GetRequiredService<ConsoleTokenWriter1>().TokenInfo;
+        var instance_2_2 = sp2.GetRequiredService<ConsoleTokenWriter2>().TokenInfo;
         var instanceDoubleToken = sp2.GetRequiredService<DoubleToken>();
 
         Assert.Multiple(() =>

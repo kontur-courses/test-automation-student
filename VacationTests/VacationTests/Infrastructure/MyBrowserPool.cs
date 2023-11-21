@@ -15,13 +15,11 @@ namespace VacationTests.Infrastructure
         private static IWebDriverPool pool;
         public static IWebDriver Get() => webDriversMap.GetOrAdd(Key, _ => pool.Acquire());
         
-        // public static void Relese() => Get().ResetWindows();
-        public static void Relese()
+        public static void Release()
         {
             webDriversMap.TryRemove(Key, out var webDriver);
+            pool.Release(webDriver);
         }
-        // public static void Relese() => webDriversMap.TryRemove(Key, out );
-
 
         public static void Dispose() => pool.Clear();
 

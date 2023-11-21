@@ -29,7 +29,7 @@ namespace VacationTests
         [OneTimeTearDown]
         protected void OneTimeTearDown()
         {
-            WebDriver.Dispose();
+            MyBrowserPool.Dispose();
             WebDriver.Close();
             WebDriver.Quit();
         }
@@ -38,8 +38,7 @@ namespace VacationTests
         public void TearDown()
         {
             Screenshoter.SaveTestFailureScreenshot();
-            MyBrowserPool.Relese();
-            MyBrowserPool.Dispose();
+            MyBrowserPool.Release();
         }
     }
 }

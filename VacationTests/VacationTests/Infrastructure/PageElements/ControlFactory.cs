@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using FluentAssertions;
 using Kontur.Selone.Elements;
 using Kontur.Selone.Extensions;
 using Kontur.Selone.Properties;
@@ -66,9 +67,6 @@ namespace VacationTests.Infrastructure.PageElements
                         $"Не поддерживаемый тип {parameterInfo.ParameterType} параметра конструктора контрола {controlType}");
                 args.Add(arg);
             }
-            
-            var controlProps = controlType.GetProperties()
-                .Where(p => typeof(ControlBase).IsAssignableFrom(p.PropertyType)).ToList();
 
             var value = constructor.Invoke(args.ToArray());
             var searchContext = contextBy?.SearchContext.SearchElement(contextBy.By) ??
@@ -77,43 +75,11 @@ namespace VacationTests.Infrastructure.PageElements
                 throw new NotSupportedException(
                     "Для автоматической инициализации полей контрола должен быть известен ISearchContext. " +
                     "Либо укажите IContextBy, либо передайте в зависимости WebDriver.");
+
+            var attribute = controlType.GetCustomAttribute<InjectControlsAttribute>(true);
             
-            // foreach (var prop in controlProps)
-            // {
-            //     if (prop.SetMethod is null) continue;
-            //     
-            //     var attribute = prop.GetCustomAttribute<InjectControlsAttribute>(true);
-            //
-            //     if (attribute != null)
-            //     {
-            //         InitializePropertiesWithControls(value, searchContext, dependencies);
-            //         break;
-            //     }
-            //     else
-            //     {
-            //         break;
-            //     }
-            // }
-            
-            foreach (var prop in controlProps)
-            {
-                // проверяем, что доступен метод set;
-                if (prop.SetMethod is null) continue;
-                
-                // находим атрибут BaseSearchByAttribute или его наследника ByTidAttribute
-                var attribute = prop.GetCustomAttribute<InjectControlsAttribute>(true);
-                // если атрибут не найден, то берём название самого свойства,
-                // а если атрибут найден, берём его значение
-                if (attribute == null)
-                {
-                    break;
-                }
-                value = CreateInstance(prop.PropertyType, contextBy, dependencies);
+            if (attribute is InjectControlsAttribute)
                 InitializePropertiesWithControls(value, searchContext, dependencies);
-                return value;
-            }
-            
-            InitializePropertiesWithControls(value, searchContext, dependencies);
 
             return value;
         }
