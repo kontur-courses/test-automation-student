@@ -6,6 +6,7 @@ namespace VacationTests.Tests.Navigation
 {
     public class NavigationTests : VacationTestBase
     {
+        [Category("Flaky")]
         [Test]
         public void LoginPage_GoToAdminPageTest()
         {
