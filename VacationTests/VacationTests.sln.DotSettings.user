@@ -1,7 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ea338903_002D4baa_002D41f1_002D89b2_002D9623c67f8c08/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;ProjectFolder&gt;25F10403-D9F6-41B8-93DE-72FD9CB04CE9/d:Tests&lt;/ProjectFolder&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
 	
 	
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/EnvironmentVariablesIndexed/=TEST_005FBROWSER/@EntryIndexedValue">firefox</s:String>
