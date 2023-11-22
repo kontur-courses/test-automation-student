@@ -16,6 +16,7 @@ namespace VacationTests.Tests.Navigation
             
             var vacationPage = enterPage.LoginAsAdmin();
             vacationPage.IsAdminPage.Should().Be(true);
+            vacationPage.ClaimList.Items.Count.Should().Be(0);
         }
     }
 }
