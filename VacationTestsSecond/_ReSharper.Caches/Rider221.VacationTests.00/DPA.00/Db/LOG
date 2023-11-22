@@ -1,2 +1,5 @@
-2023/11/21-13:40:02.287000 31200 Creating DB C:\Repositories\test-automation-student\VacationTestsSecond\_ReSharper.Caches\Rider221.VacationTests.00\DPA.00\Db since it was missing.
-2023/11/21-13:40:03.214000 31200 Delete type=3 #1
+2023/11/22-11:27:11.996000 21980 Recovering log #3
+2023/11/22-11:27:11.997000 21980 Level-0 table #5: started
+2023/11/22-11:27:12.002000 21980 Level-0 table #5: 6501 bytes OK
+2023/11/22-11:27:12.191000 21980 Delete type=0 #3
+2023/11/22-11:27:12.191000 21980 Delete type=3 #2
