@@ -20,6 +20,8 @@ namespace VacationTests.Tests.AdminPage
 {
     public class AdminPageTests : VacationTestBase
     {
+        // Добавил атрибут
+        [Category("Flaky")]
         [Test]
         public void CreateClaims_FromUI_ShouldAddClaimsToAdminPage()
         {
@@ -29,7 +31,8 @@ namespace VacationTests.Tests.AdminPage
                 (DateTime.Now.Date.AddDays(10), DateTime.Now.Date.AddDays(20))
             };
             var vacationListPage = Navigation.OpenEmployeeVacationListPage();
-            Helper.CreateClaimFromUI(vacationListPage, ClaimType.Child, dates[0], 7);
+            // Убрал возраст ребенка в следующей строке для падения теста
+            Helper.CreateClaimFromUI(vacationListPage, ClaimType.Child, dates[0]);
             vacationListPage = Navigation.OpenEmployeeVacationListPage("2");
             Helper.CreateClaimFromUI(vacationListPage, ClaimType.Child, dates[1], 6);
             var adminVacationListPage = Navigation.OpenAdminVacationListPage();
