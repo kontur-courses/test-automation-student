@@ -13,24 +13,24 @@ namespace VacationTests.Infrastructure.PageElements
     public class ControlFactory
     {
         private readonly object[] dependencies;
-
+        
         public ControlFactory(params object[] dependencies)
         {
             this.dependencies = dependencies;
         }
-
+        
         /// <summary>Создать контрол типа TPageElement</summary>
         /// <typeparam name="TPageElement">Должен содержать конструктор, принимающий IWebDriver</typeparam>
         public TPageElement CreateControl<TPageElement>(IContextBy contextBy)
         {
-            return (TPageElement) CreateInstance(typeof(TPageElement), contextBy, dependencies.Prepend(this).ToArray());
+            return (TPageElement)CreateInstance(typeof(TPageElement), contextBy, dependencies.Prepend(this).ToArray());
         }
 
         /// <summary>Создать страницу типа TPageObject</summary>
         public TPageObject CreatePage<TPageObject>(IWebDriver webDriver)
         {
             var allDependencies = dependencies.Prepend(this).Prepend(webDriver).ToArray();
-            return (TPageObject) CreateInstance(typeof(TPageObject), null, allDependencies);
+            return (TPageObject)CreateInstance(typeof(TPageObject), null, allDependencies);
         }
 
         /// <summary>Создать коллекцию контролов типа TItem</summary>
@@ -44,6 +44,7 @@ namespace VacationTests.Infrastructure.PageElements
 
         private static object CreateInstance(Type controlType, IContextBy contextBy, object[] dependencies)
         {
+            Console.WriteLine("В методе CreateInstanse создаем " + controlType.FullName);
             // У объекта, который хотим создать, проверяем, что конструктор есть и он один
             var constructors = controlType.GetConstructors();
             if (constructors.Length != 1)
@@ -65,8 +66,9 @@ namespace VacationTests.Infrastructure.PageElements
 
             // Вызываем конструктор и передаём ему все входные параметры
             var value = constructor.Invoke(args.ToArray());
-            
+
             // Получаем контекст, по которому будем искать все контролы, входящие в состав нашего объекта
+            // Здесь тест падает на SingleOrDefault
             var searchContext = contextBy?.SearchContext.SearchElement(contextBy.By) ??
                                 dependencies.OfType<ISearchContext>().SingleOrDefault();
             if (searchContext == null)
@@ -74,9 +76,16 @@ namespace VacationTests.Infrastructure.PageElements
                     "Для автоматической инициализации полей контрола должен быть известен ISearchContext. " +
                     "Либо укажите IContextBy, либо передайте в зависимости WebDriver.");
             // Инициализируем контролы объекта
-            InitializePropertiesWithControls(value, searchContext, dependencies);
 
-            // Возвращаем экземпляр объекта
+            var controlNeedInjection = controlType
+                .GetCustomAttributes()
+                .Select(y => y.GetType())
+                .Any(z => z.Name == "InjectControlsAttribute");
+            if (controlNeedInjection)
+            {
+                InitializePropertiesWithControls(value, searchContext, dependencies);
+            }
+
             return value;
         }
 
@@ -92,7 +101,7 @@ namespace VacationTests.Infrastructure.PageElements
             {
                 // проверяем, что доступен метод set;
                 if (prop.SetMethod is null) continue;
-                
+
                 // находим атрибут BaseSearchByAttribute или его наследника ByTidAttribute
                 var attribute = prop.GetCustomAttribute<BaseSearchByAttribute>(true);
                 // если атрибут не найден, то берём название самого свойства,
@@ -100,7 +109,7 @@ namespace VacationTests.Infrastructure.PageElements
                 var contextBy = attribute == null
                     ? searchContext.Search(x => x.WithTid(prop.Name))
                     : searchContext.Search(attribute.SearchCriteria);
-                
+
                 // создаём экземпляр свойства через CreateInstance,
                 // чтобы иницаилизировать у сложных контролов ещё и их свойства
                 var value = CreateInstance(prop.PropertyType, contextBy, dependencies);

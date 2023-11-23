@@ -21,6 +21,11 @@ namespace VacationTests.PageNavigation
             return OpenPage<LoginPage>(Urls.LoginPage);
         }
 
+        public AverageDailyEarningsCalculatorPage OpenAverageDailyEarningsCalculatorPage()
+        {
+            return OpenEmployeeVacationListPage().SalaryCalculatorTab.ClickAndOpen<AverageDailyEarningsCalculatorPage>();
+        }
+        
         public EmployeeVacationListPage OpenEmployeeVacationListPage(string employeeId = "1")
         {
             var isCurrentPageIsEmployeePage = webDriver.Url.Contains("user");
@@ -32,6 +37,11 @@ namespace VacationTests.PageNavigation
             if (isCurrentPageIsEmployeePage)
                 page.Refresh();
             return page;
+        }
+
+        public AdminVacationListPage OpenAdminVacationListPage()
+        {
+            return OpenPage<AdminVacationListPage>(Urls.AdminVacationListPage);
         }
 
         public TPageObject OpenPage<TPageObject>(string url)

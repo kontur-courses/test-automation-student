@@ -1,3 +1,5 @@
+using System;
+using System.Linq.Expressions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using VacationTests.Claims;
@@ -7,23 +9,55 @@ using VacationTests.PageNavigation;
 
 // Классы с тестами запускаются параллельно.
 // Тесты внутри одного класса проходят последовательно.
-[assembly: Parallelizable(ParallelScope.Fixtures)]
+[assembly: Parallelizable(ParallelScope.All)]
+[assembly: LevelOfParallelism(4)]
 
 namespace VacationTests
 {
     public abstract class VacationTestBase
     {
-        protected IWebDriver WebDriver = new ChromeDriverFactory().Create();
+        protected IWebDriver WebDriver => MyBrowserPool.Get();
         protected ClaimStorage ClaimStorage => new(LocalStorage);
         protected LocalStorage LocalStorage => new(WebDriver);
         private ControlFactory ControlFactory => new(LocalStorage, ClaimStorage);
         protected Navigation Navigation => new(WebDriver, ControlFactory);
         private Screenshoter Screenshoter => new(WebDriver); 
-
-        [OneTimeTearDown]
-        protected void OneTimeTearDown() => WebDriver.Dispose();
         
         [TearDown]
-        public void TearDown() => Screenshoter.SaveTestFailureScreenshot();
+        public void TearDown()
+        {
+            try
+            {
+                ClaimStorage.ClearClaims();
+                Screenshoter.SaveTestFailureScreenshot();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            try
+            {
+                MyBrowserPool.Release();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        [OneTimeTearDown]
+        protected void OneTimeTearDown()
+        {
+            try
+            {
+                MyBrowserPool.Dispose();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Не удалось выполнить MyBrowserPool.Dispose()");
+                Console.WriteLine(e);
+            }
+        }
     }
 }
