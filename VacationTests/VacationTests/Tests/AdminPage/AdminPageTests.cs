@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Xml.Schema;
-using FluentAssertions;
-using Kontur.RetryableAssertions.Extensions;
-using Kontur.Selone.Elements;
 using Kontur.Selone.Pages;
 using Kontur.Selone.Properties;
 using NUnit.Framework;
