@@ -3,3 +3,5 @@ bin
 Backup
 obj
 *.DotSettings
+/.vs/test-automation-student/v17
+/VacationTests/.vs/VacationTests

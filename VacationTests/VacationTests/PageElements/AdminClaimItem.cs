@@ -6,18 +6,25 @@ using VacationTests.Infrastructure.PageElements;
 namespace VacationTests.PageElements
 {
     [InjectControls]
-    // Класс элемента списка отпусков EmployeeClaimList наследуем от ControlBase,
+    // Класс элемента списка отпусков AdminClaimList наследуем от ControlBase,
     // поскольку это тоже контрол и могут понадобиться базовые методы и пропсы
-    public class EmployeeClaimItem : ControlBase
+    public class AdminClaimItem : ControlBase
     {
-        public EmployeeClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
+        public AdminClaimItem(IContextBy contextBy, ControlFactory controlFactory) : base(contextBy)
         {
             TitleLink = controlFactory.CreateControl<Link>(Container.Search(x => x.WithTid("TitleLink")));
+            UserFioLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("UserFioLabel")));
             PeriodLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("PeriodLabel")));
             StatusLabel = controlFactory.CreateControl<Label>(Container.Search(x => x.WithTid("StatusLabel")));
+            ListItemCheckbox = controlFactory.CreateControl<Checkbox>(Container.Search(x => x.WithTid("ListItemCheckbox")));
+            AcceptButton = controlFactory.CreateControl<Button>(Container.Search(x => x.WithTid("AcceptButton")));
+            RejectButton = controlFactory.CreateControl<Button>(Container.Search(x => x.WithTid("RejectButton")));
         }
 
-        // При обращении из теста к любому элементу списка отпусков будут доступны три свойства
+        public Button RejectButton { get; }
+        public Button AcceptButton { get; }
+        public Checkbox ListItemCheckbox { get; }
+        public Label UserFioLabel { get; }
         public Link TitleLink { get; }
         public Label PeriodLabel { get; }
         public Label StatusLabel { get; }

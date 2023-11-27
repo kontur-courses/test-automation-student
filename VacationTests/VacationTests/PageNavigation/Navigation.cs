@@ -41,5 +41,10 @@ namespace VacationTests.PageNavigation
             webDriver.Navigate().Refresh();
             return controlFactory.CreatePage<TPageObject>(webDriver);
         }
+
+        public AdminVacationListPage OpenAdminVacationListPage()
+        {
+            return OpenPage<AdminVacationListPage>(Urls.AdminVacationListPage);
+        }
     }
 }

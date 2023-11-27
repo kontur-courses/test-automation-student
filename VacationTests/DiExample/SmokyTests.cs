@@ -8,9 +8,9 @@ namespace DiExample
 {
     public class SmokyTests
     {
-        private readonly IServiceProvider _serviceProvider = new Container().BuildServiceProvider();
-        private IBrowser Browser => _serviceProvider.GetRequiredService<IBrowser>();
-        
+        //private readonly IServiceProvider _serviceProvider = new Container().BuildServiceProvider();
+        private IBrowser Browser => Container.GetRequiredService<IBrowser>();
+
         [TestCase("Контур"), TestCase("экосистема"), TestCase("бизнеса")]
         public void BrowserShould_BeOpenAndReturn_KonturPage(string substring)
         {
