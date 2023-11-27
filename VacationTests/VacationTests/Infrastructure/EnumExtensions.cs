@@ -16,7 +16,7 @@ namespace VacationTests.Infrastructure
                             ?? throw new Exception($"No field {value} in enum {value.GetType()}");
 
             var attributes =
-                (DescriptionAttribute[]) fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                (DescriptionAttribute[])fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
             return attributes.Length > 0 ? attributes[0].Description : value.ToString();
         }

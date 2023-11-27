@@ -6,20 +6,24 @@ using VacationTests.PageElements;
 
 namespace VacationTests.PageObjects
 {
+    [InjectControls]
     public class AdminVacationListPage : PageBase
     {
         private ControlFactory controlFactory;
+
         public AdminVacationListPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
         {
             this.controlFactory = controlFactory;
             TitleLabel = controlFactory.CreateControl<Label>(webDriver.Search(x => x.WithTid("TitleLabel")));
             ClaimsTab = controlFactory.CreateControl<Link>(webDriver.Search(x => x.WithTid("ClaimsTab")));
+            ClaimList = controlFactory.CreateControl<AdminClaimList>(webDriver.Search(x => x.WithTid("ClaimList"))); 
             DownloadButton = controlFactory.CreateControl<Button>(webDriver.Search(x => x.WithTid("DownloadButton")));
             Footer = controlFactory.CreateControl<PageFooter>(webDriver.Search(x => x.WithTid("Footer")));
         }
 
         public Label TitleLabel { get; }
         public Link ClaimsTab { get; }
+        public AdminClaimList ClaimList { get; }
         public Button DownloadButton { get; }
         public PageFooter Footer { get; }
 
@@ -29,7 +33,7 @@ namespace VacationTests.PageObjects
             {
                 var employeeVacationListPage = new ControlFactory().CreatePage<EmployeeVacationListPage>(WrappedDriver);
                 return !(employeeVacationListPage.SalaryCalculatorTab.Visible.Get()
-                       && employeeVacationListPage.CreateButton.Visible.Get());
+                         && employeeVacationListPage.CreateButton.Visible.Get());
             }
         }
     }

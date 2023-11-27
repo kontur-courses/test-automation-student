@@ -15,6 +15,11 @@ namespace DiExample.Selenium
 
     public class Browser : IBrowser
     {
+        public static void Dispose()
+        {
+            foreach (var driver in _allOpenBrowsers) driver.Dispose();
+        }
+
         #region Реализация
 
         private static readonly List<IWebDriver> _allOpenBrowsers = new();
@@ -29,23 +34,21 @@ namespace DiExample.Selenium
         }
 
         public TPage GoToPage<TPage>() where TPage : class, IPage
-            => _pageFactory.Create<TPage>(_webDriver);
+        {
+            return _pageFactory.Create<TPage>(_webDriver);
+        }
 
         public TPage GoToPage<TPage>(string path) where TPage : class, IPage
-            => _pageFactory.Create<TPage>(_webDriver, path);
+        {
+            return _pageFactory.Create<TPage>(_webDriver, path);
+        }
 
         public void GoToUrl<TPage>(string url) where TPage : class, IPage
-            => _webDriver.Navigate().GoToUrl(url);
+        {
+            _webDriver.Navigate().GoToUrl(url);
+        }
 
         #endregion
-
-        public static void Dispose()
-        {
-            foreach (var driver in _allOpenBrowsers)
-            {
-                driver.Dispose();
-            }
-        }
     }
 }
 
@@ -53,5 +56,8 @@ namespace DiExample.Selenium
 public class BrowserDisposer
 {
     [OneTimeTearDown]
-    public void Dispose() => Browser.Dispose();
+    public void Dispose()
+    {
+        Browser.Dispose();
+    }
 }

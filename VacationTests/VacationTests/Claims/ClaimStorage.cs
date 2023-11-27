@@ -42,7 +42,7 @@ namespace VacationTests.Claims
 
         public void Add(Claim claim)
         {
-            Add(new[] {claim});
+            Add(new[] { claim });
         }
 
         public void ClearClaims()
@@ -63,7 +63,7 @@ namespace VacationTests.Claims
         private static JsonSerializerSettings GetJsonSettings()
         {
             var settings = new JsonSerializerSettings();
-            settings.Converters.Add(new IsoDateTimeConverter {DateTimeFormat = "dd.MM.yyyy"});
+            settings.Converters.Add(new IsoDateTimeConverter { DateTimeFormat = "dd.MM.yyyy" });
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             return settings;
         }

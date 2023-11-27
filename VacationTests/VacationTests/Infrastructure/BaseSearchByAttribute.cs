@@ -15,6 +15,9 @@ namespace VacationTests.Infrastructure
         }
 
         // return by.Css(...)
-        public By SearchCriteria(ByDummy by) => byLambda(by);
+        public By SearchCriteria(ByDummy by)
+        {
+            return byLambda(by);
+        }
     }
 }

@@ -13,7 +13,7 @@ public class Examples_AddTransient : Base
         var text = Guid.NewGuid().ToString();
         var container = new ServiceCollection()
             .AddTransient<Token>()
-            .AddSingleton<ConsoleWriter>(_ => new ConsoleWriter(text))
+            .AddSingleton(_ => new ConsoleWriter(text))
             .BuildServiceProvider();
 
         // 2 раза берем из контейнера объект Token и кладем в разные переменные 
@@ -24,7 +24,7 @@ public class Examples_AddTransient : Base
         Assert.AreNotEqual(tokenInstance1.Id, tokenInstance2.Id);
         Log(nameof(tokenInstance1) + " -> " + tokenInstance1.Id);
         Log(nameof(tokenInstance2) + " -> " + tokenInstance2.Id);
-        
+
         // Берем из контейнера 2 разных экземпляра 1 объекта ConsoleWriter 
         var writerInstance1 = container.GetRequiredService<ConsoleWriter>();
         var writerInstance2 = container.GetRequiredService<ConsoleWriter>();
@@ -43,7 +43,7 @@ public class Examples_AddTransient : Base
             .AddTransient<Token>()
             // Смотрим как поведет себя система, если регистрировать Writer
             // используя токен из контейнера
-            .AddSingleton<ConsoleWriter>(s =>
+            .AddSingleton(s =>
             {
                 var text = s.GetRequiredService<Token>().Id.ToString();
                 return new ConsoleWriter(text);
@@ -97,7 +97,7 @@ public class Examples_AddTransient : Base
         writer2Instance1.WriteText();
         writer2Instance2.WriteText();
 
-        
+
         // Гуиды у писателей должны быть разные т.к. при конструировании контейнер находит объект Token для первого врайтера
         // Затем находит объект Token для второго врайтера. 
         // Токен добавлен как Transient, а значит будет 2 разных токена для врайтеров.

@@ -1,4 +1,6 @@
 using Kontur.Selone.Extensions;
+using Kontur.Selone.Selectors.Context;
+using Kontur.Selone.Selectors.XPath;
 using OpenQA.Selenium;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
@@ -6,6 +8,7 @@ using VacationTests.PageElements;
 
 namespace VacationTests.PageObjects
 {
+    [InjectControls]
     public class EmployeeVacationListPage : PageBase
     {
         public EmployeeVacationListPage(IWebDriver webDriver, ControlFactory controlFactory) : base(webDriver)
@@ -25,5 +28,13 @@ namespace VacationTests.PageObjects
         public Button CreateButton { get; }
         public EmployeeClaimList ClaimList { get; }
         public PageFooter Footer { get; }
+        
+        public void WaitLoaded(int? timeout = null)
+        {
+            ClaimsTab.WaitPresence(timeout);
+            SalaryCalculatorTab.WaitPresence(timeout);
+            CreateButton.WaitPresence(timeout);
+        }
     }
+    
 }

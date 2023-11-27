@@ -17,7 +17,7 @@ public class Examples_AddSingleton : Base
         // Регистрируем контейнер 
         var container = new ServiceCollection()
             .AddSingleton<Token>() // 1 объект на весь проект
-            .AddSingleton<ConsoleWriter>(_ => new ConsoleWriter(text))
+            .AddSingleton(_ => new ConsoleWriter(text))
             .BuildServiceProvider();
 
         // 2 раза берем из контейнера объект Token и кладем в разные переменные
@@ -43,7 +43,7 @@ public class Examples_AddSingleton : Base
         writerInstance1.WriteText();
         writerInstance2.WriteText();
     }
-    
+
     // Ниже необязательный пример для любознательных, можно пропустить.
     // Тестируем, что при использовании AddSingleton объект лежит в одной и тойже области памяти
     [Test]
@@ -62,18 +62,18 @@ public class Examples_AddSingleton : Base
             var id = tokenInstance.Id;
 
             // достаем указатели на ячейки памяти
-            TypedReference reference = __makeref(tokenInstance);
-            IntPtr pointerToken = **(IntPtr**) (&reference);
-            Guid* pointerTokenId = &id;
+            var reference = __makeref(tokenInstance);
+            var pointerToken = **(IntPtr**)(&reference);
+            var pointerTokenId = &id;
 
             // логируем адреса
-            Log($"{nameof(tokenInstance)} : ссылка на адрес памяти -> {(long) pointerToken:X}");
-            Log($"{nameof(pointerTokenId)}: {id} : ссылка на адрес памяти -> {(long) pointerTokenId:X}");
-            
+            Log($"{nameof(tokenInstance)} : ссылка на адрес памяти -> {(long)pointerToken:X}");
+            Log($"{nameof(pointerTokenId)}: {id} : ссылка на адрес памяти -> {(long)pointerTokenId:X}");
+
             // и добавляем в список
-            result.Add($"{(long) pointerToken:X}:{(long) pointerTokenId:X}");
+            result.Add($"{(long)pointerToken:X}:{(long)pointerTokenId:X}");
         }
-        
+
         // проверяем, что для всех 5 раз адреса были одинаковые
         Assert.AreEqual(1, result.Distinct().Count());
     }

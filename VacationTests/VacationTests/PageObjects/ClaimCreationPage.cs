@@ -1,10 +1,13 @@
+using System;
 using OpenQA.Selenium;
+using VacationTests.Claims;
 using VacationTests.Infrastructure;
 using VacationTests.Infrastructure.PageElements;
 using VacationTests.PageElements;
 
 namespace VacationTests.PageObjects
 {
+    [InjectControls]
     public class ClaimCreationPage : PageBase
     {
         public ClaimCreationPage(IWebDriver webDriver) : base(webDriver)
@@ -21,5 +24,6 @@ namespace VacationTests.PageObjects
         public Checkbox PayNowCheckbox { get; private set; }
         public DirectorFioCombobox DirectorFioCombobox { get; private set; }
         public Button SendButton { get; private set; }
+
     }
 }

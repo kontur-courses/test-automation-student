@@ -6,6 +6,7 @@ using VacationTests.PageElements;
 
 namespace VacationTests.PageObjects
 {
+    [InjectControls]
     public class ClaimLightbox : PageBase
     {
         private readonly ControlFactory controlFactory;
@@ -37,6 +38,10 @@ namespace VacationTests.PageObjects
         public Checkbox PayNowCheckbox => CreateControlByTid<Checkbox>("PayNowCheckbox");
 
         public Label DirectorFioLabel => CreateControlByTid<Label>("DirectorFioLabel");
+
+        public Button AcceptButton => CreateControlByTid<Button>("AcceptButton");
+        
+        public Button RejectButton => CreateControlByTid<Button>("RejectButton");
 
         public ClaimLightboxFooter Footer => CreateControlByTid<ClaimLightboxFooter>("ModalFooter");
 

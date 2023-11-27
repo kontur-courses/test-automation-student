@@ -16,7 +16,7 @@ namespace VacationTests.Infrastructure.PageElements
         }
 
         public IProp<string> Text => Container.Text();
-        
+
         // Явная реализация интерфейса − способ скрыть ControlFactory из автокомплита,
         // но оставить доступ к нему из классов инфраструктуры.
         ControlFactory ICanClickAndOpenPage.ControlFactory => controlFactory;

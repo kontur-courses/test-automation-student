@@ -6,6 +6,7 @@ using VacationTests.Infrastructure.PageElements;
 
 namespace VacationTests.PageObjects
 {
+    [InjectControls]
     public class InfoSidePage : PageBase
     {
         // Lazy<T> – ещё один вариант работы с элементами, которых надо искать лениво
@@ -43,7 +44,8 @@ namespace VacationTests.PageObjects
 
         private Lazy<TControl> CreateLazyControlByTid<TControl>(string tid)
         {
-            return new(() => controlFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid))));
+            return new Lazy<TControl>(() =>
+                controlFactory.CreateControl<TControl>(GetModalContext().Search(x => x.WithTid(tid))));
         }
 
         private IWebElement GetModalContext()

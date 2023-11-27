@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Xml;
 using NUnit.Engine;
+
 // ReSharper disable PossibleNullReferenceException
 // ReSharper disable AssignNullToNotNullAttribute
 
