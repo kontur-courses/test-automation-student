@@ -16,5 +16,13 @@ namespace VacationTests.Tests.Navigation
             //Assert
             adminPage.IsAdminPage.Should().BeTrue();
         }
+
+        [Test]
+        [Category("Flaky")]
+        public void NavigationToAdminListPage_Success()
+        {
+            var page = Navigation.OpenAdminVacationListPage();
+            page.ClaimList.Items.Count.Should().Be(0);
+        }
     }
 }
