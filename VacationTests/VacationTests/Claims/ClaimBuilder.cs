@@ -14,7 +14,7 @@ namespace VacationTests.Claims
         private string userId = DefaultUserId;
         private int? childAgeInMonths;
 
-        // Для каждого поля создаем метод With<название свойства>, возвращающий экземпляр этого DirectorBuilder
+        // Для каждого поля создаем метод With<название свойства>, возвращающий экземпляр этого ClaimBuilder
         // Метод принимает значение и записывает в соответствующее приватное поле
         // С помощью таких методов можно будет задать необходимые поляr
         public ClaimBuilder WithId(string newId)
