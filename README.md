@@ -1,6 +1,6 @@
 # test-automation
 
-Тестируемое приложение: сервис [«Отпуска»](https://ronzhina.gitlab-pages.kontur.host/for-course/#/).
+Тестируемое приложение: сервис [«Отпуска»](https://test-automation-course.gitlab-pages.kontur.host/for-course/#/).
 
 Для запуска проекта вам понадобится:
         
