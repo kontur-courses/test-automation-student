@@ -24,7 +24,7 @@ namespace VacationTests.Infrastructure
 			screenshot.SaveAsFile(filepath);
             
 			Console.WriteLine($"##teamcity[publishArtifacts '{filepath}'] ");
-			Console.WriteLine($"##teamcity[testMetadata name='Screenshot' type='image' value='{screenshotName}']");
+			Console.WriteLine($"##teamcity[testMetadata name='Screenshot {screenshotName}' type='image' value='{screenshotName}']");
 		}
 		
 		public void SaveTestFailureScreenshot()
