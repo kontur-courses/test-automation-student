@@ -1,5 +1,7 @@
-﻿.idea
+.idea
 bin
 Backup
 obj
 *.DotSettings
+*.DotSettings.user
+*.orig

@@ -7,6 +7,19 @@
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
+    <Choose>
+        <When Condition="$(TEAMCITY_VERSION)!=''">
+            <ItemGroup>
+                <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="105.0.5195.5200" />
+            </ItemGroup>
+        </When>
+        <Otherwise>
+            <ItemGroup>
+                <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="*" />
+            </ItemGroup>
+        </Otherwise>
+    </Choose>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
@@ -16,6 +29,5 @@
         <PackageReference Include="NUnitLite" Version="3.13.3" />
         <PackageReference Include="coverlet.collector" Version="3.0.2" />
         <PackageReference Include="Selenium.WebDriver" Version="4.8.0" />
-        <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="113.0.5672.6300" />
     </ItemGroup>
 </Project>
